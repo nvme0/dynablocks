@@ -1,0 +1,10 @@
+{
+  "align": {
+    "type": "string",
+    "default": ""
+  },
+  "buttonText": {
+    "type": "string",
+    "default": "Button"
+  }
+}

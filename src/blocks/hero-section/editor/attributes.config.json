@@ -1,0 +1,50 @@
+{
+  "align": {
+    "type": "string",
+    "default": ""
+  },
+  "backgroundImage": {
+    "type": "string",
+    "default": ""
+  },
+  "filterColor": {
+    "type": "string",
+    "default": "rgba(0, 0, 0, 0)"
+  },
+  "h2Text": {
+    "type": "string",
+    "default": "Edit the heading text in the Block Panel"
+  },
+  "h2Color": {
+    "type": "string",
+    "default": "#fff"
+  },
+  "h2FontSize": {
+    "type": "string",
+    "default": "50px"
+  },
+  "h2MarginBottom": {
+    "type": "string",
+    "default": "20px"
+  },
+  "keywords": {
+    "type": "string",
+    "default": ""
+  },
+  "keywordsColor": {
+    "type": "string",
+    "default": "#fff"
+  },
+  "keywordsInterval": {
+    "type": "number",
+    "default": 1000
+  },
+  "buttonText": {
+    "type": "string",
+    "default": "Button"
+  },
+  "height": {
+    "type": "string",
+    "default": "550px"
+  }
+}

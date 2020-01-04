@@ -1,0 +1,38 @@
+{
+  "align": {
+    "type": "string",
+    "default": "wide"
+  },
+  "filterColor": {
+    "type": "string",
+    "default": "rgba(0, 0, 0, 0)"
+  },
+  "h2Color": {
+    "type": "string",
+    "default": "#fff"
+  },
+  "h2FontSize": {
+    "type": "string",
+    "default": "50px"
+  },
+  "h2MarginBottom": {
+    "type": "string",
+    "default": "0px"
+  },
+  "h3Color": {
+    "type": "string",
+    "default": "#fff"
+  },
+  "h3FontSize": {
+    "type": "string",
+    "default": "25px"
+  },
+  "h3MarginBottom": {
+    "type": "string",
+    "default": "15px"
+  },
+  "height": {
+    "type": "string",
+    "default": "550px"
+  }
+}

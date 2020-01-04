@@ -1,0 +1,10 @@
+{
+  "align": {
+    "type": "string",
+    "default": ""
+  },
+  "tag": {
+    "type": "string",
+    "default": "div"
+  }
+}

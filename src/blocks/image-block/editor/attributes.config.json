@@ -1,0 +1,14 @@
+{
+  "align": {
+    "type": "string",
+    "default": ""
+  },
+  "backgroundImage": {
+    "type": "string",
+    "default": ""
+  },
+  "height": {
+    "type": "string",
+    "default": "300px"
+  }
+}

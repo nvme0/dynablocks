@@ -1,0 +1,118 @@
+/**
+* #.# Styles
+*
+* CSS for both Frontend+Backend.
+*/
+
+@import '../../common/sass/reset';
+@import '../../common/sass/global';
+@import "../../../node_modules/slick-carousel/slick/slick.css";
+@import "../../../node_modules/slick-carousel/slick/slick-theme.css";
+
+.s4tw-dynablocks-post-carousel {
+  overflow: hidden;
+  .wrapper {
+    .slide-container {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      .dimmer-filter {
+        height: 100%;
+        .content {
+          position: relative;
+          transform: translateX(-50%) translateY(-50%);
+          a {
+            &:hover {
+              text-decoration: none;
+            }
+          }
+          a, h2, h3 {
+            font-family: inherit;
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
+          }
+          button {
+            display: block;
+            margin: 0 auto;
+          }
+          @keyframes show1 {
+            0% { 
+              opacity: 0;
+              transform: translateX(-50%) translateY(0%);
+            }
+            100% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(-50%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.s4tw-dynablocks-post-carousel {
+    &:hover {
+      .slick-arrow {
+        &.slick-prev {
+          opacity: 1;
+          left: 25px;
+        }
+        &.slick-next {
+          opacity: 1;
+          right: 25px;
+        }
+      }
+    }
+  .slick-slider {
+    .slick-slide {
+      .content {
+        display: none;
+      }
+      &.slick-active{
+        .content {
+          z-index: 2;
+          display: inline-block;
+        }
+      }
+    }
+    .slick-arrow {
+      transition: all 1s;
+      opacity: 0;
+      position: absolute;
+      z-index: 2;
+      width: 33px;
+      height: 99px;
+      &::before {
+        font-size: 99px;
+        font-family: Arial, sans-serif;
+      }
+      &.slick-prev {
+        &::before {
+          content: '‹';
+          // TODO -  maybe use an icon font that already exists?
+          // content: url("../Post-Carousel/svg/arrow.svg");
+        }
+      }
+      &.slick-next {
+        &::before {
+          content: '›';
+          // TODO
+          // content: url("../Post-Carousel/svg/arrow.svg");
+        }
+      }
+    }
+    .slick-dots {
+      bottom: 25px;
+      li {
+        button {
+          &::before {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

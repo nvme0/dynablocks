@@ -1,0 +1,33 @@
+// break points
+$min-desktop-size: 1160px;
+$min-tablet-size: 608px;
+
+$s_tab: 0.52; //  scale tablet
+$s_mob: 0.28; //  scale mobile
+
+$black: #14181a;
+$gray-dark-logo: #424242;
+$green-logo: #45ba01;
+
+
+//
+//      centering
+//
+
+.margin-auto-center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-auto-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.children-flex-auto-center--100-height > * {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

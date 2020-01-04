@@ -1,0 +1,47 @@
+/**
+* #.# Styles
+*
+* CSS for both Frontend+Backend.
+*/
+
+@import "../../common/sass/reset";
+@import "../../common/sass/global";
+@import "../../../node_modules/slick-carousel/slick/slick.css";
+@import "../../../node_modules/slick-carousel/slick/slick-theme.css";
+
+.s4tw-dynablocks-banner-slider {
+  overflow: hidden;
+  .wrapper {
+    .slide-container {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      .dimmer-filter {
+        height: 100%;
+        .content {
+          position: relative;
+          transform: translateX(-50%) translateY(-50%);
+          h2 {
+            white-space: nowrap !important;
+            font-family: inherit;
+            padding: 0;
+          }
+          button {
+            display: block;
+            margin: 0 auto;
+          }
+          @keyframes show1 {
+            0% { 
+              opacity: 0;
+              transform: translateX(-50%) translateY(0%);
+            }
+            100% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(-50%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
