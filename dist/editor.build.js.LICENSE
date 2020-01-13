@@ -1004,7 +1004,7 @@
   !*** ./src/common/helpers.ts ***!
   \*******************************/
 
-/*! exports provided: removeAttributes, rgbaStringToObject, darkenColor, lightenColor, changeColorAlpha, extractSizeAndUnits, scaleFontSize, generateResponsiveSize, generateResponsiveCSS */
+/*! exports provided: getBlocksOfType, removeAttributes, rgbaStringToObject, darkenColor, lightenColor, changeColorAlpha, extractSizeAndUnits, scaleFontSize, generateResponsiveSize, generateResponsiveCSS */
 
 /*!***********************************************************************************************************************************************************************************************************************************!*\
   !*** multi ./src/blocks/banner-slider/editor.tsx ./src/blocks/button/editor.tsx ./src/blocks/container/editor.tsx ./src/blocks/hero-section/editor.tsx ./src/blocks/image-block/editor.tsx ./src/blocks/post-carousel/editor.tsx ***!

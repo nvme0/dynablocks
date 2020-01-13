@@ -782,6 +782,8 @@
 
 /*! ./Components/Slider */
 
+/*! ../../common/helpers */
+
 /*!****************************************!*\
   !*** ./src/blocks/button/frontend.tsx ***!
   \****************************************/
@@ -856,7 +858,7 @@
   !*** ./src/common/helpers.ts ***!
   \*******************************/
 
-/*! exports provided: removeAttributes, rgbaStringToObject, darkenColor, lightenColor, changeColorAlpha, extractSizeAndUnits, scaleFontSize, generateResponsiveSize, generateResponsiveCSS */
+/*! exports provided: getBlocksOfType, removeAttributes, rgbaStringToObject, darkenColor, lightenColor, changeColorAlpha, extractSizeAndUnits, scaleFontSize, generateResponsiveSize, generateResponsiveCSS */
 
 /*!***********************************************************************************************************************************************************************************************************************************************!*\
   !*** multi ./src/blocks/banner-slider/frontend.tsx ./src/blocks/button/frontend.tsx ./src/blocks/container/frontend.tsx ./src/blocks/hero-section/frontend.tsx ./src/blocks/image-block/frontend.tsx ./src/blocks/post-carousel/frontend.tsx ***!
