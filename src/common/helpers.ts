@@ -1,5 +1,21 @@
 import validator from "validator";
 
+/* frontend */
+
+export const getBlocksOfType = (blockName: string) => {
+  const blocksOfType = document.querySelectorAll(blockName);
+  const blocks: { block: Element; props: string }[] = [];
+  blocksOfType.forEach(block => {
+    let props = block.innerHTML;
+    props = props.replace(new RegExp("”", "g"), '"');
+    props = props.replace(new RegExp("“", "g"), '"');
+    props = props.replace(new RegExp("″", "g"), '"'); // prime?
+    props = props.replace(new RegExp("×", "g"), "x");
+    blocks.push({ block, props });
+  });
+  return blocks;
+};
+
 /* settings */
 
 export const removeAttributes = (settings: any): any =>
