@@ -1,6 +1,7 @@
 import { render } from "@wordpress/element";
 import { StyledButton } from "../../common/Components/Bootstrap/Button";
 import { Attributes } from "./editor/attributes";
+import { getBlocksOfType } from "../../common/helpers";
 
 export const StyledButtonWrapper = (props: Attributes): JSX.Element => {
   const { buttonText: text } = props;
@@ -14,12 +15,7 @@ export const StyledButtonWrapper = (props: Attributes): JSX.Element => {
   );
 };
 
-const buttons = document.querySelectorAll(".s4tw-dynablocks-button");
-buttons.forEach(button => {
-  let properties = button.innerHTML;
-  properties = properties.replace(new RegExp("”", "g"), '"');
-  properties = properties.replace(new RegExp("“", "g"), '"');
-  properties = properties.replace(new RegExp("″", "g"), '"'); // prime?
-  properties = properties.replace(new RegExp("×", "g"), "x");
-  render(<StyledButtonWrapper {...JSON.parse(properties)} />, button);
+const blocks = getBlocksOfType(".s4tw-dynablocks-button");
+blocks.forEach(({ block, props }) => {
+  render(<StyledButtonWrapper {...JSON.parse(props)} />, block);
 });

@@ -1,12 +1,8 @@
 import { render } from "@wordpress/element";
 import Divider from "./Components/Divider";
+import { getBlocksOfType } from "../../common/helpers";
 
-const dividers = document.querySelectorAll(".s4tw-dynablocks-image-block");
-dividers.forEach(divider => {
-  let properties = divider.innerHTML;
-  properties = properties.replace(new RegExp("”", "g"), '"');
-  properties = properties.replace(new RegExp("“", "g"), '"');
-  properties = properties.replace(new RegExp("″", "g"), '"'); // prime?
-  properties = properties.replace(new RegExp("×", "g"), "x");
-  render(<Divider {...JSON.parse(properties)} />, divider);
+const blocks = getBlocksOfType(".s4tw-dynablocks-image-block");
+blocks.forEach(({ block, props }) => {
+  render(<Divider {...JSON.parse(props)} />, block);
 });
