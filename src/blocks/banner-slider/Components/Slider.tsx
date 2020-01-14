@@ -1,3 +1,4 @@
+import { Fragment } from "@wordpress/element";
 import { css } from "emotion";
 import Slider from "react-slick";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
@@ -6,7 +7,7 @@ import { Responsive, generateResponsiveCSS } from "../../../common/helpers";
 
 export interface SliderProps extends Attributes {
   editMode?: boolean;
-  update?: (property: any) => (value: any) => void;
+  BackgroundSettings?: () => JSX.Element;
 }
 
 export default (props: SliderProps): JSX.Element => {
@@ -24,7 +25,8 @@ export default (props: SliderProps): JSX.Element => {
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "608px"
+    minWidthTablet = "608px",
+    BackgroundSettings
   } = props;
 
   let h2Responsive: Responsive = {};
@@ -55,21 +57,21 @@ export default (props: SliderProps): JSX.Element => {
   }
 
   return (
-    <Slider
-      accessibility={false}
-      speed={500}
-      autoplaySpeed={4000}
-      autoplay={true}
-      arrows={false}
-      fade={true}
-      dots={true}
-    >
-      {images ? (
-        images.map(image => (
+    <Fragment>
+      <Slider
+        accessibility={false}
+        speed={500}
+        autoplaySpeed={4000}
+        autoplay={true}
+        arrows={false}
+        fade={true}
+        dots={true}
+      >
+        {images.map(image => (
           <div className="wrapper">
             <div
               className="slide-container"
-              style={{ backgroundImage: `url(${image})`, height }}
+              style={{ backgroundImage: `url(${image.url})`, height }}
             >
               <div
                 className="dimmer-filter"
@@ -112,10 +114,10 @@ export default (props: SliderProps): JSX.Element => {
               </div>
             </div>
           </div>
-        ))
-      ) : (
-        <div className="wrapper"></div>
-      )}
-    </Slider>
+        ))}
+      </Slider>
+      {BackgroundSettings && <BackgroundSettings />}
+      {/* {editMode && (!images.length || isSelected) && <BackgroundSettings />} */}
+    </Fragment>
   );
 };

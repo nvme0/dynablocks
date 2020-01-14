@@ -3,7 +3,6 @@ import { PanelBody } from "@wordpress/components";
 import {
   ColorPalette,
   ColorPicker,
-  ImageUploader,
   TextControl,
   TextareaControl
 } from "../../../common/Components/Controls";
@@ -16,7 +15,6 @@ import { Attributes } from "./attributes";
 export interface ControlProps {
   update: (property: string) => (value: any) => void;
   updateColorPicker: (property: string) => (value: any) => void;
-  updateBackgroundImages: (value: [{ url: number }]) => void;
 }
 
 export type Props = Attributes & ControlProps;
@@ -25,8 +23,6 @@ export default (props: Props): JSX.Element => {
   const {
     update,
     updateColorPicker,
-    updateBackgroundImages,
-    backgroundImages,
     filterColor,
     h2FontSize,
     h2MarginBottom,
@@ -106,15 +102,6 @@ export default (props: Props): JSX.Element => {
           initialOpen: false
         }}
       >
-        <ImageUploader
-          {...{
-            name: "Background Images:",
-            value: backgroundImages,
-            multiple: true,
-            gallery: true,
-            onSelect: updateBackgroundImages
-          }}
-        />
         <ColorPicker
           {...{
             name: "Filter Color",

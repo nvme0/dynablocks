@@ -2,17 +2,13 @@ import { BlockEditProps } from "@wordpress/blocks";
 import Slider from "../Components/Slider";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
+import { __ } from "@wordpress/i18n";
+import { icon } from "../editor";
+import { ImagePlaceholder } from "../../../common/Components/Controls";
 
 export default (props: BlockEditProps<Attributes>): JSX.Element => {
-  const { backgroundImages } = props.attributes;
-
-  const updateBackgroundImages = (value: [{ url: number }]) => {
-    const images: number[] = [];
-    value.forEach(image => {
-      images.push(image.url);
-    });
-    props.setAttributes({ backgroundImages: images });
-  };
+  const { attributes, isSelected } = props;
+  const { backgroundImages } = attributes;
 
   const updateColorPicker = property => value => {
     const { a, b, g, r } = value.rgb;
@@ -24,22 +20,44 @@ export default (props: BlockEditProps<Attributes>): JSX.Element => {
     props.setAttributes({ [property]: value });
   };
 
+  const BackgroundSettings = (): JSX.Element => (
+    <ImagePlaceholder
+      {...{
+        value: backgroundImages,
+        labels: {
+          title: __("Banner Slider"),
+          instructions: __(
+            "Drag images, upload new ones or select files from your library."
+          )
+        },
+        icon,
+        onSelect: value => {
+          if (update) {
+            update("backgroundImages")(value);
+          }
+        }
+      }}
+    />
+  );
+
   return (
     <div className="s4tw-dynablocks-banner-slider">
       <ElementControls
         {...{
           update,
           updateColorPicker,
-          updateBackgroundImages,
-          ...props.attributes
+          ...attributes
         }}
       />
       <Slider
         {...{
           editMode: true,
-          update,
+          BackgroundSettings:
+            backgroundImages.length < 1 || isSelected
+              ? BackgroundSettings
+              : undefined,
           backgroundImages,
-          ...props.attributes
+          ...attributes
         }}
       />
     </div>

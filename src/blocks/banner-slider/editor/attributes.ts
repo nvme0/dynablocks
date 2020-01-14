@@ -10,7 +10,17 @@ import {
 
 export interface Attributes extends ButtonAttributes, ResponsiveAttributes {
   align: string;
-  backgroundImages: any[];
+  backgroundImages: {
+    alt: string;
+    caption: string;
+    id: number;
+    link: string;
+    mime: string;
+    sizes: any;
+    subtype: string;
+    type: string;
+    url: string;
+  }[];
   filterColor: string;
   h2Text: string;
   h2FontSize: string;

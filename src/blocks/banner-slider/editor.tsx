@@ -3,10 +3,12 @@ import { __ } from "@wordpress/i18n";
 import Edit from "./editor/Edit";
 import { removeAttributes } from "../../common/helpers";
 
+export const icon = "format-gallery";
+
 const settings: BlockConfiguration<any> = {
   title: __("Banner Slider"),
   description: __("Block to generate Banner Slider"),
-  icon: "format-gallery",
+  icon,
   category: __("s4tw-dynablocks"),
   attributes: {},
   supports: {
