@@ -89,7 +89,16 @@ add_action("init", function() {
         array(
           "render_callback" => function($attributes, $content) {
             ob_start();
-            ?><div class="<?= $attributes["renderClassName"] ?>"><?= json_encode($attributes, JSON_UNESCAPED_SLASHES); ?></div><?php
+            ?>
+              <div class="<?= $attributes["renderClassName"] ?>">
+                <div class="props" style="display: none">
+                  <?= json_encode($attributes, JSON_UNESCAPED_SLASHES); ?>
+                </div>
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            <?php
             return ob_get_clean();
           },
           "attributes" => $block["attributes"]

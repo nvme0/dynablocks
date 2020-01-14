@@ -6,12 +6,15 @@ export const getBlocksOfType = (blockName: string) => {
   const blocksOfType = document.querySelectorAll(blockName);
   const blocks: { block: Element; props: string }[] = [];
   blocksOfType.forEach(block => {
-    let props = block.innerHTML;
-    props = props.replace(new RegExp("”", "g"), '"');
-    props = props.replace(new RegExp("“", "g"), '"');
-    props = props.replace(new RegExp("″", "g"), '"'); // prime?
-    props = props.replace(new RegExp("×", "g"), "x");
-    blocks.push({ block, props });
+    const propsContainer = block.querySelector(".props");
+    if (propsContainer) {
+      let props = propsContainer.innerHTML;
+      props = props.replace(new RegExp("”", "g"), '"');
+      props = props.replace(new RegExp("“", "g"), '"');
+      props = props.replace(new RegExp("″", "g"), '"'); // prime?
+      props = props.replace(new RegExp("×", "g"), "x");
+      blocks.push({ block, props });
+    }
   });
   return blocks;
 };
