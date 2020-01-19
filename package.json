@@ -1,11 +1,12 @@
 {
-  
   "name": "s4tw-dynablocks",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "wp-scripts build",
-    "start": "concurrently \"wp-scripts start\" \"gulp\"",
+    "build:prod": "gulp build --prod",
+    "build:dev": "gulp build",
+    "watch": "gulp watch",
+    "watch:hmr": "gulp watch --hmr",
     "eslint": "eslint src -c .eslintrc.js --ext js,jsx,ts,tsx",
     "eslint:fix": "eslint src -c .eslintrc.js --ext js,jsx,ts,tsx --fix",
     "prelint": "tsc --noEmit"
@@ -14,20 +15,27 @@
   "license": "GPLv2",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "classnames": "^2.2.6",
     "emotion": "^10.0.27",
     "react-bootstrap": "^1.0.0-beta.16",
+    "react-responsive": "^8.0.1",
     "react-slick": "^0.25.2",
-    "slick-carousel": "^1.8.1"
+    "sanitize-html": "^1.21.1",
+    "slick-carousel": "^1.8.1",
+    "validator": "^12.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
+    "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.7",
+    "@babel/register": "^7.8.3",
+    "@hot-loader/react-dom": "^16.11.0",
     "@types/react-slick": "^0.23.4",
     "@types/sanitize-html": "^1.20.2",
     "@types/validator": "^12.0.1",
+    "@types/webpack-env": "^1.15.0",
     "@types/wordpress__block-editor": "^2.2.5",
     "@types/wordpress__blocks": "^6.4.4",
     "@types/wordpress__components": "^8.5.0",
@@ -41,11 +49,11 @@
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
     "@wordpress/scripts": "^6.1.1",
+    "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.27",
     "browser-sync": "^2.26.7",
-    "classnames": "^2.2.6",
-    "concurrently": "^5.0.2",
     "css-loader": "^3.4.2",
+    "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -53,17 +61,17 @@
     "gulp": "^4.0.2",
     "image-webpack-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.8.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
-    "react-contenteditable": "^3.3.2",
-    "react-responsive": "^8.0.1",
-    "sanitize-html": "^1.20.1",
+    "react-hot-loader": "^4.12.18",
     "sass-loader": "^8.0.1",
     "terser-webpack-plugin": "^2.3.2",
     "typescript": "^3.7.4",
-    "validator": "^12.1.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-fix-style-only-entries": "^0.4.0"
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-fix-style-only-entries": "^0.4.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "yargs": "^15.1.0"
   }
 }

@@ -14,14 +14,23 @@ if (!defined('ABSPATH')) {
  * Enqueue assets for frontend and backend
  * @since 1.0.0
  */
-add_action('init', function() {    
+add_action('init', function() {
+
+	// Enqueue bootstap.min.css
+	$script_url = plugins_url('dist/css/bootstrap.min.css', __FILE__);
+	wp_enqueue_style(
+		's4tw-dynablocks-bootstrap-css',
+		$script_url,
+		array(),
+		null
+	);
 
 	// Enqueue the block style
-	$deps = s4tw_getScriptDependencies('dist/style', 'css');
+	$deps = s4tw_getScriptDependencies('dist/css/frontend', 'css');
 	$script_url = $deps['url'];
 	$script_asset = $deps['asset'];
 	wp_enqueue_style(
-		's4tw-dynablocks-style-css',
+		's4tw-dynablocks-frontend-css',
 		$script_url,
 		$script_asset['dependencies'],
 		$script_asset['version'],
@@ -35,13 +44,14 @@ add_action('init', function() {
 add_action( 'enqueue_block_editor_assets', function() {
 
 	// Enqueue the editor style
-	$deps = s4tw_getScriptDependencies('dist/editor', 'css');
+	$deps = s4tw_getScriptDependencies('dist/css/editor', 'css');
 	$script_url = $deps['url'];
+	$script_asset = $deps['asset'];
 	wp_enqueue_style(
 		's4tw-dynablocks-editor-css',
 		$script_url,
-		array( ),
-		null,
+		$script_asset['dependencies'],
+		$script_asset['version'],
 	);
 
 	// Enqueue the editor script
