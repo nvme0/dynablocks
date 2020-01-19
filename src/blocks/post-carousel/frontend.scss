@@ -26,16 +26,18 @@
               text-decoration: none;
             }
           }
-          a, h2, h3 {
+          .btn {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            transform: translateX(-50%);
+          }
+          h2, h3 {
             font-family: inherit;
             margin-top: 0;
             margin-left: 0;
             margin-right: 0;
             padding: 0;
-          }
-          button {
-            display: block;
-            margin: 0 auto;
           }
           @keyframes show1 {
             0% { 

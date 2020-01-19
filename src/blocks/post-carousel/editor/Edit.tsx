@@ -5,7 +5,7 @@ import Slider from "../Components/Slider";
 import { Attributes } from "./attributes";
 import { fetchPosts } from "../common/helpers";
 
-export default (props: BlockEditProps<Attributes>) => {
+export const Edit = (props: BlockEditProps<Attributes>) => {
   const [posts, setPosts] = useState();
   const [isLoaded, setIsLoadedFlag] = useState(false);
 

@@ -1,9 +1,10 @@
 import { BlockEditProps } from "@wordpress/blocks";
+import { InspectorControls } from "@wordpress/block-editor";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
 
-export default (props: BlockEditProps<Attributes>): JSX.Element => {
+export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { attributes } = props;
   const { buttonText: text } = attributes;
 
@@ -19,13 +20,16 @@ export default (props: BlockEditProps<Attributes>): JSX.Element => {
 
   return (
     <div className="s4tw-dynablocks-button">
-      <ElementControls
+      {/* <ElementControls
         {...{
           ...attributes,
           update,
           updateColorPicker
         }}
-      />
+      /> */}
+      {/* <InspectorControls> */}
+      <div>hello, world.</div>
+      {/* </InspectorControls> */}
       <StyledButton
         {...{
           ...attributes,

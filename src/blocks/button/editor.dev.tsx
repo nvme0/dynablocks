@@ -1,5 +1,5 @@
 import { BlockConfiguration } from "@wordpress/blocks";
-import { Edit } from "./editor/Edit";
+import Edit from "./editor/Edit.dev";
 import { settings as baseSettings } from "./editor/settings";
 
 export { name } from "./editor/settings";

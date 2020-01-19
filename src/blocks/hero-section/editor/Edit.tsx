@@ -4,7 +4,7 @@ import ElementControls, { ControlProps } from "./ElementControls";
 import Hero from "../Components/Hero";
 import { Attributes } from "./attributes";
 
-export default (props: BlockEditProps<Attributes>) => {
+export const Edit = (props: BlockEditProps<Attributes>) => {
   const { keywords, keywordsInterval } = props.attributes;
 
   const keywordsArray = keywords.split(" ");

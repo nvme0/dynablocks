@@ -70,6 +70,7 @@ export interface StyledButtonProps extends Attributes {
   scaleMobile?: number;
   minWidthDesktop?: string;
   minWidthTablet?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const StyledButton = (props: StyledButtonProps): JSX.Element => {
@@ -83,7 +84,8 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "608px"
+    minWidthTablet = "608px",
+    onClick
   } = props;
   const {
     color,
@@ -131,10 +133,8 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
   return (
     <Button
       {...{
-        onClick: () => {
-          if (editMode || !buttonUrl) return;
-          location.href = buttonUrl;
-        },
+        onClick,
+        href: !editMode && buttonUrl ? buttonUrl : undefined,
         variant: buttonStyle === "secondary" ? "outline-primary" : "primary",
         size:
           buttonFontSize === "sm" || buttonFontSize === "lg"

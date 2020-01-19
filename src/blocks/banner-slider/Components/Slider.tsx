@@ -1,4 +1,5 @@
 import { Fragment } from "@wordpress/element";
+import { InnerBlocks } from "@wordpress/block-editor";
 import { css } from "emotion";
 import Slider from "react-slick";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
@@ -87,6 +88,11 @@ export default (props: SliderProps): JSX.Element => {
                     fontFamily: "'Varela Round', sans-serif, Arial, Helvetica"
                   }}
                 >
+                  {/* Are these 3 different components?? Should banner-slider be a "Layout"??
+                    Blocks: h2, StyledButton
+                    Layout: banner-slider
+                  */}
+                  {/* <h2>hello, world</h2> */}
                   <h2
                     style={{
                       color: h2Color,
@@ -103,13 +109,25 @@ export default (props: SliderProps): JSX.Element => {
                       __html: h2Text.replace(/(?:\r\n|\r|\n)/g, "<br />")
                     }}
                   />
-                  <StyledButton
-                    {...{
-                      ...props,
-                      text: buttonText,
-                      editMode
-                    }}
-                  />
+                  {editMode ? (
+                    // TODO - figure out a better way to render blocks on frontend
+                    // Maybe give each block an Inner Blocks Attribute (Array of blocks)
+                    // Also give each block a "render method" and same class, that way
+                    // one render method can be used for all blocks
+                    <InnerBlocks
+                      {...{
+                        template: [
+                          [
+                            "s4tw/dynablocks-button",
+                            { ...props, text: buttonText, editMode }
+                          ]
+                        ],
+                        templateLock: "all"
+                      }}
+                    />
+                  ) : (
+                    <StyledButton {...{ ...props, text: buttonText }} />
+                  )}
                 </div>
               </div>
             </div>
@@ -121,3 +139,5 @@ export default (props: SliderProps): JSX.Element => {
     </Fragment>
   );
 };
+
+// export default hot(SliderWrapper);

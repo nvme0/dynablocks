@@ -1,12 +1,12 @@
 import { BlockEditProps } from "@wordpress/blocks";
+import { __ } from "@wordpress/i18n";
 import Slider from "../Components/Slider";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
-import { __ } from "@wordpress/i18n";
-import { icon } from "../editor";
+import { icon } from "./settings";
 import { ImagePlaceholder } from "../../../common/Components/Controls";
 
-export default (props: BlockEditProps<Attributes>): JSX.Element => {
+export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { attributes, isSelected } = props;
   const { backgroundImages } = attributes;
 

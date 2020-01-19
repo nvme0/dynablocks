@@ -82,14 +82,14 @@ export default (props: Props): JSX.Element => {
           }}
         />
       </PanelBody>
-      <ButtonControls
+      {/* <ButtonControls
         {...{
           ...createButtonControlProps(props, update, updateColorPicker),
           buttonText,
           updateButtonText: update("buttonText"),
           initialOpen: false
         }}
-      />
+      /> */}
       <ResponsiveControls
         {...{
           ...props,

@@ -3,7 +3,7 @@ import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import Divider from "../Components/Divider";
 
-export default (props: BlockEditProps<Attributes>): JSX.Element => {
+export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { className, attributes } = props;
 
   const updateBackgroundImage = (
