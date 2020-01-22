@@ -1,10 +1,11 @@
-import { useState, useEffect, render } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import Slider from "./Components/Slider";
 import { Attributes } from "./editor/attributes";
 import { fetchPosts } from "./common/helpers";
-import { getBlocksOfType } from "../../common/helpers";
 
-export const SliderWrapper = (props: Attributes): JSX.Element => {
+export const className = ".s4tw-dynablocks-post-carousel";
+
+export const EntryPoint = (props: Attributes): JSX.Element => {
   const [posts, setPosts] = useState();
   const [isLoaded, setIsLoadedFlag] = useState(false);
 
@@ -21,8 +22,3 @@ export const SliderWrapper = (props: Attributes): JSX.Element => {
 
   return <Slider {...{ posts, ...props }} />;
 };
-
-const blocks = getBlocksOfType(".s4tw-dynablocks-post-carousel");
-blocks.forEach(({ block, props }) => {
-  render(<SliderWrapper {...JSON.parse(props)} />, block);
-});

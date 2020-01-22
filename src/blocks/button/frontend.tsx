@@ -1,9 +1,9 @@
-import { render } from "@wordpress/element";
 import { StyledButton } from "../../common/Components/Bootstrap/Button";
 import { Attributes } from "./editor/attributes";
-import { getBlocksOfType } from "../../common/helpers";
 
-export const StyledButtonWrapper = (props: Attributes): JSX.Element => {
+export const className = ".s4tw-dynablocks-button";
+
+export const EntryPoint = (props: Attributes): JSX.Element => {
   const { buttonText: text } = props;
   return (
     <StyledButton
@@ -14,8 +14,3 @@ export const StyledButtonWrapper = (props: Attributes): JSX.Element => {
     />
   );
 };
-
-const blocks = getBlocksOfType(".s4tw-dynablocks-button");
-blocks.forEach(({ block, props }) => {
-  render(<StyledButtonWrapper {...JSON.parse(props)} />, block);
-});

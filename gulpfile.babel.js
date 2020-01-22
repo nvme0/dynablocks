@@ -31,6 +31,11 @@ const scriptsEntry = {
   ["editor.build"]: []
 };
 
+blocks.forEach(block => {
+  stylesEntry["frontend.build"].push(`./src/blocks/${block}/frontend.scss`);
+  stylesEntry["editor.build"].push(`./src/blocks/${block}/editor.scss`);
+});
+
 if (!PRODUCTION && HMR) {
   scriptsEntry["frontend.build"].push("webpack-hot-middleware/client");
   scriptsEntry["editor.build"].push("webpack-hot-middleware/client");
@@ -38,13 +43,8 @@ if (!PRODUCTION && HMR) {
 } else {
   scriptsEntry["editor.build"].push("./src/blockRegistration.ts");
 }
-
-blocks.forEach(block => {
-  stylesEntry["frontend.build"].push(`./src/blocks/${block}/frontend.scss`);
-  stylesEntry["editor.build"].push(`./src/blocks/${block}/editor.scss`);
-
-  scriptsEntry["frontend.build"].push(`./src/blocks/${block}/frontend.tsx`);
-});
+// TODO - render.dev.tsx for frontend.build
+scriptsEntry["frontend.build"].push("./src/render.tsx");
 
 const stylesConfig = styles(PRODUCTION, stylesEntry);
 const scriptsConfig = scripts(PRODUCTION, scriptsEntry);

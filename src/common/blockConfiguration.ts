@@ -5,7 +5,8 @@ export const commonDefaults: BlockConfiguration<any> = {
   category: "",
   attributes: {},
   supports: {
-    align: ["left", "center", "right", "full", "wide"]
+    align: ["left", "center", "right", "full", "wide"],
+    html: false
   },
   getEditWrapperProps({ align }) {
     if (
