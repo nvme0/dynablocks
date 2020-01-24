@@ -6,18 +6,22 @@ import { Attributes } from "./attributes";
 import { icon } from "./settings";
 import { ImagePlaceholder } from "../../../common/Components/Controls";
 
-export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
-  const { attributes, isSelected } = props;
+interface EditProps extends BlockEditProps<Attributes> {
+  clientId?: string;
+}
+
+export const Edit = (props: EditProps): JSX.Element => {
+  const { attributes, setAttributes, isSelected, clientId } = props;
   const { backgroundImages } = attributes;
+
+  const update = property => value => {
+    setAttributes({ [property]: value });
+  };
 
   const updateColorPicker = property => value => {
     const { a, b, g, r } = value.rgb;
     const rgbaValue = `rgba(${r},${g},${b},${a})`;
-    props.setAttributes({ [property]: rgbaValue });
-  };
-
-  const update = property => value => {
-    props.setAttributes({ [property]: value });
+    update(property)(rgbaValue);
   };
 
   const BackgroundSettings = (): JSX.Element => (
@@ -51,6 +55,8 @@ export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
       />
       <Slider
         {...{
+          clientId,
+          update,
           editMode: true,
           BackgroundSettings:
             backgroundImages.length < 1 || isSelected

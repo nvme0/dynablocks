@@ -15,7 +15,7 @@
   },
   "h2Text": {
     "type": "string",
-    "default": "Edit the heading text in the Block Panel"
+    "default": ""
   },
   "h2FontSize": {
     "type": "string",
@@ -36,5 +36,9 @@
   "height": {
     "type": "string",
     "default": "550px"
+  },
+  "innerBlocks": {
+    "type": "object",
+    "default": {}
   }
 }

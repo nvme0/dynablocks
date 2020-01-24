@@ -3,12 +3,8 @@ import { PanelBody } from "@wordpress/components";
 import {
   ColorPalette,
   ColorPicker,
-  TextControl,
-  TextareaControl
+  TextControl
 } from "../../../common/Components/Controls";
-import ButtonControls, {
-  createButtonControlProps
-} from "../../../common/Components/Bootstrap/Button/ElementControls";
 import { ResponsiveControls } from "../../../common/Components/Controls";
 import { Attributes } from "./attributes";
 
@@ -27,8 +23,6 @@ export default (props: Props): JSX.Element => {
     h2FontSize,
     h2MarginBottom,
     h2Color,
-    h2Text,
-    buttonText,
     height
   } = props;
 
@@ -49,14 +43,6 @@ export default (props: Props): JSX.Element => {
           initialOpen: false
         }}
       >
-        <TextareaControl
-          {...{
-            name: "Static Text",
-            rows: 2,
-            value: h2Text,
-            update: update("h2Text")
-          }}
-        />
         <TextControl
           {...{
             name: "Font Size:",
@@ -82,14 +68,6 @@ export default (props: Props): JSX.Element => {
           }}
         />
       </PanelBody>
-      {/* <ButtonControls
-        {...{
-          ...createButtonControlProps(props, update, updateColorPicker),
-          buttonText,
-          updateButtonText: update("buttonText"),
-          initialOpen: false
-        }}
-      /> */}
       <ResponsiveControls
         {...{
           ...props,
