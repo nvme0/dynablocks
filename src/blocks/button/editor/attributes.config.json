@@ -1,4 +1,10 @@
 {
+  "parentId": {
+    "type": "string"
+  },
+  "relationship": {
+    "type": "string"
+  },
   "align": {
     "type": "string",
     "default": ""
