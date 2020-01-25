@@ -73,6 +73,13 @@ export const changeColorAlpha = (rgba: string, alpha: number) => {
 
 /* size */
 
+export const cap = (value: number, limit: { lower: number; upper: number }) => {
+  const { lower, upper } = limit;
+  if (value < lower) return lower;
+  if (value > upper) return upper;
+  return value;
+};
+
 export const extractSizeAndUnits = (fontSize: string) => {
   if (!fontSize) return { size: 0, units: "" };
   const size = parseInt(validator.whitelist(fontSize, "0123456789"), 10);
