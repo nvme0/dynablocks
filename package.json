@@ -56,6 +56,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react-hooks": "0.0.0-b53ea6ca0",
     "file-loader": "^4.3.0",
     "gulp": "^4.0.2",
     "image-webpack-loader": "^6.0.0",

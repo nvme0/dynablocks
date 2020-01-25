@@ -4,6 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
+  plugins: ["react-hooks"],
   extends: [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
@@ -23,6 +24,8 @@ module.exports = {
     "react/jsx-key": "off",
     "react/jsx-space-before-closing": ["error", "always"],
     "react/jsx-equals-spacing": ["error", "never"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-console": ["warn"],
     "no-alert": ["warn"],
     "space-before-function-paren": [ "error", {

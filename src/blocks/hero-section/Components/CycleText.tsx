@@ -69,7 +69,7 @@ export const Content = (props: ContentProps) => {
     return () => {
       clearInterval(timer);
     };
-  }, [interval]);
+  }, [interval, keywordsArray.length, timer]);
 
   return (
     <Element
