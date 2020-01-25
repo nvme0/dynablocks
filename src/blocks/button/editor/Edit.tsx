@@ -1,12 +1,14 @@
 import { dispatch, select } from "@wordpress/data";
+import { useEffect, useState } from "@wordpress/element";
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
+import withDraggable from "../../../common/HOCs/withDraggable";
 
 interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
-  clientId: string | undefined; // should always have this
+  clientId?: string; // should always have this
 }
 
 const createUpdateFunction = (props: EditProps) => {
@@ -49,8 +51,42 @@ const createUpdateFunction = (props: EditProps) => {
 };
 
 export const Edit = (props: EditProps): JSX.Element => {
-  const { attributes } = props;
-  const { buttonText: text } = attributes;
+  const { attributes, setAttributes } = props;
+  const {
+    buttonText: text,
+    buttonPositionLeft: left,
+    buttonPositionTop: top
+  } = attributes;
+
+  const containerRef = React.createRef<HTMLDivElement>();
+  const [parent, setParent] = useState<Element | null>();
+
+  const handlePositionUpdateCallback = (
+    position: Partial<{
+      left: number;
+      top: number;
+    }>
+  ) => {
+    setAttributes({
+      buttonPositionLeft: position.left,
+      buttonPositionTop: position.top
+    });
+  };
+
+  const DraggableStyledButton = withDraggable({
+    position: { left, top },
+    updateCallback: handlePositionUpdateCallback,
+    parentSize: {
+      width: parent ? parent.clientWidth : null,
+      height: parent ? parent.clientHeight : null
+    },
+    lockX: false,
+    lockY: true,
+    style: {
+      display: "inline-block",
+      transform: "translateX(-50%)"
+    }
+  })(StyledButton);
 
   const update = createUpdateFunction(props);
   const updateColorPicker = property => value => {
@@ -59,8 +95,18 @@ export const Edit = (props: EditProps): JSX.Element => {
     update(property)(rgbaValue);
   };
 
+  useEffect(() => {
+    const { current } = containerRef;
+    if (!parent && current) {
+      const { offsetParent } = current;
+      if (offsetParent) {
+        setParent(offsetParent);
+      }
+    }
+  }, [parent, containerRef]);
+
   return (
-    <div className="s4tw-dynablocks-button">
+    <div className="s4tw-dynablocks-button" ref={containerRef}>
       <ElementControls
         {...{
           ...attributes,
@@ -68,7 +114,7 @@ export const Edit = (props: EditProps): JSX.Element => {
           updateColorPicker
         }}
       />
-      <StyledButton
+      <DraggableStyledButton
         {...{
           ...attributes,
           text,

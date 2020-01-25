@@ -34,7 +34,6 @@ add_action("init", function() {
     array(
       "banner-slider" => array_merge(
         $blockAttributes["banner-slider"],
-        $componentAttributes["Bootstrap/Button"],
         $componentAttributes["Controls/ResponsiveControls"]
       ),
       "button" => array_merge(

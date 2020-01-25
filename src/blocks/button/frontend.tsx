@@ -9,7 +9,11 @@ export const EntryPoint = (props: Attributes): JSX.Element => {
     <StyledButton
       {...{
         ...props,
-        text
+        text,
+        style: {
+          position: "relative",
+          transform: `translateX(-50%)`
+        }
       }}
     />
   );
