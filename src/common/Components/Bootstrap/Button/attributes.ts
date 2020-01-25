@@ -19,6 +19,8 @@ export interface Attributes {
     | "outset"
     | "none"
     | "hidden";
+  buttonPositionLeft: number;
+  buttonPositionTop: number;
 }
 
 export interface BlockAttributes {
@@ -30,4 +32,6 @@ export interface BlockAttributes {
   buttonBorderRadius: BlockAttribute<Attributes["buttonBorderRadius"]>;
   buttonBorderWidth: BlockAttribute<Attributes["buttonBorderWidth"]>;
   buttonBorderStyle: BlockAttribute<Attributes["buttonBorderStyle"]>;
+  buttonPositionLeft: BlockAttribute<Attributes["buttonPositionLeft"]>;
+  buttonPositionTop: BlockAttribute<Attributes["buttonPositionTop"]>;
 }

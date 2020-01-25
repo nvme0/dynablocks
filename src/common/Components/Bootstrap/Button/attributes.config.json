@@ -27,5 +27,13 @@
   "buttonBorderStyle": {
     "type": "string",
     "default": "solid"
+  },
+  "buttonPositionLeft": {
+    "type": "number",
+    "default": 0
+  },
+  "buttonPositionTop": {
+    "type": "number",
+    "default": 0
   }
 }

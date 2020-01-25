@@ -64,6 +64,7 @@ const fontSizeToPadding = (fontSize: string, scalar = 1) => {
 
 export interface StyledButtonProps extends Attributes {
   text: string;
+  style?: React.CSSProperties;
   editMode?: boolean;
   responsive?: boolean;
   scaleTablet?: number;
@@ -76,9 +77,12 @@ export interface StyledButtonProps extends Attributes {
 export const StyledButton = (props: StyledButtonProps): JSX.Element => {
   const {
     text,
+    style,
     buttonUrl,
     buttonStyle,
     buttonFontSize,
+    buttonPositionLeft,
+    buttonPositionTop,
     editMode = false,
     responsive = false,
     scaleTablet = 1.0,
@@ -140,6 +144,7 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
           buttonFontSize === "sm" || buttonFontSize === "lg"
             ? buttonFontSize
             : undefined,
+        style,
         className: css({
           fontSize: fontSizeMobile ? fontSizeMobile : fontSize,
           color,
@@ -149,6 +154,8 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
           borderWidth,
           borderStyle,
           padding: paddingMobile ? paddingMobile : padding,
+          left: `${buttonPositionLeft}%`,
+          top: `${buttonPositionTop}%`,
           "&:hover": {
             backgroundColor: backgroundColorHover,
             borderColor: borderColorHover
