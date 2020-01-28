@@ -14,7 +14,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/camelcase": 1,
     "@typescript-eslint/no-explicit-any": "off",

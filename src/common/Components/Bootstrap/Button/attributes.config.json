@@ -28,12 +28,30 @@
     "type": "string",
     "default": "solid"
   },
-  "buttonPositionLeft": {
-    "type": "number",
-    "default": 0
+  "buttonPosition": {
+    "type": "object",
+    "default": {
+      "left": {
+        "value": 50,
+        "units": "%"
+      },
+      "top": {
+        "value": 0,
+        "units": "px"
+      }
+    }
   },
-  "buttonPositionTop": {
-    "type": "number",
-    "default": 0
+  "buttonPositionLimits": {
+    "type": "object",
+    "default": {
+      "x": {
+        "lower": 0,
+        "upper": 100
+      },
+      "y": {
+        "lower": 0,
+        "upper": 100
+      }
+    }
   }
 }

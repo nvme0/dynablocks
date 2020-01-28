@@ -1,4 +1,5 @@
 import { BlockAttribute } from "@wordpress/blocks";
+import { PositionEntry, Limits } from "../../../HOCs/withDraggable";
 
 export interface Attributes {
   buttonUrl: string;
@@ -19,8 +20,8 @@ export interface Attributes {
     | "outset"
     | "none"
     | "hidden";
-  buttonPositionLeft: number;
-  buttonPositionTop: number;
+  buttonPosition: { left: PositionEntry; top: PositionEntry };
+  buttonPositionLimits: Limits;
 }
 
 export interface BlockAttributes {
@@ -32,6 +33,6 @@ export interface BlockAttributes {
   buttonBorderRadius: BlockAttribute<Attributes["buttonBorderRadius"]>;
   buttonBorderWidth: BlockAttribute<Attributes["buttonBorderWidth"]>;
   buttonBorderStyle: BlockAttribute<Attributes["buttonBorderStyle"]>;
-  buttonPositionLeft: BlockAttribute<Attributes["buttonPositionLeft"]>;
-  buttonPositionTop: BlockAttribute<Attributes["buttonPositionTop"]>;
+  buttonPosition: BlockAttribute<Attributes["buttonPosition"]>;
+  buttonPositionLimits: BlockAttribute<Attributes["buttonPositionLimits"]>;
 }

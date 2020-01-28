@@ -1,10 +1,12 @@
 import { dispatch, select } from "@wordpress/data";
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useState, useRef } from "@wordpress/element";
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
-import withDraggable from "../../../common/HOCs/withDraggable";
+import withDraggable, { Limits } from "../../../common/HOCs/withDraggable";
+import { Toolbar, ToolbarButton } from "@wordpress/components";
+import { BlockControls } from "@wordpress/block-editor";
 
 interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
@@ -52,37 +54,50 @@ const createUpdateFunction = (props: EditProps) => {
 
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes, setAttributes } = props;
-  const {
-    buttonText: text,
-    buttonPositionLeft: left,
-    buttonPositionTop: top
-  } = attributes;
+  const { buttonText: text, buttonPosition } = attributes;
 
-  const containerRef = React.createRef<HTMLDivElement>();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [parent, setParent] = useState<Element | null>();
+  const [isDraggable, setIsDraggable] = useState(false);
 
-  const handlePositionUpdateCallback = (
-    position: Partial<{
-      left: number;
-      top: number;
-    }>
+  const updatePositionCallback = (
+    position: { left: number; top: number },
+    limits: Limits
   ) => {
     setAttributes({
-      buttonPositionLeft: position.left,
-      buttonPositionTop: position.top
+      buttonPosition: {
+        left: {
+          value: position["left"] || 0,
+          units: buttonPosition["left"]["units"] || "%"
+        },
+        top: {
+          value: position["top"] || 0,
+          units: buttonPosition["top"]["units"] || "px"
+        }
+      },
+      buttonPositionLimits: limits
     });
   };
 
   const DraggableStyledButton = withDraggable({
-    position: { left, top },
-    updateCallback: handlePositionUpdateCallback,
+    updateCallback: updatePositionCallback,
+    position: buttonPosition,
     parentSize: {
       width: parent ? parent.clientWidth : null,
       height: parent ? parent.clientHeight : null
     },
+    transforms: {
+      translateX: { value: -50, units: "%" },
+      translateY: { value: 0, units: "px" }
+    },
+    adjustmentFactor: {
+      x: 1,
+      y: 2 // negative inverse of translate.. e.g. 100/(100% - translateX(-90%)) = 1 / 0.1.
+    },
     lockX: false,
     lockY: true,
     style: {
+      position: "relative",
       display: "inline-block",
       transform: "translateX(-50%)"
     }
@@ -105,8 +120,31 @@ export const Edit = (props: EditProps): JSX.Element => {
     }
   }, [parent, containerRef]);
 
+  const buttonProps = {
+    ...{
+      ...attributes,
+      text,
+      updateText: update("buttonText"),
+      editMode: true
+    }
+  };
+
+  const { left, top } = buttonPosition;
+
   return (
     <div className="s4tw-dynablocks-button" ref={containerRef}>
+      <BlockControls>
+        <Toolbar>
+          <ToolbarButton
+            {...{
+              icon: "move",
+              title: "Position",
+              onClick: () => setIsDraggable(!isDraggable),
+              isActive: isDraggable
+            }}
+          />
+        </Toolbar>
+      </BlockControls>
       <ElementControls
         {...{
           ...attributes,
@@ -114,13 +152,21 @@ export const Edit = (props: EditProps): JSX.Element => {
           updateColorPicker
         }}
       />
-      <DraggableStyledButton
-        {...{
-          ...attributes,
-          text,
-          editMode: true
-        }}
-      />
+      {isDraggable ? (
+        <DraggableStyledButton {...{ ...buttonProps, updateText: undefined }} />
+      ) : (
+        <StyledButton
+          {...{
+            ...buttonProps,
+            style: {
+              position: "relative",
+              transform: `translateX(-50%)`,
+              left: `${left.value}${left.units}`,
+              top: `${top.value}${left.units}`
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

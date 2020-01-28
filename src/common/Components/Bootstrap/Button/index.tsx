@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import validator from "validator";
 import { Attributes } from "./attributes";
 import { darkenColor, changeColorAlpha } from "../../../helpers";
+import { RichText } from "@wordpress/block-editor";
+import { RawHTML } from "@wordpress/element";
 
 export interface ButtonStyle {
   color: string;
@@ -66,6 +68,7 @@ export interface StyledButtonProps extends Attributes {
   text: string;
   style?: React.CSSProperties;
   editMode?: boolean;
+  updateText?: (value: string) => void;
   responsive?: boolean;
   scaleTablet?: number;
   scaleMobile?: number;
@@ -81,9 +84,8 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
     buttonUrl,
     buttonStyle,
     buttonFontSize,
-    buttonPositionLeft,
-    buttonPositionTop,
     editMode = false,
+    updateText,
     responsive = false,
     scaleTablet = 1.0,
     scaleMobile = 1.0,
@@ -154,8 +156,6 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
           borderWidth,
           borderStyle,
           padding: paddingMobile ? paddingMobile : padding,
-          left: `${buttonPositionLeft}%`,
-          top: `${buttonPositionTop}%`,
           "&:hover": {
             backgroundColor: backgroundColorHover,
             borderColor: borderColorHover
@@ -176,7 +176,17 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
         })
       }}
     >
-      {text}
+      {editMode && updateText ? (
+        <RichText
+          {...{
+            value: text,
+            onChange: updateText,
+            formattingControls: ["bold", "italic", "strikethrough"]
+          }}
+        />
+      ) : (
+        <RawHTML>{text}</RawHTML>
+      )}
     </Button>
   );
 };
