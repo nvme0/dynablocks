@@ -1,0 +1,9 @@
+{
+  "align": {
+    "type": "string"
+  },
+  "height": {
+    "type": "string",
+    "default": "20px"
+  }
+}

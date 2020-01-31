@@ -6,7 +6,7 @@
  *    2. List attributes dependencies for the block in "$dependencies"
  */
 
-add_action("init", function() {
+add_action("init", function () {
   // 1. Append Block or Component name
   $blockNames = array(
     "banner-slider",
@@ -14,23 +14,28 @@ add_action("init", function() {
     "container", // Static Block
     "hero-section",
     "image-block",
-    "post-carousel"
+    "post-carousel",
+    "spacer"
   );
-  $componentNames = array (
+  $componentNames = array(
     "Bootstrap/Button",
     "Controls/ResponsiveControls"
   );
 
   $root = plugin_dir_path(__FILE__);
   $blockAttributes = s4tw_dynablocks_parse_attributes_config_json(
-    $root . "/src/blocks/", $blockNames, "/editor/attributes.config.json"
+    $root . "/src/blocks/",
+    $blockNames,
+    "/editor/attributes.config.json"
   );
   $componentAttributes = s4tw_dynablocks_parse_attributes_config_json(
-    $root . "/src/common/Components/", $componentNames, "/attributes.config.json"
+    $root . "/src/common/Components/",
+    $componentNames,
+    "/attributes.config.json"
   );
 
   // 2. List attributes dependencies for the block
-  $dependencies = 
+  $dependencies =
     array(
       "banner-slider" => array_merge(
         $blockAttributes["banner-slider"],
@@ -56,14 +61,18 @@ add_action("init", function() {
         $blockAttributes["post-carousel"],
         $componentAttributes["Bootstrap/Button"],
         $componentAttributes["Controls/ResponsiveControls"]
+      ),
+      "spacer" => array_merge(
+        $blockAttributes["spacer"],
+        $componentAttributes["Controls/ResponsiveControls"]
       )
     );
 
   // Register Block Types Handler
-  $blocks = 
+  $blocks =
     array_map(
-      function($entry) use($dependencies) {
-        return array (
+      function ($entry) use ($dependencies) {
+        return array(
           "name" => "s4tw/dynablocks-" . $entry,
           "attributes" => array_merge(
             array("renderClassName" => array("type" => "string", "default" => "s4tw-dynablocks-" . $entry)),
@@ -78,26 +87,26 @@ add_action("init", function() {
     if ($block["name"] == "s4tw/dynablocks-container") {
       // is a static block
       register_block_type(
-        $block["name"], 
+        $block["name"],
         array("attributes" => $block["attributes"])
       );
     } else {
       // is a dynamic block
       register_block_type(
-        $block["name"], 
+        $block["name"],
         array(
-          "render_callback" => function($attributes, $content) {
+          "render_callback" => function ($attributes, $content) {
             ob_start();
-            ?>
-              <div class="<?= $attributes["renderClassName"] ?>">
-                <div class="props" style="display: none">
-                  <?= json_encode($attributes, JSON_UNESCAPED_SLASHES); ?>
-                </div>
-                <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-            <?php
+?>
+        <div class="<?= $attributes["renderClassName"] ?>">
+          <div class="props" style="display: none">
+            <?= json_encode($attributes, JSON_UNESCAPED_SLASHES); ?>
+          </div>
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+<?php
             return ob_get_clean();
           },
           "attributes" => $block["attributes"]
@@ -107,7 +116,8 @@ add_action("init", function() {
   };
 });
 
-function s4tw_dynablocks_parse_attributes_config_json($dir, $names, $configFile) {
+function s4tw_dynablocks_parse_attributes_config_json($dir, $names, $configFile)
+{
   $attributes = array();
   foreach ($names as $name) {
     $attributes[$name] = json_decode(file_get_contents($dir . $name . $configFile), true);

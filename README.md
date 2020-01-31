@@ -1,12 +1,14 @@
 # Dynablocks
 
 A Wordpress Gutenberg Blocks Plugin which adds the following custom Wordpress Blocks:
+
 - Hero Section
 - Post Carousel
 - Banner Slider
 - Container
 - Image Block
 - Button
+- Spacer
 
 ## Common setup
 
