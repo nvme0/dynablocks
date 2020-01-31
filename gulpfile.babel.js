@@ -72,10 +72,7 @@ export const buildScripts = () => bundle(scriptsConfig);
 const streamStyles = () => src("dist/css/*.css").pipe(browserSync.stream());
 
 export const build = () =>
-  clean()
-    .then(bootstrap())
-    .then(buildStyles())
-    .then(buildScripts());
+  clean().then(series(bootstrap, buildStyles, buildScripts));
 
 export const watch = () => {
   build();
