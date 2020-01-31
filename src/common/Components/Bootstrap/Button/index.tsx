@@ -181,7 +181,7 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
           {...{
             value: text,
             onChange: updateText,
-            formattingControls: ["bold", "italic", "strikethrough"]
+            allowedFormats: ["bold", "italic", "strikethrough"]
           }}
         />
       ) : (
