@@ -63,9 +63,10 @@ const bundle = config =>
 
 export const clean = () => del(["dist"]);
 export const bootstrap = () =>
-  src("node_modules/bootstrap/dist/css/bootstrap.min.css").pipe(
-    dest("dist/css")
-  );
+  src([
+    "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "./node_modules/bootstrap/dist/css/bootstrap.min.css.map"
+  ]).pipe(dest("dist/css"));
 export const buildStyles = () => bundle(stylesConfig);
 export const buildScripts = () => bundle(scriptsConfig);
 const streamStyles = () => src("dist/css/*.css").pipe(browserSync.stream());
