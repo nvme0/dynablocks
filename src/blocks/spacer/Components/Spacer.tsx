@@ -1,3 +1,5 @@
+import { compose } from "@wordpress/compose";
+import { withDispatch } from "@wordpress/data";
 import { ResizableBox } from "@wordpress/components";
 import classnames from "classnames";
 import { css } from "emotion";
@@ -12,14 +14,17 @@ export interface SliderProps extends Attributes {
   editMode?: boolean;
   isSelected?: boolean;
   update?: (value: any) => void;
+  toggleSelection: (isSelectionEnabled?: boolean | undefined) => void;
 }
 
-export default (props: SliderProps) => {
+const Core = (props: SliderProps) => {
   const {
     editMode = false,
     isSelected = false,
     update,
+    toggleSelection,
     height,
+    resizeRatio,
     responsive = false,
     scaleTablet = 1.0,
     scaleMobile = 1.0,
@@ -58,7 +63,8 @@ export default (props: SliderProps) => {
           "is-selected": isSelected
         }),
         size: { height },
-        minHeight: 0,
+        minHeight: 20,
+        resizeRatio,
         enable: {
           top: false,
           right: false,
@@ -70,13 +76,22 @@ export default (props: SliderProps) => {
           topLeft: false
         },
         onResizeStop: (event, direction, elt, delta) => {
+          toggleSelection(true);
           const { size, units } = extractSizeAndUnits(height);
           const spacerHeight = Math.round(size + delta.height);
           update(`${spacerHeight}${units}`);
-        }
+        },
+        onResizeStart: () => toggleSelection(false)
       }}
     />
   ) : (
     <div className={css({ height, ...heightResponsive })} />
   );
 };
+
+export default compose(
+  withDispatch(dispatch => {
+    const { toggleSelection } = dispatch("core/block-editor");
+    return { toggleSelection };
+  })
+)(Core);

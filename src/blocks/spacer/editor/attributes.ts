@@ -9,6 +9,7 @@ export interface Attributes extends ResponsiveAttributes {
   relationship?: string;
   align: string;
   height: string;
+  resizeRatio: string;
 }
 
 export interface BlockAttributes extends ResponsiveBlockAttributes {
@@ -16,4 +17,5 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   relationship: BlockAttribute<Attributes["relationship"]>;
   align: BlockAttribute<Attributes["align"]>;
   height: BlockAttribute<Attributes["height"]>;
+  resizeRatio: BlockAttribute<Attributes["resizeRatio"]>;
 }

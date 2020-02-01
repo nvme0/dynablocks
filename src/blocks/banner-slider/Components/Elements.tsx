@@ -80,7 +80,8 @@ export default (props: ElementsProps): JSX.Element => {
                         ? innerBlocks["spacer-0"].attributes
                         : undefined),
                       parentId: clientId,
-                      relationship: "spacer-0"
+                      relationship: "spacer-0",
+                      resizeRatio: 2
                     }
                   ],
                   [
