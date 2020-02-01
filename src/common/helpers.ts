@@ -1,4 +1,6 @@
+import { dispatch, select } from "@wordpress/data";
 import validator from "validator";
+import { BlockEditProps } from "@wordpress/blocks";
 
 /* frontend */
 
@@ -30,6 +32,50 @@ export const removeAttributes = (settings: any): any =>
     }
     return object;
   }, {});
+
+export interface UpdateFunctionProps
+  extends BlockEditProps<Partial<{ parentId: string; relationship: string }>> {
+  clientId?: string;
+}
+
+export const createUpdateFunction = (props: UpdateFunctionProps) => {
+  const { clientId, attributes, setAttributes } = props;
+  const { parentId, relationship } = attributes;
+  let syncWithParent;
+
+  if (parentId && relationship && clientId) {
+    const parentAttributes = select("core/block-editor").getBlockAttributes(
+      parentId
+    );
+
+    if (parentAttributes) {
+      syncWithParent = () => {
+        const { innerBlocks } = parentAttributes;
+        const blockInstance = select("core/block-editor").getBlock(clientId);
+        dispatch("core/block-editor").updateBlockAttributes(parentId, {
+          innerBlocks: {
+            ...innerBlocks,
+            [relationship]: blockInstance
+          }
+        });
+      };
+
+      // sync attributes with parent
+      syncWithParent();
+    }
+  }
+
+  if (!syncWithParent) {
+    return property => value => {
+      setAttributes({ [property]: value });
+    };
+  }
+
+  return property => value => {
+    syncWithParent();
+    setAttributes({ [property]: value });
+  };
+};
 
 /* color */
 
