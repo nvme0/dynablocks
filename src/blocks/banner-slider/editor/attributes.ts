@@ -4,6 +4,7 @@ import {
   BlockAttributes as ResponsiveBlockAttributes
 } from "../../../common/Components/Controls/ResponsiveControls/attributes";
 import { Attributes as ButtonAttributes } from "../../button/editor/attributes";
+import { Attributes as SpacerAttributes } from "../../spacer/editor/attributes";
 
 export interface Image {
   alt: string;
@@ -23,11 +24,13 @@ export interface Attributes extends ResponsiveAttributes {
   filterColor: string;
   h2Text: string;
   h2FontSize: string;
-  h2MarginBottom: string;
   h2Color: string;
   height: string;
   // innerBlocks: { [clientId: string]: any };
-  innerBlocks: { "button-0": BlockInstance<ButtonAttributes> };
+  innerBlocks: {
+    "button-0": BlockInstance<ButtonAttributes>;
+    "spacer-0": BlockInstance<SpacerAttributes>;
+  };
 }
 
 export interface BlockAttributes extends ResponsiveBlockAttributes {
@@ -36,7 +39,6 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   filterColor: BlockAttribute<Attributes["filterColor"]>;
   h2Text: BlockAttribute<Attributes["h2Text"]>;
   h2FontSize: BlockAttribute<Attributes["h2FontSize"]>;
-  h2MarginBottom: BlockAttribute<Attributes["h2MarginBottom"]>;
   h2Color: BlockAttribute<Attributes["h2Color"]>;
   height: BlockAttribute<Attributes["height"]>;
   innerBlocks: BlockAttribute<Attributes["innerBlocks"]>;

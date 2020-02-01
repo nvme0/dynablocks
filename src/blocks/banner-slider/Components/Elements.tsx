@@ -4,6 +4,7 @@ import { css } from "emotion";
 import { Attributes } from "../editor/attributes";
 import { Responsive } from "../../../common/helpers";
 import { EntryPoint as DynablocksButton } from "../../button/frontend";
+import { EntryPoint as DynablocksSpacer } from "../../spacer/frontend";
 
 export interface ElementsProps extends Attributes {
   clientId?: string;
@@ -21,7 +22,6 @@ export default (props: ElementsProps): JSX.Element => {
     h2Responsive,
     h2Text,
     h2FontSize,
-    h2MarginBottom,
     h2Color,
     editMode = false,
     responsive = false
@@ -30,8 +30,7 @@ export default (props: ElementsProps): JSX.Element => {
   const h2Style = {
     margin: "0 auto",
     color: h2Color,
-    fontSize: !responsive || editMode ? h2FontSize : undefined,
-    marginBottom: !responsive || editMode ? h2MarginBottom : undefined
+    fontSize: !responsive || editMode ? h2FontSize : undefined
   };
 
   const h2ClassName = css({
@@ -75,6 +74,16 @@ export default (props: ElementsProps): JSX.Element => {
               {...{
                 template: [
                   [
+                    "s4tw/dynablocks-spacer",
+                    {
+                      ...(innerBlocks["spacer-0"]
+                        ? innerBlocks["spacer-0"].attributes
+                        : undefined),
+                      parentId: clientId,
+                      relationship: "spacer-0"
+                    }
+                  ],
+                  [
                     "s4tw/dynablocks-button",
                     {
                       ...(innerBlocks["button-0"]
@@ -99,6 +108,7 @@ export default (props: ElementsProps): JSX.Element => {
                 className: h2ClassName
               }}
             />
+            <DynablocksSpacer {...innerBlocks["spacer-0"].attributes} />
             <DynablocksButton {...innerBlocks["button-0"].attributes} />
           </Fragment>
         )}
