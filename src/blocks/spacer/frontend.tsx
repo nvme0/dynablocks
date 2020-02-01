@@ -1,13 +1,10 @@
 import { Attributes } from "./editor/attributes";
 import Spacer from "./Components/Spacer";
 
-export const className = ".s4tw-dynablocks-banner-slider";
+export const className = ".s4tw-dynablocks-spacer";
 
-export const EntryPoint = (props: Attributes): JSX.Element => {
-  const { height } = props;
-  return (
-    <div className="s4tw-dynablocks-spacer" style={{ height: height }}>
-      <Spacer {...props} />
-    </div>
-  );
-};
+export const EntryPoint = (props: Attributes): JSX.Element => (
+  <div className="s4tw-dynablocks-spacer">
+    <Spacer {...props} />
+  </div>
+);

@@ -4,17 +4,23 @@ import { Attributes } from "./attributes";
 import Spacer from "../Components/Spacer";
 
 export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
-  const { attributes, setAttributes } = props;
-  const { height } = attributes;
+  const { attributes, setAttributes, isSelected } = props;
 
   const update = property => value => {
     setAttributes({ [property]: value });
   };
 
   return (
-    <div className="s4tw-dynablocks-spacer" style={{ height: height }}>
+    <div className="s4tw-dynablocks-spacer">
       <ElementControls {...{ update, ...attributes }} />
-      <Spacer {...attributes} />
+      <Spacer
+        {...{
+          ...attributes,
+          isSelected,
+          update: update("height"),
+          editMode: true
+        }}
+      />
     </div>
   );
 };
