@@ -59,9 +59,13 @@ const Core = (props: SliderProps) => {
   return editMode && update ? (
     <ResizableBox
       {...{
-        className: classnames("block-library-spacer__resize-container", {
-          "is-selected": isSelected
-        }),
+        className: classnames(
+          "block-library-spacer__resize-container",
+          {
+            "is-selected": isSelected
+          },
+          css({ marginBottom: 0 })
+        ),
         size: { height },
         minHeight: 20,
         resizeRatio,
