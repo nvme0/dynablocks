@@ -175,8 +175,8 @@ export default (props: ButtonControlProps): JSX.Element => {
           {...{
             value: position["left"]["value"],
             onChange: updateButtonPosition("left"),
-            min: limits["x"]["lower"],
-            max: limits["x"]["upper"]
+            min: limits["left"],
+            max: limits["right"]
           }}
         />
       </PanelBody>
