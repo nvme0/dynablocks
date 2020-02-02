@@ -3,7 +3,9 @@ import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
-import withDraggable, { Limits } from "../../../common/HOCs/withDraggable";
+import withDraggable, {
+  updatePositionCallback
+} from "../../../common/HOCs/withDraggable";
 import { createUpdateFunction } from "../../../common/helpers";
 import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { BlockControls } from "@wordpress/block-editor";
@@ -21,27 +23,16 @@ export const Edit = (props: EditProps): JSX.Element => {
   const [parent, setParent] = useState<Element | null>();
   const [isDraggable, setIsDraggable] = useState(false);
 
-  const updatePositionCallback = (
-    position: { left: number; top: number },
-    limits: Limits
-  ) => {
-    setAttributes({
-      buttonPosition: {
-        left: {
-          value: position["left"] || 0,
-          units: buttonPosition["left"]["units"] || "%"
-        },
-        top: {
-          value: position["top"] || 0,
-          units: buttonPosition["top"]["units"] || "px"
-        }
-      },
-      buttonPositionLimits: limits
-    });
-  };
-
   const DraggableStyledButton = withDraggable({
-    updateCallback: updatePositionCallback,
+    updateCallback: updatePositionCallback(
+      "buttonPosition",
+      "buttonPositionLimits",
+      {
+        left: buttonPosition["left"]["units"],
+        top: buttonPosition["top"]["units"]
+      },
+      setAttributes
+    ),
     position: buttonPosition,
     parentSize: {
       width: parent ? parent.clientWidth : null,

@@ -80,6 +80,27 @@ const deriveLimits = (
   return { lower: Math.round(lower), upper: Math.round(upper) };
 };
 
+export const updatePositionCallback = (
+  positionEntryName: string,
+  positionLimitsEntryName: string,
+  units: { left: string; top: string },
+  setAttributes: (attrs: Partial<any>) => void
+) => (position: { left: number; top: number }, limits: Limits) => {
+  setAttributes({
+    [positionEntryName]: {
+      left: {
+        value: position["left"] || 0,
+        units: units["left"] || "%"
+      },
+      top: {
+        value: position["top"] || 0,
+        units: units["top"] || "px"
+      }
+    },
+    [positionLimitsEntryName]: limits
+  });
+};
+
 interface State {
   isDragging: boolean;
   left: number;
