@@ -33,6 +33,45 @@
     "type": "string",
     "default": "550px"
   },
+  "elementsPosition": {
+    "type": "object",
+    "default": {
+      "left": {
+        "value": 50,
+        "units": "%"
+      },
+      "top": {
+        "value": 50,
+        "units": "%"
+      }
+    }
+  },
+  "elementsPositionLimits": {
+    "type": "object",
+    "default": {
+      "x": {
+        "lower": 0,
+        "upper": 100
+      },
+      "y": {
+        "lower": 0,
+        "upper": 100
+      }
+    }
+  },
+  "elementsTranslate": {
+    "type": "object",
+    "default": {
+      "left": {
+        "value": -50,
+        "units": "%"
+      },
+      "top": {
+        "value": -50,
+        "units": "%"
+      }
+    }
+  },
   "innerBlocks": {
     "type": "object",
     "default": {}

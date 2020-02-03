@@ -1,4 +1,7 @@
 import { BlockEditProps } from "@wordpress/blocks";
+import { BlockControls } from "@wordpress/block-editor";
+import { useState } from "@wordpress/element";
+import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import Slider from "../Components/Slider";
 import ElementControls from "./ElementControls";
@@ -13,6 +16,8 @@ interface EditProps extends BlockEditProps<Attributes> {
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes, setAttributes, isSelected, clientId } = props;
   const { backgroundImages } = attributes;
+
+  const [isDraggable, setIsDraggable] = useState(false);
 
   const update = property => value => {
     setAttributes({ [property]: value });
@@ -46,6 +51,20 @@ export const Edit = (props: EditProps): JSX.Element => {
 
   return (
     <div className="s4tw-dynablocks-banner-slider">
+      <BlockControls>
+        <Toolbar>
+          <ToolbarButton
+            {...{
+              icon: "move",
+              title: "Position",
+              onClick: () => {
+                setIsDraggable(!isDraggable);
+              },
+              isActive: isDraggable
+            }}
+          />
+        </Toolbar>
+      </BlockControls>
       <ElementControls
         {...{
           update,
@@ -57,6 +76,8 @@ export const Edit = (props: EditProps): JSX.Element => {
         {...{
           clientId,
           update,
+          setAttributes,
+          isDraggable,
           editMode: true,
           BackgroundSettings:
             backgroundImages.length < 1 || isSelected
