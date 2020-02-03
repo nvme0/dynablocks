@@ -75,6 +75,7 @@ export const Edit = (props: EditProps): JSX.Element => {
       <Slider
         {...{
           clientId,
+          isSelected,
           update,
           setAttributes,
           isDraggable,

@@ -25,6 +25,7 @@ export default (props: Props): JSX.Element => {
     updateColorPicker,
     filterColor,
     h2FontSize,
+    h2MarginBottom,
     h2Color,
     height,
     elementsPosition: position,
@@ -77,6 +78,14 @@ export default (props: Props): JSX.Element => {
             value: h2FontSize,
             secondary: true,
             update: update("h2FontSize")
+          }}
+        />
+        <TextControl
+          {...{
+            name: "Margin Bottom:",
+            value: h2MarginBottom,
+            secondary: true,
+            update: update("h2MarginBottom")
           }}
         />
         <ColorPalette

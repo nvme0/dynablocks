@@ -19,7 +19,8 @@ add_action("init", function () {
   );
   $componentNames = array(
     "Bootstrap/Button",
-    "Controls/ResponsiveControls"
+    "Controls/ResponsiveControls",
+    "Spacer"
   );
 
   $root = plugin_dir_path(__FILE__);
@@ -64,7 +65,8 @@ add_action("init", function () {
       ),
       "spacer" => array_merge(
         $blockAttributes["spacer"],
-        $componentAttributes["Controls/ResponsiveControls"]
+        $componentAttributes["Controls/ResponsiveControls"],
+        $componentAttributes["Spacer"]
       )
     );
 

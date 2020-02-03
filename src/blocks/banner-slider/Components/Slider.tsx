@@ -11,6 +11,7 @@ import Elements from "./Elements";
 
 export interface SliderProps extends Attributes {
   clientId?: string;
+  isSelected?: boolean;
   editMode?: boolean;
   isDraggable?: boolean;
   BackgroundSettings?: () => JSX.Element;
@@ -20,6 +21,7 @@ export interface SliderProps extends Attributes {
 
 export default (props: SliderProps): JSX.Element => {
   const {
+    isSelected,
     setAttributes,
     isDraggable,
     elementsPosition,
@@ -27,6 +29,7 @@ export default (props: SliderProps): JSX.Element => {
     height,
     backgroundImages: images,
     h2FontSize,
+    h2MarginBottom,
     editMode = false,
     responsive = false,
     scaleTablet = 1.0,
@@ -57,7 +60,10 @@ export default (props: SliderProps): JSX.Element => {
     ];
 
     h2Responsive = generateResponsiveCSS(
-      [{ name: "fontSize", size: h2FontSize }],
+      [
+        { name: "fontSize", size: h2FontSize },
+        { name: "marginBottom", size: h2MarginBottom }
+      ],
       responsiveParameters
     );
   }
@@ -129,6 +135,7 @@ export default (props: SliderProps): JSX.Element => {
           <Elements
             {...{
               ...props,
+              isSelected,
               h2Responsive,
               style: {
                 display: "inline-block",

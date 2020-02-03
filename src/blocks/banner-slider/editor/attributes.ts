@@ -25,6 +25,7 @@ export interface Attributes extends ResponsiveAttributes {
   filterColor: string;
   h2Text: string;
   h2FontSize: string;
+  h2MarginBottom: string;
   h2Color: string;
   height: string;
   elementsPosition: { left: PositionEntry; top: PositionEntry };
@@ -43,6 +44,7 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   filterColor: BlockAttribute<Attributes["filterColor"]>;
   h2Text: BlockAttribute<Attributes["h2Text"]>;
   h2FontSize: BlockAttribute<Attributes["h2FontSize"]>;
+  h2MarginBottom: BlockAttribute<Attributes["h2MarginBottom"]>;
   h2Color: BlockAttribute<Attributes["h2Color"]>;
   height: BlockAttribute<Attributes["height"]>;
   innerBlocks: BlockAttribute<Attributes["innerBlocks"]>;

@@ -21,6 +21,10 @@
     "type": "string",
     "default": "50px"
   },
+  "h2MarginBottom": {
+    "type": "string",
+    "default": "20px"
+  },
   "h2Color": {
     "type": "string",
     "default": "#fff"
