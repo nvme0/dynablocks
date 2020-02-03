@@ -24,6 +24,7 @@ export default (props: ElementsProps): JSX.Element => {
     innerBlocks,
     h2Responsive,
     h2Text,
+    h2TextAlignment,
     h2FontSize,
     h2MarginBottom,
     h2Color,
@@ -45,7 +46,7 @@ export default (props: ElementsProps): JSX.Element => {
   };
 
   const h2ClassName = css({
-    textAlign: "center",
+    textAlign: h2TextAlignment,
     ...h2Responsive
   });
 

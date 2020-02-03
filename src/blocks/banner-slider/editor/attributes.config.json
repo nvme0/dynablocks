@@ -17,6 +17,10 @@
     "type": "string",
     "default": ""
   },
+  "h2TextAlignment": {
+    "type": "string",
+    "default": "center"
+  },
   "h2FontSize": {
     "type": "string",
     "default": "50px"

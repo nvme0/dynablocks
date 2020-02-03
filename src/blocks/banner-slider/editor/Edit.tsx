@@ -1,5 +1,5 @@
 import { BlockEditProps } from "@wordpress/blocks";
-import { BlockControls } from "@wordpress/block-editor";
+import { BlockControls, AlignmentToolbar } from "@wordpress/block-editor";
 import { useState } from "@wordpress/element";
 import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
@@ -15,7 +15,7 @@ interface EditProps extends BlockEditProps<Attributes> {
 
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes, setAttributes, isSelected, clientId } = props;
-  const { backgroundImages } = attributes;
+  const { backgroundImages, h2TextAlignment } = attributes;
 
   const [isDraggable, setIsDraggable] = useState(false);
 
@@ -61,6 +61,12 @@ export const Edit = (props: EditProps): JSX.Element => {
                 setIsDraggable(!isDraggable);
               },
               isActive: isDraggable
+            }}
+          />
+          <AlignmentToolbar
+            {...{
+              value: h2TextAlignment,
+              onChange: value => update("h2TextAlignment")(value)
             }}
           />
         </Toolbar>

@@ -24,6 +24,7 @@ export interface Attributes extends ResponsiveAttributes {
   backgroundImages: Image[];
   filterColor: string;
   h2Text: string;
+  h2TextAlignment: "left" | "center" | "right";
   h2FontSize: string;
   h2MarginBottom: string;
   h2Color: string;
@@ -43,6 +44,7 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   backgroundImages: BlockAttribute<Attributes["backgroundImages"]>;
   filterColor: BlockAttribute<Attributes["filterColor"]>;
   h2Text: BlockAttribute<Attributes["h2Text"]>;
+  h2TextAlignment: BlockAttribute<Attributes["h2TextAlignment"]>;
   h2FontSize: BlockAttribute<Attributes["h2FontSize"]>;
   h2MarginBottom: BlockAttribute<Attributes["h2MarginBottom"]>;
   h2Color: BlockAttribute<Attributes["h2Color"]>;
