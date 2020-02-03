@@ -25,7 +25,7 @@ export default (props: SliderProps): JSX.Element => {
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "608px"
+    minWidthTablet = "600px"
   } = props;
 
   let h2Responsive: Responsive = {};

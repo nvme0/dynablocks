@@ -17,6 +17,6 @@
   },
   "minWidthTablet": {
     "type": "string",
-    "default": "608px"
+    "default": "600px"
   }
 }

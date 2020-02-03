@@ -29,7 +29,7 @@ const Core = (props: SliderProps) => {
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "608px"
+    minWidthTablet = "600px"
   } = props;
 
   let heightResponsive: Responsive = {};
