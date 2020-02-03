@@ -9,7 +9,7 @@ import { Attributes } from "./attributes";
 import { icon } from "./settings";
 import { ImagePlaceholder } from "../../../common/Components/Controls";
 
-interface EditProps extends BlockEditProps<Attributes> {
+export interface EditProps extends BlockEditProps<Attributes> {
   clientId?: string;
 }
 

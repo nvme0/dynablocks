@@ -4,7 +4,7 @@ import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
 import { createUpdateFunction } from "../../../common/helpers";
 
-interface EditProps extends BlockEditProps<Attributes> {
+export interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
   clientId?: string; // should always have this
 }
