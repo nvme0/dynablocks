@@ -6,10 +6,11 @@ export interface Props {
   value: string;
   colors: string[];
   update: (value: any) => void;
+  style?: React.CSSProperties;
 }
 
 export default (props: Props): JSX.Element => {
-  const { name, value, colors, update } = props;
+  const { name, value, colors, update, style } = props;
   const _value = value as any;
   const _colors = colors as any;
 
@@ -20,7 +21,8 @@ export default (props: Props): JSX.Element => {
         p: {
           marginBottom: 0,
           whiteSpace: "nowrap"
-        }
+        },
+        ...style
       })}
     >
       <p>
