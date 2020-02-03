@@ -5,17 +5,11 @@ export const commonDefaults: BlockConfiguration<any> = {
   category: "",
   attributes: {},
   supports: {
-    align: ["left", "center", "right", "full", "wide"],
+    align: ["center", "full", "wide"],
     html: false
   },
   getEditWrapperProps({ align }) {
-    if (
-      "left" === align ||
-      "right" === align ||
-      "full" === align ||
-      "wide" === align ||
-      "full" === align
-    ) {
+    if ("full" === align || "wide" === align || "full" === align) {
       return { "data-align": align };
     }
     return { "data-align": "" };
