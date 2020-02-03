@@ -13,7 +13,8 @@ export const commonDefaults: BlockConfiguration<any> = {
       "left" === align ||
       "right" === align ||
       "full" === align ||
-      "wide" === align
+      "wide" === align ||
+      "full" === align
     ) {
       return { "data-align": align };
     }
