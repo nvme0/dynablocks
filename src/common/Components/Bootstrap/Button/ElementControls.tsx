@@ -3,9 +3,10 @@ import {
   PanelBody,
   Button,
   ButtonGroup,
-  RangeControl
+  RangeControl,
+  ToggleControl
 } from "@wordpress/components";
-import { Fragment } from "@wordpress/element";
+import { Fragment, useState } from "@wordpress/element";
 import {
   ColorPalette,
   ColorPicker,
@@ -19,6 +20,7 @@ export interface ButtonControlProps extends Attributes {
   updateStyle: (value: any) => void;
   updateFontSize: (value: any) => void;
   updateColor: (value: any) => void;
+  updateHoverColor: (value: any) => void;
   updatePrimaryColor: (value: any) => void;
   updateBorderRadius: (value: any) => void;
   updateBorderWidth: (value: any) => void;
@@ -39,6 +41,7 @@ export default (props: ButtonControlProps): JSX.Element => {
     buttonStyle: style,
     buttonFontSize: fontSize,
     buttonColor: color,
+    buttonHoverColor: hoverColor,
     buttonPrimaryColor: primaryColor,
     buttonBorderRadius: borderRadius,
     buttonBorderWidth: borderWidth,
@@ -50,6 +53,7 @@ export default (props: ButtonControlProps): JSX.Element => {
     updateStyle,
     updateFontSize,
     updateColor,
+    updateHoverColor,
     updatePrimaryColor,
     updateBorderRadius,
     updateBorderWidth,
@@ -59,6 +63,11 @@ export default (props: ButtonControlProps): JSX.Element => {
     // button text
     buttonText = ""
   } = props;
+
+  const [hoverColorControls, enableHoverColorControls] = useState(
+    hoverColor === color
+  );
+
   return (
     <Fragment>
       <PanelBody {...{ title: "Button", initialOpen }}>
@@ -189,6 +198,33 @@ export default (props: ButtonControlProps): JSX.Element => {
             update: updateColor
           }}
         />
+        <div style={{ height: "8px" }} />
+        <ToggleControl
+          {...{
+            label: "Font Color on Hover",
+            checked: hoverColorControls,
+            onChange: (value: boolean) => {
+              enableHoverColorControls(value);
+              if (!value) {
+                updateHoverColor(color);
+              }
+            }
+          }}
+        />
+        {hoverColorControls && (
+          <ColorPalette
+            {...{
+              name: "Color",
+              value: hoverColor,
+              colors: [],
+              update: updateHoverColor,
+              style: {
+                marginTop: "-16px",
+                marginBottom: "20px"
+              }
+            }}
+          />
+        )}
         <ColorPicker
           {...{
             name: "Primary Color:",
@@ -262,6 +298,7 @@ export const createButtonControlProps = (
     buttonStyle,
     buttonFontSize,
     buttonColor,
+    buttonHoverColor,
     buttonPrimaryColor,
     buttonBorderRadius,
     buttonBorderWidth,
@@ -276,6 +313,7 @@ export const createButtonControlProps = (
     buttonStyle,
     buttonFontSize,
     buttonColor,
+    buttonHoverColor,
     buttonPrimaryColor,
     buttonBorderRadius,
     buttonBorderWidth,
@@ -286,6 +324,7 @@ export const createButtonControlProps = (
     updateStyle: update(keys ? keys["style"] : "buttonStyle"),
     updateFontSize: update(keys ? keys["fontSize"] : "buttonFontSize"),
     updateColor: update(keys ? keys["color"] : "buttonColor"),
+    updateHoverColor: update(keys ? keys["hoverColor"] : "buttonHoverColor"),
     updatePrimaryColor: updateColorPicker(
       keys ? keys["primaryColor"] : "buttonPrimaryColor"
     ),

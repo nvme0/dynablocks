@@ -6,6 +6,7 @@ export interface Attributes {
   buttonStyle: "primary" | "secondary";
   buttonFontSize: "small" | "medium" | "large" | string; // padding: 0.375 * fontSize 0.75 * fontSize
   buttonColor: string;
+  buttonHoverColor: string;
   buttonPrimaryColor: string; // outline ? borderColor : backgroundcolor
   buttonBorderRadius: string;
   buttonBorderWidth: string;
@@ -29,6 +30,7 @@ export interface BlockAttributes {
   buttonStyle: BlockAttribute<Attributes["buttonStyle"]>;
   buttonFontSize: BlockAttribute<Attributes["buttonFontSize"]>;
   buttonColor: BlockAttribute<Attributes["buttonColor"]>;
+  buttonHoverColor: BlockAttribute<Attributes["buttonHoverColor"]>;
   buttonPrimaryColor: BlockAttribute<Attributes["buttonPrimaryColor"]>;
   buttonBorderRadius: BlockAttribute<Attributes["buttonBorderRadius"]>;
   buttonBorderWidth: BlockAttribute<Attributes["buttonBorderWidth"]>;

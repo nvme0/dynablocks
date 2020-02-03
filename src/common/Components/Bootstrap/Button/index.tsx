@@ -8,6 +8,7 @@ import { RawHTML } from "@wordpress/element";
 
 export interface ButtonStyle {
   color: string;
+  hoverColor: string;
   backgroundColor?: string;
   borderColor?: string;
   borderRadius: string;
@@ -31,6 +32,7 @@ export const convertButtonStylePropsToCSS = (
   const {
     buttonStyle,
     buttonColor: color,
+    buttonHoverColor: hoverColor,
     buttonPrimaryColor: primaryColor,
     buttonBorderRadius: borderRadius,
     buttonBorderWidth: borderWidth,
@@ -42,6 +44,7 @@ export const convertButtonStylePropsToCSS = (
 
   return {
     color,
+    hoverColor,
     backgroundColor,
     borderColor,
     borderRadius,
@@ -95,6 +98,7 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
   } = props;
   const {
     color,
+    hoverColor,
     backgroundColor,
     borderColor,
     borderRadius,
@@ -157,15 +161,18 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
           borderStyle,
           padding: paddingMobile ? paddingMobile : padding,
           "&:hover": {
+            color: hoverColor || color,
             backgroundColor: backgroundColorHover,
             borderColor: borderColorHover
           },
           "&:focus": {
+            color: hoverColor || color,
             backgroundColor: backgroundColorHover,
             borderColor: borderColorHover,
             boxShadow: `0 0 0 2px ${boxShadowFocus}`
           },
           "&:not(:disabled):not(.disabled):active": {
+            color: hoverColor || color,
             backgroundColor: backgroundColorHover,
             borderColor: borderColorHover,
             "&:focus": {

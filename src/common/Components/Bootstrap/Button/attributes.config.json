@@ -14,6 +14,9 @@
   "buttonColor": {
     "type": "string"
   },
+  "buttonHoverColor": {
+    "type": "string"
+  },
   "buttonPrimaryColor": {
     "type": "string",
     "default": "rgb(0, 98, 204)"
