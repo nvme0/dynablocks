@@ -93,7 +93,7 @@ export const StyledButton = (props: StyledButtonProps): JSX.Element => {
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "608px",
+    minWidthTablet = "600px",
     onClick
   } = props;
   const {
