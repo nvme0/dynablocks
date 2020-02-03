@@ -1,5 +1,6 @@
 import { compose } from "@wordpress/compose";
 import { withDispatch } from "@wordpress/data";
+import { useState } from "@wordpress/element";
 import { ResizableBox } from "@wordpress/components";
 import classnames from "classnames";
 import { css } from "emotion";
@@ -38,26 +39,34 @@ const Core = (props: Props) => {
     enable
   } = props;
 
+  const [isResizing, setIsResizing] = useState(false);
+
   return (
     <ResizableBox
       {...{
         className: classnames(
-          "block-library-spacer__resize-container",
           {
             "is-selected": isSelected
           },
-          css({ marginBottom: 0 })
+          css({
+            marginBottom: 0,
+            backgroundColor: isResizing ? "rgba(255, 255, 0, 0.5)" : undefined
+          })
         ),
         size: { height },
         resizeRatio,
         enable,
         onResizeStop: (event, direction, elt, delta) => {
+          setIsResizing(false);
           toggleSelection(true);
           const { size, units } = extractSizeAndUnits(height);
           const spacerHeight = Math.round(size + delta.height);
           update(`${spacerHeight}${units}`);
         },
-        onResizeStart: () => toggleSelection(false)
+        onResizeStart: () => {
+          toggleSelection(false);
+          setIsResizing(true);
+        }
       }}
     />
   );
