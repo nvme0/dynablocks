@@ -1,7 +1,7 @@
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
-import Spacer from "../Components/Spacer";
+import Spacer from "../../../common/Components/Spacer";
 import { createUpdateFunction } from "../../../common/helpers";
 
 export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {

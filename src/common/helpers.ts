@@ -49,19 +49,20 @@ export const createUpdateFunction = (props: UpdateFunctionProps) => {
     );
 
     if (parentAttributes) {
-      syncWithParent = () => {
-        const { innerBlocks } = parentAttributes;
-        const blockInstance = select("core/block-editor").getBlock(clientId);
-        dispatch("core/block-editor").updateBlockAttributes(parentId, {
-          innerBlocks: {
-            ...innerBlocks,
-            [relationship]: blockInstance
-          }
-        });
-      };
-
-      // sync attributes with parent
-      syncWithParent();
+      const { innerBlocks } = parentAttributes;
+      if (innerBlocks) {
+        syncWithParent = () => {
+          const blockInstance = select("core/block-editor").getBlock(clientId);
+          dispatch("core/block-editor").updateBlockAttributes(parentId, {
+            innerBlocks: {
+              ...innerBlocks,
+              [relationship]: blockInstance
+            }
+          });
+        };
+        // sync attributes with parent
+        syncWithParent();
+      }
     }
   }
 

@@ -1,28 +1,25 @@
-import { compose } from "@wordpress/compose";
-import { withDispatch } from "@wordpress/data";
-import { ResizableBox } from "@wordpress/components";
-import classnames from "classnames";
 import { css } from "emotion";
-import { Attributes } from "../editor/attributes";
-import {
-  Responsive,
-  generateResponsiveCSS,
-  extractSizeAndUnits
-} from "../../../common/helpers";
+import { Attributes } from "./attributes";
+import { Responsive, generateResponsiveCSS } from "../../../common/helpers";
+import ResizableBox from "../../../common/Components/ResizableBox";
 
-export interface SliderProps extends Attributes {
+export interface SpacerProps extends Attributes {
   editMode?: boolean;
   isSelected?: boolean;
   update?: (value: any) => void;
-  toggleSelection: (isSelectionEnabled?: boolean | undefined) => void;
+  minHeight?: string | number;
+  responsive?: boolean;
+  scaleTablet?: number;
+  scaleMobile?: number;
+  minWidthDesktop?: string;
+  minWidthTablet?: string;
 }
 
-const Core = (props: SliderProps) => {
+export default (props: SpacerProps) => {
   const {
     editMode = false,
     isSelected = false,
     update,
-    toggleSelection,
     height,
     resizeRatio,
     responsive = false,
@@ -59,15 +56,9 @@ const Core = (props: SliderProps) => {
   return editMode && update ? (
     <ResizableBox
       {...{
-        className: classnames(
-          "block-library-spacer__resize-container",
-          {
-            "is-selected": isSelected
-          },
-          css({ marginBottom: 0 })
-        ),
-        size: { height },
-        minHeight: 20,
+        height,
+        update,
+        isSelected,
         resizeRatio,
         enable: {
           top: false,
@@ -78,24 +69,10 @@ const Core = (props: SliderProps) => {
           bottomRight: false,
           bottomLeft: false,
           topLeft: false
-        },
-        onResizeStop: (event, direction, elt, delta) => {
-          toggleSelection(true);
-          const { size, units } = extractSizeAndUnits(height);
-          const spacerHeight = Math.round(size + delta.height);
-          update(`${spacerHeight}${units}`);
-        },
-        onResizeStart: () => toggleSelection(false)
+        }
       }}
     />
   ) : (
     <div className={css({ height, ...heightResponsive })} />
   );
 };
-
-export default compose(
-  withDispatch(dispatch => {
-    const { toggleSelection } = dispatch("core/block-editor");
-    return { toggleSelection };
-  })
-)(Core);

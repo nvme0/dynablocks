@@ -1,5 +1,5 @@
 import { Attributes } from "./editor/attributes";
-import Spacer from "./Components/Spacer";
+import Spacer from "../../common/Components/Spacer";
 
 export const className = ".s4tw-dynablocks-spacer";
 
