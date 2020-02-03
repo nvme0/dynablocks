@@ -13,7 +13,20 @@ export interface ControlProps {
 export type Props = Attributes & ControlProps;
 
 export default (props: Props): JSX.Element => {
-  const { buttonText, update, updateColorPicker } = props;
+  const { buttonText, buttonFontSize, update, updateColorPicker } = props;
+
+  const setResponsiveControls = (property: string) => (value: boolean) => {
+    if (value) {
+      if (
+        buttonFontSize === "sm" ||
+        buttonFontSize === "" ||
+        buttonFontSize === "lg"
+      ) {
+        update("buttonFontSize")("16px");
+      }
+    }
+    update(property)(value);
+  };
 
   return (
     <InspectorControls>
@@ -28,6 +41,7 @@ export default (props: Props): JSX.Element => {
       <ResponsiveControls
         {...{
           ...props,
+          update: setResponsiveControls,
           initialOpen: false
         }}
       />
