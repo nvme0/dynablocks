@@ -7,7 +7,7 @@
   },
   "align": {
     "type": "string",
-    "default": ""
+    "default": "center"
   },
   "buttonText": {
     "type": "string",

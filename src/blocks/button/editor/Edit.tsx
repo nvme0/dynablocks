@@ -1,14 +1,8 @@
-import { useEffect, useState, useRef } from "@wordpress/element";
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { StyledButton } from "../../../common/Components/Bootstrap/Button";
-import withDraggable, {
-  updatePositionCallback
-} from "../../../common/HOCs/withDraggable";
 import { createUpdateFunction } from "../../../common/helpers";
-import { Toolbar, ToolbarButton } from "@wordpress/components";
-import { BlockControls } from "@wordpress/block-editor";
 
 interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
@@ -16,44 +10,8 @@ interface EditProps extends BlockEditProps<Attributes> {
 }
 
 export const Edit = (props: EditProps): JSX.Element => {
-  const { attributes, setAttributes } = props;
-  const { buttonText: text, buttonPosition } = attributes;
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [parent, setParent] = useState<Element | null>();
-  const [isDraggable, setIsDraggable] = useState(false);
-
-  const DraggableStyledButton = withDraggable({
-    updateCallback: updatePositionCallback(
-      "buttonPosition",
-      "buttonPositionLimits",
-      {
-        left: buttonPosition["left"]["units"],
-        top: buttonPosition["top"]["units"]
-      },
-      setAttributes
-    ),
-    position: buttonPosition,
-    parentSize: {
-      width: parent ? parent.clientWidth : null,
-      height: parent ? parent.clientHeight : null
-    },
-    transforms: {
-      translateX: { value: -50, units: "%" },
-      translateY: { value: 0, units: "px" }
-    },
-    adjustmentFactor: {
-      x: 1,
-      y: 2 // negative inverse of translate.. e.g. 100/(100% - translateX(-90%)) = 1 / 0.1.
-    },
-    lockX: false,
-    lockY: true,
-    style: {
-      position: "relative",
-      display: "inline-block",
-      transform: "translateX(-50%)"
-    }
-  })(StyledButton);
+  const { attributes } = props;
+  const { buttonText: text, align } = attributes;
 
   const update = createUpdateFunction(props);
   const updateColorPicker = property => value => {
@@ -61,16 +19,6 @@ export const Edit = (props: EditProps): JSX.Element => {
     const rgbaValue = `rgba(${r},${g},${b},${a})`;
     update(property)(rgbaValue);
   };
-
-  useEffect(() => {
-    const { current } = containerRef;
-    if (!parent && current) {
-      const { offsetParent } = current;
-      if (offsetParent) {
-        setParent(offsetParent);
-      }
-    }
-  }, [parent, containerRef]);
 
   const buttonProps = {
     ...{
@@ -81,22 +29,8 @@ export const Edit = (props: EditProps): JSX.Element => {
     }
   };
 
-  const { left, top } = buttonPosition;
-
   return (
-    <div className="s4tw-dynablocks-button" ref={containerRef}>
-      <BlockControls>
-        <Toolbar>
-          <ToolbarButton
-            {...{
-              icon: "move",
-              title: "Position",
-              onClick: () => setIsDraggable(!isDraggable),
-              isActive: isDraggable
-            }}
-          />
-        </Toolbar>
-      </BlockControls>
+    <div className="s4tw-dynablocks-button">
       <ElementControls
         {...{
           ...attributes,
@@ -104,21 +38,13 @@ export const Edit = (props: EditProps): JSX.Element => {
           updateColorPicker
         }}
       />
-      {isDraggable ? (
-        <DraggableStyledButton {...{ ...buttonProps, updateText: undefined }} />
-      ) : (
+      <div style={{ textAlign: align }}>
         <StyledButton
           {...{
-            ...buttonProps,
-            style: {
-              position: "relative",
-              transform: `translateX(-50%)`,
-              left: `${left.value}${left.units}`,
-              top: `${top.value}${left.units}`
-            }
+            ...buttonProps
           }}
         />
-      )}
+      </div>
     </div>
   );
 };

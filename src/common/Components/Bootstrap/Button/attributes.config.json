@@ -30,31 +30,5 @@
   "buttonBorderStyle": {
     "type": "string",
     "default": "solid"
-  },
-  "buttonPosition": {
-    "type": "object",
-    "default": {
-      "left": {
-        "value": 50,
-        "units": "%"
-      },
-      "top": {
-        "value": 0,
-        "units": "px"
-      }
-    }
-  },
-  "buttonPositionLimits": {
-    "type": "object",
-    "default": {
-      "x": {
-        "lower": 0,
-        "upper": 100
-      },
-      "y": {
-        "lower": 0,
-        "upper": 100
-      }
-    }
   }
 }

@@ -11,7 +11,7 @@ import {
 export interface Attributes extends ButtonAttributes, ResponsiveAttributes {
   parentId?: string;
   relationship?: string;
-  align: string;
+  align: "left" | "center" | "right";
   buttonText: string;
 }
 

@@ -1,11 +1,5 @@
 import validator from "validator";
-import {
-  PanelBody,
-  Button,
-  ButtonGroup,
-  RangeControl,
-  ToggleControl
-} from "@wordpress/components";
+import { PanelBody, ToggleControl } from "@wordpress/components";
 import { Fragment, useState } from "@wordpress/element";
 import {
   ColorPalette,
@@ -25,8 +19,6 @@ export interface ButtonControlProps extends Attributes {
   updateBorderRadius: (value: any) => void;
   updateBorderWidth: (value: any) => void;
   updateBorderStyle: (value: any) => void;
-  updateButtonPosition: (entry: string) => (value: number) => void;
-  updateButtonPositionLimits: (entry: string) => (value: number) => void;
   updateButtonText?: (value: any) => void;
   buttonText?: string;
   initialOpen?: boolean;
@@ -46,8 +38,6 @@ export default (props: ButtonControlProps): JSX.Element => {
     buttonBorderRadius: borderRadius,
     buttonBorderWidth: borderWidth,
     buttonBorderStyle: borderStyle,
-    buttonPosition: position,
-    buttonPositionLimits: limits,
     // update callbacks
     updateUrl,
     updateStyle,
@@ -59,7 +49,6 @@ export default (props: ButtonControlProps): JSX.Element => {
     updateBorderWidth,
     updateBorderStyle,
     updateButtonText,
-    updateButtonPosition,
     // button text
     buttonText = ""
   } = props;
@@ -147,45 +136,6 @@ export default (props: ButtonControlProps): JSX.Element => {
                 ? true
                 : false,
             secondary: true
-          }}
-        />
-      </PanelBody>
-      <PanelBody {...{ title: "Button Position", initialOpen }}>
-        <ButtonGroup>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonPosition("left")(limits.x.lower)
-            }}
-          >
-            Left
-          </Button>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonPosition("left")(50)
-            }}
-          >
-            Center
-          </Button>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonPosition("left")(limits.x.upper)
-            }}
-          >
-            Right
-          </Button>
-        </ButtonGroup>
-        <RangeControl
-          {...{
-            value: position["left"]["value"],
-            onChange: updateButtonPosition("left"),
-            min: limits["left"],
-            max: limits["right"]
           }}
         />
       </PanelBody>
@@ -302,9 +252,7 @@ export const createButtonControlProps = (
     buttonPrimaryColor,
     buttonBorderRadius,
     buttonBorderWidth,
-    buttonBorderStyle,
-    buttonPosition,
-    buttonPositionLimits
+    buttonBorderStyle
   } = props;
 
   return {
@@ -318,8 +266,6 @@ export const createButtonControlProps = (
     buttonBorderRadius,
     buttonBorderWidth,
     buttonBorderStyle,
-    buttonPosition,
-    buttonPositionLimits,
     updateUrl: update(keys ? keys["url"] : "buttonUrl"),
     updateStyle: update(keys ? keys["style"] : "buttonStyle"),
     updateFontSize: update(keys ? keys["fontSize"] : "buttonFontSize"),
@@ -332,21 +278,6 @@ export const createButtonControlProps = (
       keys ? keys["borderRadius"] : "buttonBorderRadius"
     ),
     updateBorderWidth: update(keys ? keys["borderWidth"] : "buttonBorderWidth"),
-    updateBorderStyle: update(keys ? keys["borderStyle"] : "buttonBorderStyle"),
-    updateButtonPosition: (entry: string) => (value: number) => {
-      update(keys ? keys["position"] : "buttonPosition")({
-        ...buttonPosition,
-        [entry]: {
-          ...buttonPosition[entry],
-          value
-        }
-      });
-    },
-    updateButtonPositionLimits: (entry: string) => (value: number) => {
-      update(keys ? keys["limits"] : "buttonPositionLimits")({
-        ...buttonPositionLimits,
-        [entry]: value
-      });
-    }
+    updateBorderStyle: update(keys ? keys["borderStyle"] : "buttonBorderStyle")
   };
 };

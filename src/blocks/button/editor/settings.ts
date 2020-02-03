@@ -9,6 +9,10 @@ export const name = "s4tw/dynablocks-button";
 
 export const settings: BlockConfiguration<any> = {
   ...commonDefaults,
+  supports: {
+    ...commonDefaults["supports"],
+    align: ["left", "center", "right"]
+  },
   title: __("Button"),
   description: __("Add a button block."),
   icon: icon as any,
