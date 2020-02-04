@@ -11,6 +11,7 @@ add_action("init", function () {
   $blockNames = array(
     "banner-slider",
     "button",
+    "button-group",
     "container", // Static Block
     "hero-section",
     "image-block",
@@ -46,6 +47,9 @@ add_action("init", function () {
         $blockAttributes["button"],
         $componentAttributes["Bootstrap/Button"],
         $componentAttributes["Controls/ResponsiveControls"]
+      ),
+      "button-group" => array_merge(
+        $blockAttributes["button-group"]
       ),
       "container" => array_merge(
         $blockAttributes["container"]

@@ -8,6 +8,7 @@ A Wordpress Gutenberg Blocks Plugin which adds the following custom Wordpress Bl
 - Container
 - Image Block
 - Button
+- Button Group
 - Spacer
 
 ## Common setup

@@ -13,6 +13,7 @@ export const Edit = (props: EditProps): JSX.Element => {
   const { attributes } = props;
   const { buttonText: text, align } = attributes;
 
+  // console.log({ parentId: attributes.parentId });
   const update = createUpdateFunction(props);
   const updateColorPicker = property => value => {
     const { a, b, g, r } = value.rgb;

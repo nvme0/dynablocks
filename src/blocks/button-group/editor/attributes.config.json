@@ -1,0 +1,23 @@
+{
+  "parentId": {
+    "type": "string"
+  },
+  "relationship": {
+    "type": "string"
+  },
+  "align": {
+    "type": "string",
+    "default": "center"
+  },
+  "blockOrder": {
+    "type": "array",
+    "default": [],
+    "items": {
+      "type": "string"
+    }
+  },
+  "innerBlocks": {
+    "type": "object",
+    "default": {}
+  }
+}
