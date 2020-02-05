@@ -3,7 +3,7 @@ import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import ContainerElement from "../Components/ContainerElement";
 
-export default (props: BlockEditProps<Attributes>): JSX.Element => {
+export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { attributes, className } = props;
   const { tag } = attributes;
   return (
@@ -19,3 +19,5 @@ export default (props: BlockEditProps<Attributes>): JSX.Element => {
     </div>
   );
 };
+
+export default Edit;

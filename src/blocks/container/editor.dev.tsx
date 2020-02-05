@@ -1,10 +1,18 @@
 import { BlockConfiguration } from "@wordpress/blocks";
-import Edit from "./editor/Edit";
+import { __ } from "@wordpress/i18n";
+import { commonDefaults } from "../../common/blockConfiguration";
+import Edit from "./editor/Edit.dev";
+import Save from "./editor/Save";
 
-import { settings as base } from "./editor";
-export { name } from "./editor";
+export const name = "s4tw/dynablocks-container";
 
 export const settings: BlockConfiguration<any> = {
-  ...base,
-  edit: props => <Edit {...props} />
+  ...commonDefaults,
+  title: __("Container"),
+  description: __("Add a container block."),
+  icon: "grid-view",
+  category: "s4tw-dynablocks",
+  keywords: ["column", "grid", "row"],
+  edit: props => <Edit {...props} />,
+  save: props => <Save {...props} />
 };

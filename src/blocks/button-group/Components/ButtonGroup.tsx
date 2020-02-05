@@ -27,7 +27,7 @@ export default (props: ButtonGroupProps): JSX.Element => {
         display: "block",
         "> .block-editor-inner-blocks > .block-editor-block-list__layout": {
           display: "flex",
-          "flex-wrap": "nowrap",
+          flexWrap: "nowrap",
           "> div": {
             transition: "none !important",
             transform: "none !important",

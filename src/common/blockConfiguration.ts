@@ -9,7 +9,7 @@ export const commonDefaults: BlockConfiguration<any> = {
     html: false
   },
   getEditWrapperProps({ align }) {
-    if ("full" === align || "wide" === align || "full" === align) {
+    if ("full" === align || "wide" === align) {
       return { "data-align": align };
     }
     return { "data-align": "" };
