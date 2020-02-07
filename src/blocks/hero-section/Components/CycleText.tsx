@@ -57,19 +57,16 @@ export interface ContentProps extends BaseProps {
 
 export const Content = (props: ContentProps) => {
   const [index, setIndex] = useState(0);
-  const [timer, setTimer] = useState();
   const { keywordsArray, interval } = props;
 
   useEffect(() => {
-    setTimer(
-      setInterval(() => {
-        setIndex(index => (index + 1) % keywordsArray.length);
-      }, interval)
-    );
+    const timer = setInterval(() => {
+      setIndex(index => (index + 1) % keywordsArray.length);
+    }, interval);
     return () => {
       clearInterval(timer);
     };
-  }, [interval, keywordsArray.length, timer]);
+  }, [interval, keywordsArray.length]);
 
   return (
     <Element

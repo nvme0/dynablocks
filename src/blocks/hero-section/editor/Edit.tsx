@@ -9,7 +9,6 @@ export const Edit = (props: BlockEditProps<Attributes>) => {
 
   const keywordsArray = keywords.split(" ");
   const [index, setIndex] = useState(0);
-  const [timer, setTimer] = useState();
   const [cycleKeywords, setCycleKeywords] = useState(false);
 
   function updateBackgroundImage(image: { id: number } & { [k: string]: any }) {
@@ -30,13 +29,11 @@ export const Edit = (props: BlockEditProps<Attributes>) => {
   const controlProps: ControlProps = {
     state: {
       index,
-      cycleKeywords,
-      timer
+      cycleKeywords
     },
     actions: {
       setIndex,
-      setCycleKeywords,
-      setTimer
+      setCycleKeywords
     },
     keywordsArray,
     update,
@@ -44,33 +41,33 @@ export const Edit = (props: BlockEditProps<Attributes>) => {
     updateBackgroundImage
   };
 
-  if (timer && !cycleKeywords) {
-    clearInterval(timer);
-    setTimer(undefined);
-  }
-
-  if (!timer && cycleKeywords) {
-    setTimer(
-      setInterval(() => {
-        setIndex(index => (index + 1) % keywordsArray.length);
-      }, keywordsInterval)
-    );
-  }
-
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+
+    if (timer && !cycleKeywords) {
+      clearInterval(timer);
+      timer = undefined;
+    }
+
+    if (!timer && cycleKeywords) {
+      timer = setInterval(() => {
+        setIndex(index => (index + 1) % keywordsArray.length);
+      }, keywordsInterval);
+    }
+
     if (timer && cycleKeywords) {
       clearInterval(timer);
-      setTimer(
-        setInterval(() => {
-          setIndex(index => (index + 1) % keywordsArray.length);
-        }, keywordsInterval)
-      );
+      timer = setInterval(() => {
+        setIndex(index => (index + 1) % keywordsArray.length);
+      }, keywordsInterval);
     }
 
     return () => {
-      clearInterval(timer);
+      if (timer) {
+        clearInterval(timer);
+      }
     };
-  }, [keywordsInterval]);
+  }, [cycleKeywords, keywordsArray.length, keywordsInterval]);
 
   return (
     <div className="s4tw-dynablocks-hero-section">
