@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { select, dispatch } from "@wordpress/data";
 import { BlockSaveProps, BlockInstance } from "@wordpress/blocks";
-import { Attributes } from "./attributes";
 
 const syncBlockOrder = (
   editorId: string,
@@ -11,7 +10,7 @@ const syncBlockOrder = (
   }
 ) => {
   const editorBlockOrder = select("core/block-editor").getBlockOrder(editorId);
-  const editorBlocks: { [relationship: string]: BlockInstance<any> } = {};
+  const editorBlocks: typeof savedBlocks = {};
   select("core/block-editor")
     .getBlocksByClientId(editorBlockOrder)
     .forEach(block => {
@@ -46,7 +45,15 @@ const syncBlockOrder = (
   });
 };
 
-export default (props: BlockSaveProps<Attributes>) => {
+const Save = <
+  Attributes extends {
+    editorId: string;
+    blockOrder: string[];
+    innerBlocks: { [relationship: string]: BlockInstance<any> };
+  }
+>(
+  props: BlockSaveProps<Attributes>
+) => {
   const { attributes } = props;
   const { editorId, blockOrder, innerBlocks } = attributes;
   if (editorId) {
@@ -54,3 +61,5 @@ export default (props: BlockSaveProps<Attributes>) => {
   }
   return null;
 };
+
+export default Save;

@@ -1,6 +1,6 @@
 import { BlockConfiguration } from "@wordpress/blocks";
 import { Edit } from "./editor/Edit";
-import Save from "./editor/Save";
+import Save from "../../common/Save";
 import { settings as baseSettings } from "./editor/settings";
 
 export { name } from "./editor/settings";
