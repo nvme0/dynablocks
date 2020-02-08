@@ -1,0 +1,13 @@
+{
+  "blockOrder": {
+    "type": "array",
+    "default": [],
+    "items": {
+      "type": "string"
+    }
+  },
+  "innerBlocks": {
+    "type": "object",
+    "default": {}
+  }
+}

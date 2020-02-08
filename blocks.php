@@ -9,6 +9,9 @@
 add_action("init", function () {
   // 1. Append Block or Component name
   $blockNames = array(
+    "accordion",
+    "accordion-column",
+    "accordion-column-element",
     "banner-slider",
     "button",
     "button-group",
@@ -39,6 +42,16 @@ add_action("init", function () {
   // 2. List attributes dependencies for the block
   $dependencies =
     array(
+      "accordion" => array_merge(
+        $blockAttributes["accordion"],
+        $componentAttributes["Controls/ResponsiveControls"]
+      ),
+      "accordion-column" => array_merge(
+        $blockAttributes["accordion-column"]
+      ),
+      "accordion-column-element" => array_merge(
+        $blockAttributes["accordion-column-element"]
+      ),
       "banner-slider" => array_merge(
         $blockAttributes["banner-slider"],
         $componentAttributes["Controls/ResponsiveControls"]
@@ -106,7 +119,7 @@ add_action("init", function () {
 ?>
         <div class="<?= $attributes["renderClassName"] ?>">
           <div class="props" style="display: none">
-            <?= json_encode($attributes, JSON_UNESCAPED_SLASHES); ?>
+            <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
           </div>
           <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>

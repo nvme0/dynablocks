@@ -12,13 +12,19 @@ const PRODUCTION = yargs.argv.prod;
 const HMR = yargs.argv.hmr;
 const browserSync = BrowserSync.create();
 
+// dont forget to append blocks here too.
 const blocks = [
+  "accordion",
+  "accordion-column",
+  "accordion-column-element",
   "banner-slider",
   "button",
+  "button-group",
   "container",
   "hero-section",
   "image-block",
-  "post-carousel"
+  "post-carousel",
+  "spacer"
 ];
 
 const stylesEntry = {

@@ -1,7 +1,7 @@
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
-import { createUpdateFunction } from "../../../common/helpers";
+import { syncBlockWithParent } from "../../../common/helpers";
 import ButtonGroup from "../Components/ButtonGroup";
 
 export interface EditProps extends BlockEditProps<Attributes> {
@@ -11,8 +11,13 @@ export interface EditProps extends BlockEditProps<Attributes> {
 
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes, setAttributes, clientId } = props;
+  const { parentId, relationship } = attributes;
 
-  const update = createUpdateFunction(props);
+  syncBlockWithParent(setAttributes, clientId, parentId, relationship);
+
+  const update = property => value => {
+    setAttributes({ [property]: value });
+  };
 
   return (
     <div className="s4tw-dynablocks-button-group">
@@ -27,7 +32,8 @@ export const Edit = (props: EditProps): JSX.Element => {
       <ButtonGroup
         {...{
           ...attributes,
-          clientId
+          clientId,
+          editMode: true
         }}
       />
     </div>

@@ -1,27 +1,33 @@
 import { ButtonGroup, Button } from "@wordpress/components";
 
-export default (props: {
+export default <T extends any>(props: {
   lowerLimit: {
     label: string;
-    value: number;
+    value: T;
   };
   centerPosition: {
     label: string;
-    value: number;
+    value: T;
   };
   upperLimit: {
     label: string;
-    value: number;
+    value: T;
   };
-  update: (value: number) => void;
+  update: (value: T) => void;
+  isActive?: T;
 }): JSX.Element => {
-  const { lowerLimit, centerPosition, upperLimit, update } = props;
+  const { lowerLimit, centerPosition, upperLimit, update, isActive } = props;
+  const activeButtonStyle = {
+    color: "#fff"
+  };
   return (
     <ButtonGroup>
       <Button
         {...{
           isSmall: true,
-          isSecondary: true,
+          isTertiary: true,
+          isPrimary: isActive === lowerLimit.value,
+          style: isActive === lowerLimit.value ? activeButtonStyle : undefined,
           onClick: () => update(lowerLimit.value)
         }}
       >
@@ -30,7 +36,10 @@ export default (props: {
       <Button
         {...{
           isSmall: true,
-          isSecondary: true,
+          isTertiary: true,
+          isPrimary: isActive === centerPosition.value,
+          style:
+            isActive === centerPosition.value ? activeButtonStyle : undefined,
           onClick: () => update(centerPosition.value)
         }}
       >
@@ -39,7 +48,9 @@ export default (props: {
       <Button
         {...{
           isSmall: true,
-          isSecondary: true,
+          isTertiary: true,
+          isPrimary: isActive === upperLimit.value,
+          style: isActive === upperLimit.value ? activeButtonStyle : undefined,
           onClick: () => update(upperLimit.value)
         }}
       >

@@ -1,0 +1,32 @@
+.s4tw-dynablocks-accordion {
+  >.accordion {
+    >.block-editor-inner-blocks {
+      >.block-editor-block-list__layout {
+        display: flex;
+        margin: 0;
+        >.block-list-appender {
+          display: none;
+        }
+        >.wp-block.editor-block-list__block.block-editor-block-list__block {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          max-width: none;
+          >.editor-block-list__block-edit.block-editor-block-list__block-edit {
+            margin: 0;
+            div[data-block] {
+              margin: 0;
+            }
+            &::before {
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              z-index: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

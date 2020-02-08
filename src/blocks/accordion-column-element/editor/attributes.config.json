@@ -1,0 +1,13 @@
+{
+  "editorId": {
+    "type": "string"
+  },
+  "headingText": {
+    "type": "string",
+    "default": ""
+  },
+  "bodyText": {
+    "type": "string",
+    "default": ""
+  }
+}

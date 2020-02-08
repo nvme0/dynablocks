@@ -1,0 +1,67 @@
+{
+  "editorId": {
+    "type": "string"
+  },
+  "align": {
+    "type": "string",
+    "default": "center"
+  },
+  "blockOrder": {
+    "type": "array",
+    "default": [],
+    "items": {
+      "type": "string"
+    }
+  },
+  "innerBlocks": {
+    "type": "object",
+    "default": {}
+  },
+  "titleTextAlign": {
+    "type": "string",
+    "default": "left"
+  },
+  "headingTextAlign": {
+    "type": "string",
+    "default": "left"
+  },
+  "bodyTextAlign": {
+    "type": "string",
+    "default": "left"
+  },
+  "titleText": {
+    "type": "string",
+    "default": ""
+  },
+  "titleFontSize": {
+    "type": "string",
+    "default": "36px"
+  },
+  "titleColor": {
+    "type": "string",
+    "default": "#000"
+  },
+  "headingFontSize": {
+    "type": "string",
+    "default": "22px"
+  },
+  "headingColor": {
+    "type": "string",
+    "default": "#000"
+  },
+  "bodyFontSize": {
+    "type": "string",
+    "default": "18px"
+  },
+  "bodyColor": {
+    "type": "string",
+    "default": "#000"
+  },
+  "columnBreaks": {
+    "type": "object",
+    "default": {
+      "tablet": 2,
+      "mobile": 1
+    }
+  }
+}
