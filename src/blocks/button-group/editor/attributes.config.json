@@ -1,13 +1,13 @@
 {
-  "parentId": {
-    "type": "string"
-  },
-  "relationship": {
+  "editorId": {
     "type": "string"
   },
   "align": {
     "type": "string",
     "default": "center"
+  },
+  "buttonSpacing": {
+    "type": "string"
   },
   "blockOrder": {
     "type": "array",

@@ -4,7 +4,6 @@ import ButtonControls, {
 } from "../../../common/Components/Bootstrap/Button/ElementControls";
 import { ResponsiveControls } from "../../../common/Components/Controls";
 import { Attributes } from "./attributes";
-import { PanelBody, ButtonGroup, Button } from "@wordpress/components";
 
 export interface ControlProps {
   update: (property: string) => (value: any) => void;
@@ -14,13 +13,7 @@ export interface ControlProps {
 export type Props = Attributes & ControlProps;
 
 export default (props: Props): JSX.Element => {
-  const {
-    align,
-    buttonText,
-    buttonFontSize,
-    update,
-    updateColorPicker
-  } = props;
+  const { buttonText, buttonFontSize, update, updateColorPicker } = props;
 
   const setResponsiveControls = (property: string) => (value: boolean) => {
     if (value) {
@@ -36,7 +29,6 @@ export default (props: Props): JSX.Element => {
   };
 
   const updateButtonText = update("buttonText");
-  const updateButtonAlignment = update("align");
 
   return (
     <InspectorControls>
@@ -48,40 +40,6 @@ export default (props: Props): JSX.Element => {
           initialOpen: false
         }}
       />
-      <PanelBody {...{ title: "Button Alignment", initialOpen: false }}>
-        <ButtonGroup>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonAlignment("left"),
-              isToggled: align === "left"
-            }}
-          >
-            Left
-          </Button>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonAlignment("center"),
-              isToggled: align === "center"
-            }}
-          >
-            Center
-          </Button>
-          <Button
-            {...{
-              isSmall: true,
-              isSecondary: true,
-              onClick: () => updateButtonAlignment("right"),
-              isToggled: align === "right"
-            }}
-          >
-            Right
-          </Button>
-        </ButtonGroup>
-      </PanelBody>
       <ResponsiveControls
         {...{
           ...props,

@@ -62,7 +62,8 @@ add_action("init", function () {
         $componentAttributes["Controls/ResponsiveControls"]
       ),
       "button-group" => array_merge(
-        $blockAttributes["button-group"]
+        $blockAttributes["button-group"],
+        $componentAttributes["Controls/ResponsiveControls"]
       ),
       "container" => array_merge(
         $blockAttributes["container"]

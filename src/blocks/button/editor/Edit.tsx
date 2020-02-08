@@ -1,8 +1,9 @@
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
-import { StyledButton } from "../../../common/Components/Bootstrap/Button";
 import { createUpdateFunction } from "../../../common/helpers";
+import { Fragment } from "@wordpress/element";
+import Button from "../Component/Button";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
@@ -11,7 +12,7 @@ export interface EditProps extends BlockEditProps<Attributes> {
 
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes } = props;
-  const { buttonText: text, align } = attributes;
+  const { buttonText: text } = attributes;
 
   // console.log({ parentId: attributes.parentId });
   const update = createUpdateFunction(props);
@@ -21,17 +22,8 @@ export const Edit = (props: EditProps): JSX.Element => {
     update(property)(rgbaValue);
   };
 
-  const buttonProps = {
-    ...{
-      ...attributes,
-      text,
-      updateText: update("buttonText"),
-      editMode: true
-    }
-  };
-
   return (
-    <div className="s4tw-dynablocks-button">
+    <Fragment>
       <ElementControls
         {...{
           ...attributes,
@@ -39,13 +31,13 @@ export const Edit = (props: EditProps): JSX.Element => {
           updateColorPicker
         }}
       />
-      <div style={{ textAlign: align }}>
-        <StyledButton
-          {...{
-            ...buttonProps
-          }}
-        />
-      </div>
-    </div>
+      <Button
+        {...{
+          ...attributes,
+          text,
+          updateText: update("buttonText")
+        }}
+      />
+    </Fragment>
   );
 };

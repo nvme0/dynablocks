@@ -60,16 +60,6 @@ export default (props: ButtonControlProps): JSX.Element => {
   return (
     <Fragment>
       <PanelBody {...{ title: "Button", initialOpen }}>
-        {updateButtonText !== undefined && (
-          <TextControl
-            {...{
-              name: "Text:",
-              value: buttonText,
-              update: updateButtonText,
-              secondary: true
-            }}
-          />
-        )}
         {!noUrl && (
           <TextControl
             {...{
