@@ -44,11 +44,7 @@ export const Edit = (props: EditProps): JSX.Element => {
           )
         },
         icon,
-        onSelect: value => {
-          if (update) {
-            update("backgroundImages")(value);
-          }
-        }
+        onSelect: update("backgroundImages")
       }}
     />
   );
@@ -84,7 +80,6 @@ export const Edit = (props: EditProps): JSX.Element => {
       />
       <Slider
         {...{
-          clientId,
           isSelected,
           update,
           setAttributes,
@@ -94,7 +89,6 @@ export const Edit = (props: EditProps): JSX.Element => {
             backgroundImages.length < 1 || isSelected
               ? BackgroundSettings
               : undefined,
-          backgroundImages,
           ...attributes
         }}
       />

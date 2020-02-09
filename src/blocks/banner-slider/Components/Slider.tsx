@@ -10,7 +10,6 @@ import Slide from "./Slide";
 import Elements from "./Elements";
 
 export interface SliderProps extends Attributes {
-  clientId?: string;
   isSelected?: boolean;
   editMode?: boolean;
   isDraggable?: boolean;
@@ -36,7 +35,8 @@ export default (props: SliderProps): JSX.Element => {
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
     minWidthTablet = "600px",
-    BackgroundSettings
+    BackgroundSettings,
+    backgroundImages
   } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,10 +44,7 @@ export default (props: SliderProps): JSX.Element => {
   let h2Responsive: Responsive = {};
   if (!editMode && responsive) {
     const responsiveParameters = [
-      {
-        name: "mobile",
-        scale: scaleMobile
-      },
+      { name: "mobile", scale: scaleMobile },
       {
         name: "tablet",
         breakpoint: `@media all and (min-width: ${minWidthTablet})`,
@@ -117,51 +114,55 @@ export default (props: SliderProps): JSX.Element => {
 
   return (
     <Fragment>
-      <div
-        className="content"
-        style={{
-          height,
-          width: "100%",
-          position: "absolute",
-          fontFamily: "'Varela Round', sans-serif, Arial, Helvetica"
-        }}
-        ref={containerRef}
-      >
-        {isDraggable ? (
-          <DraggableElements
-            {...{ ...props, h2Responsive, update: undefined }}
-          />
-        ) : (
-          <Elements
-            {...{
-              ...props,
-              isSelected,
-              h2Responsive,
-              style: {
-                display: "inline-block",
-                position: "relative",
-                transform: `translate(${translateX["value"]}${translateX["units"]}, ${translateY["value"]}${translateY["units"]})`,
-                left: `${left.value}${left.units}`,
-                top: `${top.value}${left.units}`
-              }
+      {backgroundImages.length > 0 && (
+        <Fragment>
+          <div
+            className="content"
+            style={{
+              height,
+              width: "100%",
+              position: "absolute",
+              fontFamily: "'Varela Round', sans-serif, Arial, Helvetica"
             }}
-          />
-        )}
-      </div>
-      <Slider
-        accessibility={false}
-        speed={500}
-        autoplaySpeed={4000}
-        autoplay={true}
-        arrows={false}
-        fade={true}
-        dots={true}
-        className={css({ zIndex: -1 })}
-      >
-        {images.map(image => (
-          <Slide {...{ ...props, image }} />
-        ))}
-      </Slider>
+            ref={containerRef}
+          >
+            {isDraggable ? (
+              <DraggableElements
+                {...{ ...props, h2Responsive, update: undefined }}
+              />
+            ) : (
+              <Elements
+                {...{
+                  ...props,
+                  isSelected,
+                  h2Responsive,
+                  style: {
+                    display: "inline-block",
+                    position: "relative",
+                    transform: `translate(${translateX["value"]}${translateX["units"]}, ${translateY["value"]}${translateY["units"]})`,
+                    left: `${left.value}${left.units}`,
+                    top: `${top.value}${left.units}`
+                  }
+                }}
+              />
+            )}
+          </div>
+          <Slider
+            accessibility={false}
+            speed={500}
+            autoplaySpeed={4000}
+            autoplay={true}
+            arrows={false}
+            fade={true}
+            dots={true}
+            className={css({ zIndex: -1 })}
+          >
+            {images.map(image => (
+              <Slide {...{ ...props, image }} />
+            ))}
+          </Slider>
+        </Fragment>
+      )}
       {BackgroundSettings && <BackgroundSettings />}
     </Fragment>
   );

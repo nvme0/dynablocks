@@ -18,6 +18,34 @@ export interface ElementsProps extends Attributes {
   style?: React.CSSProperties;
 }
 
+const RenderAppender = (props: {
+  clientId?: string;
+  numberOfBlocks: number;
+}): JSX.Element => {
+  const { clientId, numberOfBlocks } = props;
+  return (
+    <div>
+      <IconButton
+        {...{
+          icon: "insert",
+          className:
+            "components-button block-list-appender__toggle block-editor-button-block-appender",
+          onClick: () => {
+            if (!clientId) return;
+            const innerBlock = createBlock("s4tw/dynablocks-button-group");
+            dispatch("core/block-editor").insertBlock(
+              innerBlock,
+              numberOfBlocks,
+              clientId,
+              false
+            );
+          }
+        }}
+      />
+    </div>
+  );
+};
+
 export default (props: ElementsProps): JSX.Element => {
   const {
     clientId,
@@ -64,7 +92,8 @@ export default (props: ElementsProps): JSX.Element => {
               onChange: update("h2Text"),
               tagName: "h2",
               style: h2Style,
-              className: h2ClassName
+              className: h2ClassName,
+              placeholder: "Click to edit text"
             }}
           />
           <ResizableBox
@@ -101,27 +130,9 @@ export default (props: ElementsProps): JSX.Element => {
             }}
           />
           {blockOrder.length < 1 && (
-            <div>
-              <IconButton
-                {...{
-                  icon: "insert",
-                  className:
-                    "components-button block-list-appender__toggle block-editor-button-block-appender",
-                  onClick: () => {
-                    if (!clientId) return;
-                    const innerBlock = createBlock(
-                      "s4tw/dynablocks-button-group"
-                    );
-                    dispatch("core/block-editor").insertBlock(
-                      innerBlock,
-                      blockOrder.length,
-                      clientId,
-                      false
-                    );
-                  }
-                }}
-              />
-            </div>
+            <RenderAppender
+              {...{ clientId, numberOfBlocks: blockOrder.length }}
+            />
           )}
         </Fragment>
       ) : (

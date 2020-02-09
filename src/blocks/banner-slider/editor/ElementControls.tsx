@@ -10,7 +10,7 @@ import {
   ResponsiveControls
 } from "../../../common/Components/Controls";
 import { Attributes } from "./attributes";
-import { PositionEntry } from "src/common/HOCs/withDraggable";
+import { PositionEntry } from "../../../common/HOCs/withDraggable";
 
 export interface ControlProps {
   update: (property: string) => (value: any) => void;
@@ -183,15 +183,9 @@ export default (props: Props): JSX.Element => {
           initialOpen: false
         }}
       />
-      <PanelBody
-        {...{
-          title: "Background Settings",
-          initialOpen: false
-        }}
-      >
+      <PanelBody {...{ title: "Filter Color", initialOpen: false }}>
         <ColorPicker
           {...{
-            name: "Filter Color",
             color: filterColor,
             disableAlpha: false,
             update: updateColorPicker("filterColor")

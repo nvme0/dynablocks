@@ -2,24 +2,34 @@ import { Dashicon } from "@wordpress/components";
 import { MediaPlaceholder } from "@wordpress/block-editor";
 import { some } from "lodash";
 
-export interface Props {
-  value: any;
+export interface Image {
+  alt: string;
+  caption: string;
+  id: number;
+  link: string;
+  mime: string;
+  sizes: any;
+  subtype: string;
+  type: string;
+  url: string;
+}
+
+const ImagePlaceholder = (props: {
+  value: Image | Image[];
   labels?: {
     title?: string;
     instructions?: string;
   };
   icon?: Dashicon.Icon | JSX.Element;
-  onSelect: (value: Array<{ id: number } & { [k: string]: any }>) => void;
-}
-
-export default (props: Props): JSX.Element => {
+  onSelect: (value: Image | Image[]) => void;
+}): JSX.Element => {
   const { value, labels, icon, onSelect } = props;
 
   let properties: {
     isAppender: boolean;
     addToGallery: boolean;
     multiple: boolean;
-    value: number | number[] | undefined;
+    value: any;
   };
 
   if (Array.isArray(value)) {
@@ -53,3 +63,5 @@ export default (props: Props): JSX.Element => {
     />
   );
 };
+
+export default ImagePlaceholder;
