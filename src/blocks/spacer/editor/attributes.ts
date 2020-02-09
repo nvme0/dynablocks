@@ -9,15 +9,11 @@ import {
 } from "../../../common/Components/Spacer/attributes";
 
 export interface Attributes extends ResponsiveAttributes, SpacerAttributes {
-  parentId?: string;
-  relationship?: string;
   align: string;
 }
 
 export interface BlockAttributes
   extends ResponsiveBlockAttributes,
     SpacerBlockAttributes {
-  parentId: BlockAttribute<Attributes["parentId"]>;
-  relationship: BlockAttribute<Attributes["relationship"]>;
   align: BlockAttribute<Attributes["align"]>;
 }

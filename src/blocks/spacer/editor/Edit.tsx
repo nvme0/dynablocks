@@ -2,12 +2,13 @@ import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import Spacer from "../../../common/Components/Spacer";
-import { createUpdateFunction } from "../../../common/helpers";
 
 export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
-  const { attributes, isSelected } = props;
+  const { attributes, setAttributes, isSelected } = props;
 
-  const update = createUpdateFunction(props);
+  const update = property => value => {
+    setAttributes({ [property]: value });
+  };
 
   return (
     <div className="s4tw-dynablocks-spacer">
