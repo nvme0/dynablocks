@@ -1,14 +1,4 @@
 {
-  "parentId": {
-    "type": "string"
-  },
-  "relationship": {
-    "type": "string"
-  },
-  "align": {
-    "type": "string",
-    "default": "center"
-  },
   "buttonText": {
     "type": "string",
     "default": "Button"

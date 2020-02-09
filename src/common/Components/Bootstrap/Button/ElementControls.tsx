@@ -47,14 +47,11 @@ export default (props: ButtonControlProps): JSX.Element => {
     updatePrimaryColor,
     updateBorderRadius,
     updateBorderWidth,
-    updateBorderStyle,
-    updateButtonText,
-    // button text
-    buttonText = ""
+    updateBorderStyle
   } = props;
 
   const [hoverColorControls, enableHoverColorControls] = useState(
-    hoverColor === color
+    hoverColor !== ""
   );
 
   return (
@@ -146,7 +143,7 @@ export default (props: ButtonControlProps): JSX.Element => {
             onChange: (value: boolean) => {
               enableHoverColorControls(value);
               if (!value) {
-                updateHoverColor(color);
+                updateHoverColor("");
               }
             }
           }}

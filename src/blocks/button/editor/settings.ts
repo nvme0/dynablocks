@@ -11,8 +11,9 @@ export const settings: BlockConfiguration<any> = {
   ...commonDefaults,
   supports: {
     ...commonDefaults["supports"],
-    align: ["left", "center", "right"]
+    align: []
   },
+  parent: ["s4tw/dynablocks-button-group"],
   title: __("Button"),
   description: __("Add a button block."),
   icon: icon as any,

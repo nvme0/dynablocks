@@ -1,4 +1,8 @@
+import { dispatch } from "@wordpress/data";
+import { createBlock } from "@wordpress/blocks";
 import { InnerBlocks } from "@wordpress/block-editor";
+import { IconButton } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 import classnames from "classnames";
 import { css } from "emotion";
 import { Attributes } from "../editor/attributes";
@@ -78,6 +82,28 @@ export default (props: ButtonGroupProps): JSX.Element => {
           allowedBlocks: ["s4tw/dynablocks-button"]
         }}
       />
+      {numberOfButtons < 1 && (
+        <IconButton
+          {...{
+            icon: "insert",
+            className:
+              "components-button block-list-appender__toggle block-editor-button-block-appender",
+            onClick: () => {
+              if (!clientId) return;
+              const innerBlock = createBlock("s4tw/dynablocks-button");
+              dispatch("core/block-editor").insertBlock(
+                innerBlock,
+                numberOfButtons,
+                clientId,
+                false
+              );
+            },
+            disabled: numberOfButtons >= 4
+          }}
+        >
+          {__("Add a Buton")}
+        </IconButton>
+      )}
     </div>
   ) : (
     <div
