@@ -1,12 +1,9 @@
-import { dispatch, select } from "@wordpress/data";
 import {
   BlockEditProps,
   BlockInstance,
-  createBlock,
   TemplateArray
 } from "@wordpress/blocks";
 import validator from "validator";
-import uuid from "uuid/v4";
 
 /* frontend */
 
@@ -38,41 +35,6 @@ export const removeAttributes = (settings: any): any =>
     }
     return object;
   }, {});
-
-// TODO - remove this function
-export const syncBlockWithParent = (
-  setAttributes: (attrs: any) => void,
-  clientId?: string,
-  parentId?: string,
-  relationship?: string
-) => {
-  if (!clientId || !parentId || !relationship) return;
-
-  const rootClientId = select("core/block-editor").getBlockRootClientId(
-    clientId
-  );
-
-  if (rootClientId !== parentId) {
-    setAttributes({ parentId: rootClientId });
-  }
-
-  if (!rootClientId) return;
-
-  const parentAttributes = select("core/block-editor").getBlockAttributes(
-    rootClientId
-  );
-  if (!parentAttributes) return;
-  const { innerBlocks } = parentAttributes;
-  if (!innerBlocks) return;
-
-  const blockInstance = select("core/block-editor").getBlock(clientId);
-  dispatch("core/block-editor").updateBlockAttributes(rootClientId, {
-    innerBlocks: {
-      ...innerBlocks,
-      [relationship]: blockInstance
-    }
-  });
-};
 
 export const generateBlockTemplate = <
   T extends {
@@ -106,47 +68,6 @@ export interface UpdateFunctionProps
   extends BlockEditProps<Partial<{ parentId: string; relationship: string }>> {
   clientId?: string;
 }
-
-// TODO - remove this function & UpdateFunctionProps Interface
-export const createUpdateFunction = (props: UpdateFunctionProps) => {
-  const { clientId, attributes, setAttributes } = props;
-  const { parentId, relationship } = attributes;
-  let syncWithParent;
-
-  if (parentId && relationship && clientId) {
-    const parentAttributes = select("core/block-editor").getBlockAttributes(
-      parentId
-    );
-
-    if (parentAttributes) {
-      const { innerBlocks } = parentAttributes;
-      if (innerBlocks) {
-        syncWithParent = () => {
-          const blockInstance = select("core/block-editor").getBlock(clientId);
-          dispatch("core/block-editor").updateBlockAttributes(parentId, {
-            innerBlocks: {
-              ...innerBlocks,
-              [relationship]: blockInstance
-            }
-          });
-        };
-        // sync attributes with parent
-        syncWithParent();
-      }
-    }
-  }
-
-  if (!syncWithParent) {
-    return property => value => {
-      setAttributes({ [property]: value });
-    };
-  }
-
-  return property => value => {
-    syncWithParent();
-    setAttributes({ [property]: value });
-  };
-};
 
 /* color */
 
@@ -313,142 +234,4 @@ export const generateResponsiveCSS = (
     );
   });
   return responsive;
-};
-
-/* InnerBlocks Actions -- TODO - remove these */
-
-export const addInnerBlock = <
-  Attributes extends {
-    blockOrder: string[];
-    innerBlocks: { [x: string]: BlockInstance<any> };
-  }
->(params: {
-  blockName: string;
-  clientId: string;
-  attributes: Attributes;
-  setAttributes: (
-    attrs: Partial<{
-      blockOrder: string[];
-      innerBlocks: { [x: string]: BlockInstance<any> };
-    }>
-  ) => void;
-}) => {
-  const { blockName, clientId, attributes, setAttributes } = params;
-  const { blockOrder, innerBlocks } = attributes;
-  const innerBlocksKeys = Object.keys(innerBlocks);
-
-  const uniqueId = uuid();
-  const innerBlock = createBlock(blockName, {
-    parentId: clientId,
-    relationship: uniqueId
-  });
-
-  const newBlockOrder: Attributes["blockOrder"] = [];
-  blockOrder.forEach(entry => {
-    newBlockOrder.push(entry);
-  });
-  newBlockOrder.push(uniqueId);
-
-  const innerBlocksArray: Array<BlockInstance<Attributes>> = [];
-  innerBlocksKeys.forEach(key => {
-    innerBlocksArray.push(innerBlock[key]);
-  });
-  innerBlocksArray.push(innerBlock as BlockInstance<any>);
-
-  const { getBlockOrder } = select("core/block-editor");
-  const insertIndex = getBlockOrder(clientId).length;
-  dispatch("core/block-editor").insertBlock(
-    innerBlock,
-    insertIndex,
-    clientId,
-    false
-  );
-
-  setAttributes({
-    blockOrder: newBlockOrder,
-    innerBlocks: {
-      ...innerBlocks,
-      [uniqueId]: innerBlock
-    }
-  });
-};
-
-export const deleteInnerBlock = <
-  Attributes extends {
-    blockOrder: string[];
-    innerBlocks: { [x: string]: BlockInstance<any> };
-  }
->(params: {
-  index: number;
-  innerBlocksKeys: string[];
-  attributes: Attributes;
-  setAttributes: (
-    attrs: Partial<{
-      blockOrder: string[];
-      innerBlocks: { [x: string]: BlockInstance<any> };
-    }>
-  ) => void;
-}) => {
-  const { index, innerBlocksKeys, attributes, setAttributes } = params;
-  const { blockOrder, innerBlocks } = attributes;
-
-  const deleteKey = blockOrder[index];
-  const updatedInnerBlocks: Attributes["innerBlocks"] = innerBlocksKeys
-    .filter(key => key !== deleteKey)
-    .reduce((result, current) => {
-      result[current] = innerBlocks[current];
-      return result;
-    }, {});
-
-  const newBlockOrder: string[] = blockOrder.filter(
-    entry => entry !== deleteKey
-  );
-
-  dispatch("core/block-editor").removeBlock(innerBlocks[deleteKey].clientId);
-  setAttributes({
-    blockOrder: newBlockOrder,
-    innerBlocks: updatedInnerBlocks
-  });
-};
-
-export const moveInnerBlock = <
-  Attributes extends {
-    blockOrder: string[];
-    innerBlocks: { [x: string]: BlockInstance<any> };
-  }
->(params: {
-  currentIndex: number;
-  newIndex: number;
-  clientId: string;
-  attributes: Attributes;
-  setAttributes: (
-    attrs: Partial<{
-      blockOrder: string[];
-      innerBlocks: { [x: string]: BlockInstance<any> };
-    }>
-  ) => void;
-}) => {
-  const {
-    currentIndex,
-    newIndex,
-    clientId,
-    attributes,
-    setAttributes
-  } = params;
-  const { blockOrder, innerBlocks } = attributes;
-
-  const newBlockOrder: string[] = blockOrder.filter(_entry => true);
-  newBlockOrder.splice(newIndex, 0, newBlockOrder.splice(currentIndex, 1)[0]);
-
-  const innerBlocksArray: BlockInstance<{ [k: string]: any }>[] = [];
-  newBlockOrder.forEach(entry => {
-    innerBlocksArray.push(innerBlocks[entry]);
-  });
-  dispatch("core/block-editor").replaceInnerBlocks(
-    clientId,
-    innerBlocksArray,
-    false
-  );
-
-  setAttributes({ blockOrder: newBlockOrder });
 };

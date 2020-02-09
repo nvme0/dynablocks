@@ -3,12 +3,11 @@
 A Wordpress Gutenberg Blocks Plugin which adds the following custom Wordpress Blocks:
 
 - Hero Section
-- Post Carousel
 - Banner Slider
-- Container
-- Image Block
-- Button
+- Post Carousel
 - Button Group
+- Image Block
+- Container
 - Spacer
 
 ## Common setup
