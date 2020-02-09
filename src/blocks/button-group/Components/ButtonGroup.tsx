@@ -34,7 +34,6 @@ export default (props: ButtonGroupProps): JSX.Element => {
       ? generateBlockTemplate(blockOrder, innerBlocks)
       : undefined;
 
-  // TODO - responsive spacing
   const responsiveParameters = [
     { name: "mobile", scale: scaleMobile },
     {

@@ -3,7 +3,7 @@ import {
   Attributes as ResponsiveAttributes,
   BlockAttributes as ResponsiveBlockAttributes
 } from "../../../common/Components/Controls/ResponsiveControls/attributes";
-import { Attributes as ButtonAttributes } from "../../button/editor/attributes";
+import { Attributes as ButtonGroupAttributes } from "../../button-group/editor/attributes";
 import { PositionEntry, Limits } from "../../../common/HOCs/withDraggable";
 
 export interface Image {
@@ -33,7 +33,7 @@ export interface Attributes extends ResponsiveAttributes {
   elementsPositionLimits: Limits;
   elementsTranslate: { left: PositionEntry; top: PositionEntry };
   blockOrder: string[];
-  innerBlocks: { [x: string]: BlockInstance<ButtonAttributes> };
+  innerBlocks: { [x: string]: BlockInstance<ButtonGroupAttributes> };
 }
 
 export interface BlockAttributes extends ResponsiveBlockAttributes {
