@@ -1,4 +1,7 @@
 {
+  "editorId": {
+    "type": "string"
+  },
   "align": {
     "type": "string"
   },
@@ -78,6 +81,13 @@
         "value": -50,
         "units": "%"
       }
+    }
+  },
+  "blockOrder": {
+    "type": "array",
+    "default": [],
+    "items": {
+      "type": "string"
     }
   },
   "innerBlocks": {

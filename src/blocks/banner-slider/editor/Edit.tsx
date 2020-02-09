@@ -15,7 +15,11 @@ export interface EditProps extends BlockEditProps<Attributes> {
 
 export const Edit = (props: EditProps): JSX.Element => {
   const { attributes, setAttributes, isSelected, clientId } = props;
-  const { backgroundImages, h2TextAlignment } = attributes;
+  const { editorId, backgroundImages, h2TextAlignment } = attributes;
+
+  if (clientId !== editorId) {
+    setAttributes({ editorId: clientId });
+  }
 
   const [isDraggable, setIsDraggable] = useState(false);
 

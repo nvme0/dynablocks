@@ -1,5 +1,8 @@
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
 import { Fragment } from "@wordpress/element";
+import { IconButton } from "@wordpress/components";
+import { createBlock } from "@wordpress/blocks";
+import { dispatch } from "@wordpress/data";
 import { css } from "emotion";
 import { Attributes } from "../editor/attributes";
 import { Responsive } from "../../../common/helpers";
@@ -18,10 +21,11 @@ export interface ElementsProps extends Attributes {
 export default (props: ElementsProps): JSX.Element => {
   const {
     clientId,
+    innerBlocks,
+    blockOrder,
     isSelected,
     update,
     style,
-    innerBlocks,
     h2Responsive,
     h2Text,
     h2TextAlignment,
@@ -51,13 +55,7 @@ export default (props: ElementsProps): JSX.Element => {
   });
 
   return (
-    <div
-      style={{
-        ...style
-        // animationName: "show1",
-        // animationDuration: "1s"
-      }}
-    >
+    <div style={{ ...style }}>
       {editMode && update ? (
         <Fragment>
           <RichText
@@ -91,19 +89,40 @@ export default (props: ElementsProps): JSX.Element => {
             {...{
               template: [
                 [
-                  "s4tw/dynablocks-button",
+                  "s4tw/dynablocks-button-group",
                   {
-                    ...(innerBlocks["button-0"]
-                      ? innerBlocks["button-0"].attributes
-                      : undefined),
-                    parentId: clientId,
-                    relationship: "button-0"
+                    ...(innerBlocks[blockOrder[0]]
+                      ? innerBlocks[blockOrder[0]].attributes
+                      : undefined)
                   }
                 ]
               ],
-              templateLock: "all"
+              allowedBlocks: ["s4tw/dynablocks-button-group"]
             }}
           />
+          {blockOrder.length < 1 && (
+            <div>
+              <IconButton
+                {...{
+                  icon: "insert",
+                  className:
+                    "components-button block-list-appender__toggle block-editor-button-block-appender",
+                  onClick: () => {
+                    if (!clientId) return;
+                    const innerBlock = createBlock(
+                      "s4tw/dynablocks-button-group"
+                    );
+                    dispatch("core/block-editor").insertBlock(
+                      innerBlock,
+                      blockOrder.length,
+                      clientId,
+                      false
+                    );
+                  }
+                }}
+              />
+            </div>
+          )}
         </Fragment>
       ) : (
         <Fragment>
@@ -115,7 +134,7 @@ export default (props: ElementsProps): JSX.Element => {
               className: h2ClassName
             }}
           />
-          <DynablocksButton {...innerBlocks["button-0"].attributes} />
+          <DynablocksButton {...innerBlocks[blockOrder[0]].attributes} />
         </Fragment>
       )}
     </div>

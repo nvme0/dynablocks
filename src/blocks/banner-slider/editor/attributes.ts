@@ -4,7 +4,6 @@ import {
   BlockAttributes as ResponsiveBlockAttributes
 } from "../../../common/Components/Controls/ResponsiveControls/attributes";
 import { Attributes as ButtonAttributes } from "../../button/editor/attributes";
-import { Attributes as SpacerAttributes } from "../../spacer/editor/attributes";
 import { PositionEntry, Limits } from "../../../common/HOCs/withDraggable";
 
 export interface Image {
@@ -20,6 +19,7 @@ export interface Image {
 }
 
 export interface Attributes extends ResponsiveAttributes {
+  editorId?: string;
   align: string;
   backgroundImages: Image[];
   filterColor: string;
@@ -32,14 +32,12 @@ export interface Attributes extends ResponsiveAttributes {
   elementsPosition: { left: PositionEntry; top: PositionEntry };
   elementsPositionLimits: Limits;
   elementsTranslate: { left: PositionEntry; top: PositionEntry };
-  // innerBlocks: { [clientId: string]: any };
-  innerBlocks: {
-    "button-0": BlockInstance<ButtonAttributes>;
-    "spacer-0": BlockInstance<SpacerAttributes>;
-  };
+  blockOrder: string[];
+  innerBlocks: { [x: string]: BlockInstance<ButtonAttributes> };
 }
 
 export interface BlockAttributes extends ResponsiveBlockAttributes {
+  editorId: BlockAttribute<Attributes["editorId"]>;
   align: BlockAttribute<Attributes["align"]>;
   backgroundImages: BlockAttribute<Attributes["backgroundImages"]>;
   filterColor: BlockAttribute<Attributes["filterColor"]>;
@@ -49,8 +47,9 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   h2MarginBottom: BlockAttribute<Attributes["h2MarginBottom"]>;
   h2Color: BlockAttribute<Attributes["h2Color"]>;
   height: BlockAttribute<Attributes["height"]>;
-  innerBlocks: BlockAttribute<Attributes["innerBlocks"]>;
   elementsPosition: BlockAttribute<Attributes["elementsPosition"]>;
   elementsPositionLimits: BlockAttribute<Attributes["elementsPositionLimits"]>;
   elementsTranslate: BlockAttribute<Attributes["elementsPosition"]>;
+  blockOrder: BlockAttribute<Attributes["blockOrder"]>;
+  innerBlocks: BlockAttribute<Attributes["innerBlocks"]>;
 }
