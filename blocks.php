@@ -70,7 +70,6 @@ add_action("init", function () {
       ),
       "hero-section" => array_merge(
         $blockAttributes["hero-section"],
-        $componentAttributes["Bootstrap/Button"],
         $componentAttributes["Controls/ResponsiveControls"]
       ),
       "image-block" => array_merge(

@@ -1,16 +1,7 @@
 import { useState, useEffect } from "@wordpress/element";
-import { Responsive } from "src/common/helpers";
-import { css } from "emotion";
 
 export interface BaseProps {
-  staticText: string;
-  style: {
-    staticText: { color: string };
-    keyword: { color: string };
-    fontSize?: string;
-    marginBottom?: string;
-  };
-  h2Responsive?: Responsive;
+  style: { color: string };
 }
 
 export interface ElementProps extends BaseProps {
@@ -18,35 +9,12 @@ export interface ElementProps extends BaseProps {
 }
 
 export const Element = (props: ElementProps) => {
-  const { staticText, keyword, style, h2Responsive } = props;
-  const {
-    staticText: textStyle,
-    keyword: keywordStyle,
-    fontSize,
-    marginBottom
-  } = style;
+  const { keyword, style } = props;
+  const { color } = style;
   return (
-    <h2
-      className={css({ ...h2Responsive })}
-      style={{
-        fontSize,
-        marginBottom
-      }}
-    >
-      <span
-        className="static-wrapper"
-        style={{ color: textStyle["color"] }}
-        dangerouslySetInnerHTML={{
-          __html: staticText.replace(/(?:\r\n|\r|\n)/g, "<br />")
-        }}
-      />{" "}
-      <span
-        className="dynamic-wrapper"
-        style={{ color: keywordStyle["color"] }}
-      >
-        {keyword}
-      </span>
-    </h2>
+    <span className="dynamic-wrapper" style={{ color }}>
+      {keyword}
+    </span>
   );
 };
 

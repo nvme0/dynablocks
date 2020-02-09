@@ -10,6 +10,22 @@
 
 .s4tw-dynablocks-hero-section {
   overflow: hidden;
+  .content {
+    h2 {
+      white-space: nowrap !important;
+      font-family: inherit;
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+      span {
+        >div {
+          display: inline;
+        }
+        display: inline;
+      }
+    }
+  }
   .wrapper{
     .hero-container{
       background-position: center;
@@ -17,42 +33,6 @@
       background-repeat: no-repeat;
       .dimmer-filter{
         height: 100%;
-        .content {
-          position: relative;
-          transform: translateX(-50%) translateY(-50%);
-          h2, button {
-            font-family: inherit;
-          }
-          h2 {
-            text-align: center;
-            margin-top: 0;
-            margin-left: 0;
-            margin-right: 0;
-            padding: 0; 
-            .dynamic-wrapper {
-              span {
-                display: none;
-                &.is-active {
-                  display: inline;
-                }
-              }
-            }
-          }
-          button {
-            display: block;
-            margin: 0 auto;
-          }
-          @keyframes show1 {
-            0% { 
-              opacity: 0;
-              transform: translateX(-50%) translateY(0%);
-            }
-            100% {
-              opacity: 1;
-              transform: translateX(-50%) translateY(-50%);
-            }
-          }
-        }
       }
     }
   }
