@@ -2,12 +2,13 @@
 
 A Wordpress Gutenberg Blocks Plugin which adds the following custom Wordpress Blocks:
 
-- Hero Section
+- Accordion
 - Banner Slider
-- Post Carousel
 - Button Group
-- Image Block
 - Container
+- Hero Section
+- Image Block
+- Post Carousel
 - Spacer
 
 ## Common setup
@@ -16,7 +17,7 @@ Clone the repo, install the dependencies and transpile the source code.
 
 ```
 git clone git@github.com:solutions4theweb/dynablocks.git
-cd ./dynablocks-master
+cd ./dynablocks
 npm install
 npm run build:prod
 ```
