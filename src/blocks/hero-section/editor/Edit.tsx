@@ -8,6 +8,7 @@ import ElementControls, { ControlProps } from "./ElementControls";
 import { Attributes } from "./attributes";
 import { icon } from "./settings";
 import { ImagePlaceholder } from "../../../common/Components/Controls";
+import { Image } from "../../../common/Components/Controls/ImagePlaceholder";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   clientId?: string;
@@ -20,6 +21,7 @@ export const Edit = (props: EditProps) => {
     keywords,
     keywordsInterval,
     backgroundImage,
+    backgroundImageSize,
     h2TextAlignment
   } = attributes;
 
@@ -53,7 +55,13 @@ export const Edit = (props: EditProps) => {
           )
         },
         icon,
-        onSelect: update("backgroundImage")
+        onSelect: value => {
+          const image = value as Image;
+          if (!image.sizes[backgroundImageSize]) {
+            update("backgroundImageSize")(undefined);
+          }
+          update("backgroundImage")(image);
+        }
       }}
     />
   );

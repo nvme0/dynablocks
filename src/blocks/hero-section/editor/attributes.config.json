@@ -9,6 +9,9 @@
   "backgroundImage": {
     "type": "object"
   },
+  "backgroundImageSize": {
+    "type": "string"
+  },
   "filterColor": {
     "type": "string",
     "default": "rgba(0, 0, 0, 0)"

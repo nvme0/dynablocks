@@ -1,6 +1,14 @@
 import { Dashicon } from "@wordpress/components";
-import { MediaPlaceholder } from "@wordpress/block-editor";
-import { some } from "lodash";
+import { MediaPlaceholder, EditorBaseSetting } from "@wordpress/block-editor";
+import { some, get, map, filter } from "lodash";
+import { select } from "@wordpress/data";
+
+export interface ImageSize {
+  height: number;
+  width: number;
+  url: string;
+  orientation: string;
+}
 
 export interface Image {
   alt: string;
@@ -8,11 +16,20 @@ export interface Image {
   id: number;
   link: string;
   mime: string;
-  sizes: any;
+  sizes: { [slug: string]: ImageSize };
   subtype: string;
   type: string;
   url: string;
 }
+
+export const getImageSizeOptions = (image: Image | undefined) => {
+  if (!image) return [];
+  const { imageSizes } = select("core/block-editor").getSettings();
+  const sizeOptions = map(
+    filter(imageSizes, ({ slug }) => get(image, ["sizes", slug, "url"]))
+  ) as EditorBaseSetting[];
+  return sizeOptions.map(({ name, slug }) => ({ value: slug, label: name }));
+};
 
 const ImagePlaceholder = (props: {
   value: Image | Image[];

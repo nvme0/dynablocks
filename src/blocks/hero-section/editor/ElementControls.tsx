@@ -1,10 +1,13 @@
+import { isEmpty, concat } from "lodash";
 import validator from "validator";
 import { InspectorControls } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 import {
   PanelBody,
   PanelRow,
   ToggleControl,
-  RangeControl
+  RangeControl,
+  SelectControl
 } from "@wordpress/components";
 import KeywordSelector from "../Components/KeywordSelector";
 import {
@@ -17,18 +20,7 @@ import {
 } from "../../../common/Components/Controls";
 import { Attributes } from "./attributes";
 import { PositionEntry } from "../../../common/HOCs/withDraggable";
-
-export interface Image {
-  alt: string;
-  caption: string;
-  id: number;
-  link: string;
-  mime: string;
-  sizes: any;
-  subtype: string;
-  type: string;
-  url: string;
-}
+import { getImageSizeOptions } from "../../../common/Components/Controls/ImagePlaceholder";
 
 export interface ControlProps {
   state: {
@@ -63,6 +55,8 @@ export default (props: Props): JSX.Element => {
     keywordsInterval,
     h2Color,
     height,
+    backgroundImage,
+    backgroundImageSize,
     elementsPosition: position,
     elementsPositionLimits: limits,
     elementsTranslate: translate
@@ -92,8 +86,31 @@ export default (props: Props): JSX.Element => {
     translate
   );
 
+  const imageSizeOptions = backgroundImageSize
+    ? getImageSizeOptions(backgroundImage)
+    : concat([{ label: "", value: "" }], getImageSizeOptions(backgroundImage));
+
   return (
     <InspectorControls>
+      <PanelBody {...{ title: "Image Settings", initialOpen: false }}>
+        {!isEmpty(imageSizeOptions) && (
+          <SelectControl
+            {...{
+              label: __("Image Size"),
+              value: backgroundImageSize,
+              options: imageSizeOptions,
+              onChange: update("backgroundImageSize")
+            }}
+          />
+        )}
+        <ColorPicker
+          {...{
+            color: filterColor,
+            disableAlpha: false,
+            update: updateColorPicker("filterColor")
+          }}
+        />
+      </PanelBody>
       <PanelBody {...{ title: "Cycling Text", initialOpen: false }}>
         <TextareaControl
           {...{
@@ -263,15 +280,6 @@ export default (props: Props): JSX.Element => {
           initialOpen: false
         }}
       />
-      <PanelBody {...{ title: "Filter Color", initialOpen: false }}>
-        <ColorPicker
-          {...{
-            color: filterColor,
-            disableAlpha: false,
-            update: updateColorPicker("filterColor")
-          }}
-        />
-      </PanelBody>
     </InspectorControls>
   );
 };

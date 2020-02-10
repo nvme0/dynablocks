@@ -27,6 +27,7 @@ export default (props: HeroProps): JSX.Element => {
     height,
     filterColor,
     backgroundImage,
+    backgroundImageSize,
     h2FontSize,
     h2MarginBottom,
     editMode = false,
@@ -112,6 +113,12 @@ export default (props: HeroProps): JSX.Element => {
 
   const { left, top } = elementsPosition;
 
+  const imageSrc = backgroundImage
+    ? backgroundImageSize
+      ? backgroundImage.sizes[backgroundImageSize].url
+      : backgroundImage.url
+    : undefined;
+
   return (
     <Fragment>
       {backgroundImage && (
@@ -151,7 +158,7 @@ export default (props: HeroProps): JSX.Element => {
             <div
               className="hero-container"
               style={{
-                backgroundImage: `url(${backgroundImage.url})`,
+                backgroundImage: `url(${imageSrc})`,
                 height
               }}
             >

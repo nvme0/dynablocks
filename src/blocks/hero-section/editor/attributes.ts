@@ -3,25 +3,15 @@ import {
   Attributes as ResponsiveAttributes,
   BlockAttributes as ResponsiveBlockAttributes
 } from "../../../common/Components/Controls/ResponsiveControls/attributes";
+import { Image } from "../../../common/Components/Controls/ImagePlaceholder";
 import { Attributes as ButtonGroupAttributes } from "../../button-group/editor/attributes";
 import { PositionEntry, Limits } from "../../../common/HOCs/withDraggable";
-
-export interface Image {
-  alt: string;
-  caption: string;
-  id: number;
-  link: string;
-  mime: string;
-  sizes: any;
-  subtype: string;
-  type: string;
-  url: string;
-}
 
 export interface Attributes extends ResponsiveAttributes {
   editorId?: string;
   align: "center" | "full" | "wide";
   backgroundImage: Image;
+  backgroundImageSize: string;
   filterColor: string;
   h2Text: string;
   h2TextAlignment: "left" | "center" | "right";
