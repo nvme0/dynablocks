@@ -18,7 +18,7 @@ export const Edit = (props: EditProps): JSX.Element => {
   const { editorId, backgroundImages, h2TextAlignment } = attributes;
 
   if (clientId !== editorId) {
-    setAttributes({ editorId: clientId });
+    setTimeout(() => setAttributes({ editorId: clientId }), 1000);
   }
 
   const [isDraggable, setIsDraggable] = useState(false);

@@ -26,7 +26,7 @@ export const Edit = (props: EditProps) => {
   } = attributes;
 
   if (clientId !== editorId) {
-    setAttributes({ editorId: clientId });
+    setTimeout(() => setAttributes({ editorId: clientId }), 1000);
   }
 
   const keywordsArray = keywords.split(" ");

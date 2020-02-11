@@ -20,7 +20,7 @@ export const Edit = (props: EditProps): JSX.Element => {
   const numberOfColumns = innerBlocksKeys.length;
 
   if (clientId !== editorId) {
-    setAttributes({ editorId: clientId });
+    setTimeout(() => setAttributes({ editorId: clientId }), 1000);
   }
 
   const update = property => value => {
