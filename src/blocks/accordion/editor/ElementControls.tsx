@@ -1,4 +1,4 @@
-import _ from "lodash";
+import lodash from "lodash";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, PanelRow } from "@wordpress/components";
 import validator from "validator";
@@ -126,7 +126,7 @@ export default (props: ControlProps): JSX.Element => {
               name: "Tablet:",
               value: columnBreaks["tablet"],
               update: value => {
-                const sanitizedValue = _.clamp(
+                const sanitizedValue = lodash.clamp(
                   parseInt(validator.whitelist(value, "0123456789")),
                   0,
                   numberOfColumns
@@ -145,7 +145,7 @@ export default (props: ControlProps): JSX.Element => {
               name: "Mobile:",
               value: columnBreaks["mobile"],
               update: value => {
-                const sanitizedValue = _.clamp(
+                const sanitizedValue = lodash.clamp(
                   parseInt(validator.whitelist(value, "0123456789")),
                   0,
                   numberOfColumns
