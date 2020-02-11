@@ -5,7 +5,7 @@
  * Description: A Wordpress Gutenberg Blocks Plugin containing a number of useful blocks that add functionality to your website.
  * Author: Solutions 4 the Web
  * Author URI: https://solutions4theweb.com
- * Version: 1.0.0
+ * Version: 1.0.2
  * 
  * @package Dynablocks
  */
