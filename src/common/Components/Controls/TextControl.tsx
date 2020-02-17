@@ -8,10 +8,11 @@ export interface Props {
   disabled?: boolean;
   secondary?: boolean;
   units?: string;
+  type?: "string" | "number";
 }
 
 export default (props: Props): JSX.Element => {
-  const { name, value, update, disabled, secondary, units } = props;
+  const { name, value, update, disabled, secondary, units, type } = props;
   return secondary ? (
     <div
       className={css({
@@ -29,35 +30,41 @@ export default (props: Props): JSX.Element => {
       <p>
         <strong>{name}</strong>
       </p>
-      <TextControl
-        {...{
-          value,
-          onChange: update,
-          disabled,
-          className: css({
-            maxWidth: "154px",
-            marginBottom: 0 + "!important",
-            ".components-base-control__field": {
-              marginBottom: 0
-            }
-          })
-        }}
-      />
-      {units && <p>{units}</p>}
+      <div style={{ display: "flex" }}>
+        <TextControl
+          {...{
+            value,
+            onChange: update,
+            disabled,
+            className: css({
+              maxWidth: units ? "136px" : "154px",
+              marginBottom: 0 + "!important",
+              ".components-base-control__field": {
+                marginBottom: 0
+              }
+            }),
+            type
+          }}
+        />
+        {units && <p style={{ paddingLeft: "0.5em" }}>{units}</p>}
+      </div>
     </div>
   ) : (
     <div className={css({ marginBottom: "16px" })}>
       <p>
         <strong>{name}</strong>
       </p>
-      <TextControl
-        {...{
-          value,
-          onChange: update,
-          disabled
-        }}
-      />
-      {units && <p>{units}</p>}
+      <div style={{ display: "flex" }}>
+        <TextControl
+          {...{
+            value,
+            onChange: update,
+            disabled,
+            type
+          }}
+        />
+        {units && <p style={{ paddingLeft: "0.5em" }}>{units}</p>}
+      </div>
     </div>
   );
 };
