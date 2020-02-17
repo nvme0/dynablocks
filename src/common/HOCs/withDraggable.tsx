@@ -44,6 +44,8 @@ interface Options {
   lockX?: boolean;
   lockY?: boolean;
   style?: React.CSSProperties;
+  grid?: { gridX: number; gridY: number };
+  sticky?: boolean;
 }
 
 const deriveLimits = (
@@ -125,7 +127,9 @@ const withDraggable = <P extends {}>(
     lockX,
     lockY,
     style,
-    adjustmentFactor = { x: 1.0, y: 1.0 }
+    adjustmentFactor = { x: 1.0, y: 1.0 },
+    grid = { gridX: 100, gridY: 100 },
+    sticky = true
   } = options;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -161,24 +165,37 @@ const withDraggable = <P extends {}>(
         top: { units: unitsY }
       } = positionEntry;
       let { left, top } = state;
+      const { gridX, gridY } = grid;
 
       if (!lockX) {
         if (!parentOffset.x) return;
         left = (event.pageX - rel.x - parentOffset.x) * adjustmentFactor.x;
+
         if (unitsX === "%" && xMax) {
-          left = (left / xMax) * 100;
+          if (gridX > 0 && sticky) {
+            left = (100 / gridX) * Math.round((left / xMax) * gridX);
+          } else {
+            left = (left / xMax) * 100;
+          }
+        } else {
+          left = Math.round(left);
         }
-        left = Math.round(left);
         left = cap(left, limits.x);
       }
 
       if (!lockY) {
         if (!parentOffset.y) return;
         top = (event.pageY - rel.y - parentOffset.y) * adjustmentFactor.y;
+
         if (unitsY === "%" && yMax) {
-          top = (top / yMax) * 100;
+          if (gridY > 0 && sticky) {
+            top = (100 / gridY) * Math.round((top / yMax) * gridY);
+          } else {
+            top = (top / yMax) * 100;
+          }
+        } else {
+          top = Math.round(top);
         }
-        top = Math.round(top);
         top = cap(top, limits.y);
       }
 
@@ -191,32 +208,66 @@ const withDraggable = <P extends {}>(
     [
       adjustmentFactor.x,
       adjustmentFactor.y,
+      grid,
       limits.x,
       limits.y,
       lockX,
       lockY,
       positionEntry,
       state,
+      sticky,
       xMax,
       yMax
     ]
   );
 
   const stopDragging = useCallback(() => {
-    const { isDragging, left, top } = state;
+    const {
+      left: { units: unitsX },
+      top: { units: unitsY }
+    } = positionEntry;
+    const { isDragging } = state;
+    let { left, top } = state;
+    const { gridX, gridY } = grid;
+
     if (isDragging) {
       setState(prevState => ({
         ...prevState,
         isDragging: false
       }));
     }
+
+    left =
+      !sticky && !lockX && unitsX === "%" && gridX > 0
+        ? cap((100 / gridX) * Math.round(left * gridX * 0.01), limits.x)
+        : left;
+    top =
+      !sticky && !lockY && unitsY === "%" && gridY > 0
+        ? cap((100 / gridY) * Math.round(top * gridY * 0.01), limits.y)
+        : top;
+
+    setState(prevState => ({
+      ...prevState,
+      left,
+      top
+    }));
+
     if (
       left !== positionEntry["left"]["value"] ||
       top !== positionEntry["top"]["value"]
     ) {
       updateCallback({ left, top }, limits);
     }
-  }, [limits, positionEntry, state, updateCallback]);
+  }, [
+    grid,
+    limits,
+    lockX,
+    lockY,
+    positionEntry,
+    state,
+    sticky,
+    updateCallback
+  ]);
 
   const startDragging = useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
