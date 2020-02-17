@@ -7,8 +7,10 @@ import { css } from "emotion";
 import { extractSizeAndUnits } from "../../../common/helpers";
 
 export interface ResizableBoxProps {
-  height: string;
-  resizeRatio: number;
+  style?: React.CSSProperties;
+  height?: string;
+  width?: string;
+  resizeRatio?: number;
   isSelected: boolean;
   update: (value: any) => void;
   enable?: {
@@ -31,7 +33,9 @@ type Props = ResizableBoxProps & DispatchProps;
 
 const Core = (props: Props) => {
   const {
+    style,
     height,
+    width,
     resizeRatio,
     isSelected = false,
     update,
@@ -44,6 +48,7 @@ const Core = (props: Props) => {
   return (
     <ResizableBox
       {...{
+        style,
         className: classnames(
           {
             "is-selected": isSelected
@@ -53,15 +58,32 @@ const Core = (props: Props) => {
             backgroundColor: isResizing ? "rgba(255, 255, 0, 0.5)" : undefined
           })
         ),
-        size: { height },
+        size: { height, width },
         resizeRatio,
         enable,
         onResizeStop: (event, direction, elt, delta) => {
           setIsResizing(false);
           toggleSelection(true);
-          const { size, units } = extractSizeAndUnits(height);
-          const spacerHeight = Math.round(size + delta.height);
-          update(`${spacerHeight}${units}`);
+          if (height && width) {
+            const { size: hSize, units: hUnits } = extractSizeAndUnits(height);
+            const boxHeight = Math.round(hSize + delta.height);
+
+            const { size: wSize, units: wUnits } = extractSizeAndUnits(width);
+            const boxWidth = Math.round(wSize + delta.height);
+
+            update({
+              deltaHeight: `${boxHeight}${hUnits}`,
+              deltaWidth: `${boxWidth}${wUnits}`
+            });
+          } else if (height) {
+            const { size, units } = extractSizeAndUnits(height);
+            const boxHeight = Math.round(size + delta.height);
+            update(`${boxHeight}${units}`);
+          } else if (width) {
+            const { size, units } = extractSizeAndUnits(width);
+            const boxWidth = Math.round(size + delta.height);
+            update(`${boxWidth}${units}`);
+          }
         },
         onResizeStart: () => {
           toggleSelection(false);
