@@ -33,11 +33,12 @@ export default (props: ResponsiveControlProps): JSX.Element => {
       </PanelRow>
       {responsive && (
         <Fragment>
-          <h6 style={{ margin: "16px 0 16px 0" }}>Scale</h6>
+          <p>Scale</p>
           <TextControl
             {...{
               name: "Tablet:",
               value: scaleTablet * 100,
+              units: "%",
               update: value => {
                 const sanitizedValue = validator.whitelist(value, "0123456789");
                 update("scaleTablet")(parseInt(sanitizedValue) / 100.0);
@@ -49,6 +50,7 @@ export default (props: ResponsiveControlProps): JSX.Element => {
             {...{
               name: "Mobile:",
               value: scaleMobile * 100,
+              units: "%",
               update: value => {
                 const sanitizedValue = validator.whitelist(value, "0123456789");
                 update("scaleMobile")(parseInt(sanitizedValue) / 100.0);
@@ -56,7 +58,7 @@ export default (props: ResponsiveControlProps): JSX.Element => {
               secondary: true
             }}
           />
-          <h6 style={{ margin: "8px 0 16px 0" }}>Breakpoints</h6>
+          <p style={{ margin: "16px 0" }}>Breakpoints</p>
           <TextControl
             {...{
               name: "Desktop:",
@@ -81,7 +83,6 @@ export default (props: ResponsiveControlProps): JSX.Element => {
               secondary: true
             }}
           />
-          <div style={{ padding: "8px" }}></div>
         </Fragment>
       )}
     </PanelBody>
