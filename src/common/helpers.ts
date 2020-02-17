@@ -1,3 +1,4 @@
+import { clamp } from "lodash";
 import {
   BlockEditProps,
   BlockInstance,
@@ -234,4 +235,15 @@ export const generateResponsiveCSS = (
     );
   });
   return responsive;
+};
+
+/* number */
+
+export const sanitizeIntegerInput = (
+  value: string,
+  limits = { min: 0, max: 1000000 },
+  whitelist = "-0123456789"
+) => {
+  const { min, max } = limits;
+  return clamp(parseInt(validator.whitelist(value, whitelist)), min, max);
 };

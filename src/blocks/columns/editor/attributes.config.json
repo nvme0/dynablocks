@@ -1,0 +1,55 @@
+{
+  "editorId": {
+    "type": "string"
+  },
+  "align": {
+    "type": "string",
+    "default": "center"
+  },
+  "blockOrder": {
+    "type": "array",
+    "default": [],
+    "items": {
+      "type": "string"
+    }
+  },
+  "innerBlocks": {
+    "type": "object",
+    "default": {}
+  },
+  "columnBreaks": {
+    "type": "object",
+    "default": {
+      "desktop": 4,
+      "tablet": 2,
+      "mobile": 1
+    }
+  },
+  "columns": {
+    "type": "object",
+    "default": {
+      "desktop": [ 25, 25, 25, 25 ],
+      "tablet": [ 50, 50 ],
+      "mobile": [ 100 ]
+    }
+  },
+  "gridGaps": {
+    "type": "object",
+    "default": {
+      "row": 0,
+      "column": 0
+    }
+  },
+  "editorOptions": {
+    "type": "object",
+    "default": {
+      "gridSnap": true,
+      "gridShow": "back",
+      "gridSize": {
+        "desktop": 12,
+        "tablet": 8,
+        "mobile": 4
+      }
+    }
+  }
+}

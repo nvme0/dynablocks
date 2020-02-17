@@ -1,11 +1,12 @@
 # Dynablocks
 
-A Wordpress Gutenberg Blocks Plugin which adds the following custom Wordpress Blocks:
+A Wordpress Gutenberg Blocks Plugin which adds 9 custom Wordpress Blocks:
 
 - Accordion
 - Banner Slider
-- Button Group
-- Container
+- Buttons
+- Responsive Columns
+- Container (depreciate in future, in favor of Responsive Columns)
 - Hero Section
 - Image Block
 - Post Carousel

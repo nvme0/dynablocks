@@ -21,6 +21,8 @@ const blocks = [
   "button",
   "button-group",
   "container",
+  "columns",
+  "columns-element",
   "hero-section",
   "image-block",
   "post-carousel",
