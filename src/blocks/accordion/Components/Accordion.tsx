@@ -1,4 +1,4 @@
-import lodash from "lodash";
+import { merge } from "lodash";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
 import { Fragment } from "@wordpress/element";
 import { css } from "emotion";
@@ -237,7 +237,7 @@ export default (props: AccordionProps): JSX.Element => {
               !editMode && responsive
                 ? `${(1 / numberOfColumns.mobile) * 100}%`
                 : "100%",
-            ...lodash.merge({}, columnsResponsive, paddingColumnResponsive),
+            ...merge({}, columnsResponsive, paddingColumnResponsive),
             ".s4tw-dynablocks-accordion-column-element": {
               textAlign: bodyTextAlign,
               ...paddingResponsive,
@@ -250,12 +250,12 @@ export default (props: AccordionProps): JSX.Element => {
               h4: {
                 color: headingColor,
                 margin: 0,
-                ...lodash.merge({}, paddingResponsive, headingResponsive)
+                ...merge({}, paddingResponsive, headingResponsive)
               },
               p: {
                 color: bodyColor,
                 margin: 0,
-                ...lodash.merge({}, paddingResponsive, bodyResponsive)
+                ...merge({}, paddingResponsive, bodyResponsive)
               }
             }
           }

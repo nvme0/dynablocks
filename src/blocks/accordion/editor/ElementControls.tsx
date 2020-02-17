@@ -1,7 +1,5 @@
-import lodash from "lodash";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, PanelRow } from "@wordpress/components";
-import validator from "validator";
 import { Attributes } from "./attributes";
 import {
   TextControl,
@@ -9,12 +7,27 @@ import {
   AlignmentButtons,
   ResponsiveControls
 } from "../../../common/Components/Controls";
+import { sanitizeIntegerInput } from "../../../common/helpers";
 
 export interface ControlProps extends Attributes {
   clientId?: string;
   numberOfColumns: number;
   update: (property: any) => (value: any) => void;
 }
+
+const updateColumnBreaks = (
+  value: string,
+  device: string,
+  limits: { min: number; max: number },
+  update: (property: any) => (value: any) => void,
+  columnBreaks: { [x: string]: number }
+) => {
+  const sanitizedValue = sanitizeIntegerInput(value, limits);
+  update("columnBreaks")({
+    ...columnBreaks,
+    [device]: sanitizedValue
+  });
+};
 
 const TextStyleControl = (props: {
   update: (property: any) => (value: any) => void;
@@ -125,18 +138,14 @@ export default (props: ControlProps): JSX.Element => {
             {...{
               name: "Tablet:",
               value: columnBreaks["tablet"],
-              update: value => {
-                const sanitizedValue = lodash.clamp(
-                  parseInt(validator.whitelist(value, "0123456789")),
-                  0,
-                  numberOfColumns
-                );
-
-                update("columnBreaks")({
-                  ...columnBreaks,
-                  tablet: sanitizedValue
-                });
-              },
+              update: value =>
+                updateColumnBreaks(
+                  value,
+                  "tablet",
+                  { min: 0, max: numberOfColumns },
+                  update,
+                  columnBreaks
+                ),
               secondary: true
             }}
           />
@@ -144,18 +153,14 @@ export default (props: ControlProps): JSX.Element => {
             {...{
               name: "Mobile:",
               value: columnBreaks["mobile"],
-              update: value => {
-                const sanitizedValue = lodash.clamp(
-                  parseInt(validator.whitelist(value, "0123456789")),
-                  0,
-                  numberOfColumns
-                );
-
-                update("columnBreaks")({
-                  ...columnBreaks,
-                  mobile: sanitizedValue
-                });
-              },
+              update: value =>
+                updateColumnBreaks(
+                  value,
+                  "tablet",
+                  { min: 0, max: numberOfColumns },
+                  update,
+                  columnBreaks
+                ),
               secondary: true
             }}
           />

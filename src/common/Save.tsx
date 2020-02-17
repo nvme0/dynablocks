@@ -1,4 +1,4 @@
-import lodash from "lodash";
+import { isEqual } from "lodash";
 import { select, dispatch } from "@wordpress/data";
 import { BlockSaveProps, BlockInstance } from "@wordpress/blocks";
 
@@ -30,11 +30,8 @@ const syncBlockOrder = (
     }
   });
 
-  const blockOrderHasChanged = !lodash.isEqual(
-    savedBlockOrder,
-    editorBlockOrder
-  );
-  const blockDataHasChanged = !lodash.isEqual(savedBlocks, editorBlocks);
+  const blockOrderHasChanged = !isEqual(savedBlockOrder, editorBlockOrder);
+  const blockDataHasChanged = !isEqual(savedBlocks, editorBlocks);
   const hasChanged = blockOrderHasChanged || blockDataHasChanged;
 
   if (!hasChanged) return;

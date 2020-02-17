@@ -1,4 +1,5 @@
-import { Attributes, Image } from "../editor/attributes";
+import { Attributes } from "../editor/attributes";
+import { Image } from "../../../common/Components/Controls/ImagePlaceholder";
 
 export interface SlideProps extends Attributes {
   editMode?: boolean;
