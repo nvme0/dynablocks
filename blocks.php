@@ -140,48 +140,24 @@ add_action("init", function () {
               "mobile" => "0px"
             );
             $columns = $attributes["columns"];
-            $columnBreaks = $attributes["columnBreaks"];
             $gridGaps = $attributes["gridGaps"];
             $deviceTypes = Array("desktop", "tablet", "mobile");
-            $numberOfItems = sizeof($attributes["blockOrder"]);
-
-            $cols = $columnBreaks["desktop"];
-            $rows = ceil($numberOfItems / $cols);
-            $columnGap = $gridGaps["column"] / 2.0;
-            $rowGap = $gridGaps["row"] / 2.0;
-            
-            $gridTemplateColumns = Array();
-            foreach ($columns as $device => $entry) {
-              $gridTemplateColumns[$device] = array_reduce($entry, function($carry, $item) {
-                return $carry . "{$item}% ";
-              });
-            }
-
-            $allButLastColumn = ":not(:nth-child(" . $cols . "n))";
-            $allButFirstColumn = ":not(:nth-child(" . $cols . "n - " . ($cols - 1) . "))";
-            $allButFirstRow = ":nth-child(n + " . ($cols + 1) . ")";
-            $allButLastRow = ":not(:nth-child(n + " . ($cols * ($rows - 1) + 1) . "))";
 
             $style = Array();
             foreach ($deviceTypes as $device) {
-              $scaledColumnGap = $columnGap * $scale[$device];
-              $scaledRowGap = $rowGap * $scale[$device];
+              $scaledColumnGap = $gridGaps["column"] * $scale[$device];
+              $scaledRowGap = $gridGaps["row"] * $scale[$device];
+
+              $gridTemplateColumns = array_reduce($columns[$device], function($carry, $entry) use($scaledColumnGap) {
+                return $carry . "calc({$entry}% - " . (1 - $entry / 100) * $scaledColumnGap . "px) ";
+              });
+
               $style[$device] = "
 .{$uuid} {
   display: grid;
-  grid-template-columns: {$gridTemplateColumns[$device]};
-}
-.{$uuid} > {$allButLastColumn} {
-  padding-right: {$scaledColumnGap}px;
-}
-.{$uuid} > {$allButFirstColumn} {
-  padding-left: {$scaledColumnGap}px;
-}
-.{$uuid} > {$allButFirstRow} {
-  padding-top: {$scaledRowGap}px;
-}
-.{$uuid} > {$allButLastRow} {
-  padding-bottom: {$scaledRowGap}px;
+  grid-template-columns: {$gridTemplateColumns};
+  grid-column-gap: {$scaledColumnGap}px;
+  grid-row-gap: {$scaledRowGap}px;
 }";
             }
 
@@ -241,7 +217,7 @@ $style["desktop"];
           "render_callback" => function ($attributes, $content) {
             ob_start();
 ?>
-<div class="<?= $attributes["renderClassName"] ?>">
+<div class=" <?= $attributes["renderClassName"] ?>">
   <div class="props" style="display: none">
     <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
   </div>

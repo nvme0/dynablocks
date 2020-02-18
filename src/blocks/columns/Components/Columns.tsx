@@ -33,34 +33,6 @@ const generateWidth = (columns: number[]): { [x: number]: number } => {
   return width;
 };
 
-const generateGridGapStyles = (
-  gridGaps: { row: number; column: number },
-  numberOfColumns: number,
-  numberOfItems: number
-) => {
-  const columnGap = gridGaps["column"] / 2.0;
-  const rowGap = gridGaps["row"] / 2.0;
-  const rows = Math.ceil(numberOfItems / numberOfColumns);
-  const columns = numberOfColumns;
-
-  // TODO - account for activeState
-  return {
-    padding: 0,
-    [`:not(:nth-child(${columns}n))`]: {
-      paddingRight: `${columnGap}px`
-    },
-    [`:not(:nth-child(${columns}n - ${columns - 1}))`]: {
-      paddingLeft: `${columnGap}px`
-    },
-    [`:nth-child(n + ${columns + 1})`]: {
-      paddingTop: `${rowGap}px`
-    },
-    [`:not(:nth-child(n + ${columns * (rows - 1) + 1}))`]: {
-      paddingBottom: `${rowGap}px`
-    }
-  };
-};
-
 interface SizeMeOptions {
   readonly size: {
     readonly width: number | null;
@@ -89,7 +61,9 @@ export const Columns = (props: Props): JSX.Element => {
   );
 
   const gridTemplateColumns = columns[activeState].reduce(
-    (columns, entry, index) => columns + `${width[index]}% `, // could be columns + entry;
+    (columns, entry) =>
+      columns +
+      `calc(${entry}% - ${(1 - entry / 100) * gridGaps["column"]}px) `,
     ""
   );
 
@@ -102,12 +76,9 @@ export const Columns = (props: Props): JSX.Element => {
     ">.block-editor-inner-blocks": {
       ">.block-editor-block-list__layout": {
         gridTemplateColumns,
+        gridColumnGap: gridGaps["column"],
+        gridRowGap: gridGaps["row"],
         ">.block-editor-block-list__block": {
-          ...generateGridGapStyles(
-            gridGaps,
-            columnBreaks[activeState],
-            numberOfItems
-          ),
           ".s4tw-dynablocks-columns-element": {
             outline: isDraggable
               ? "2px solid rgba(0, 115, 170, 0.5)"
@@ -125,13 +96,13 @@ export const Columns = (props: Props): JSX.Element => {
         height: numberOfItems < 1 ? "62px" : undefined
       }}
       className={css(classNameStyles)}
-      ref={containerRef}
     >
       <div
         className={classnames(
           "s4tw-alignment-grid",
           css({
-            gridTemplateColumns: `repeat(${gridSize[activeState]}, 1fr)`
+            gridTemplateColumns: `repeat(${gridSize[activeState]}, 1fr)`,
+            gridColumnGap: gridGaps["column"]
           })
         )}
         style={{
@@ -143,12 +114,6 @@ export const Columns = (props: Props): JSX.Element => {
             className={classnames(
               "s4tw-alignment-grid-column",
               css({
-                ":not(:first-child)": {
-                  marginLeft: `${gridGaps["column"] / 2.0}px`
-                },
-                ":not(:last-child)": {
-                  marginRight: `${gridGaps["column"] / 2.0}px`
-                },
                 borderLeft: !isDraggable
                   ? "1px solid rgb(221, 221, 221)"
                   : undefined,
@@ -168,36 +133,46 @@ export const Columns = (props: Props): JSX.Element => {
           />
         ))}
       </div>
-      {isDraggable && (
-        <DraggableAdjuster
-          {...{
-            numberOfColumns: columnBreaks[activeState],
-            position,
-            setPosition,
-            width,
-            setWidth: newWidth => {
-              setWidth(newWidth);
-              const indicies = Object.keys(newWidth).map(value =>
-                parseInt(value)
-              );
-              indicies.sort();
+      <div
+        style={{
+          position: "absolute",
+          height: "100%",
+          width: `calc(100% + ${gridGaps["column"]}px)`,
+          marginLeft: `-${gridGaps["column"] / 2.0}px`
+        }}
+        ref={containerRef}
+      >
+        {isDraggable && (
+          <DraggableAdjuster
+            {...{
+              numberOfColumns: columnBreaks[activeState],
+              position,
+              setPosition,
+              width,
+              setWidth: newWidth => {
+                setWidth(newWidth);
+                const indicies = Object.keys(newWidth).map(value =>
+                  parseInt(value)
+                );
+                indicies.sort();
 
-              const updatedColumns = indicies.map(index => newWidth[index]);
-              if (isEqual(columns[activeState], updatedColumns)) return;
+                const updatedColumns = indicies.map(index => newWidth[index]);
+                if (isEqual(columns[activeState], updatedColumns)) return;
 
-              setAttributes({
-                columns: {
-                  ...columns,
-                  [activeState]: updatedColumns
-                }
-              });
-            },
-            containerRef,
-            gridX: gridSnap ? gridSize[activeState] : undefined,
-            sticky: !gridSnap
-          }}
-        />
-      )}
+                setAttributes({
+                  columns: {
+                    ...columns,
+                    [activeState]: updatedColumns
+                  }
+                });
+              },
+              containerRef,
+              gridX: gridSnap ? gridSize[activeState] : undefined,
+              sticky: !gridSnap
+            }}
+          />
+        )}
+      </div>
       <InnerBlocks
         {...{ allowedBlocks: ["s4tw/dynablocks-columns-element"] }}
       />
