@@ -6,13 +6,36 @@ import classnames from "classnames";
 import { css } from "emotion";
 import { extractSizeAndUnits } from "../../../common/helpers";
 
+export type ResizableDirection =
+  | "top"
+  | "right"
+  | "bottom"
+  | "left"
+  | "topRight"
+  | "bottomRight"
+  | "bottomLeft"
+  | "topLeft";
+
+export type Size = { height: string; width: string };
+export type DeltaSize = {
+  direction: ResizableDirection;
+  deltaHeight: number;
+  deltaWidth: number;
+};
+export type Delta = {
+  direction: string;
+  delta: number;
+};
+export type UpdateProps = Size | DeltaSize | string | Delta;
+
 export interface ResizableBoxProps {
   style?: React.CSSProperties;
   height?: string;
   width?: string;
   resizeRatio?: number;
+  returnDelta?: boolean;
   isSelected: boolean;
-  update: (value: any) => void;
+  update: (value: UpdateProps) => void;
   enable?: {
     top?: boolean | undefined;
     right?: boolean | undefined;
@@ -37,6 +60,7 @@ const Core = (props: Props) => {
     height,
     width,
     resizeRatio,
+    returnDelta = false,
     isSelected = false,
     update,
     toggleSelection,
@@ -65,24 +89,40 @@ const Core = (props: Props) => {
           setIsResizing(false);
           toggleSelection(true);
           if (height && width) {
-            const { size: hSize, units: hUnits } = extractSizeAndUnits(height);
-            const boxHeight = Math.round(hSize + delta.height);
-
-            const { size: wSize, units: wUnits } = extractSizeAndUnits(width);
-            const boxWidth = Math.round(wSize + delta.height);
-
-            update({
-              deltaHeight: `${boxHeight}${hUnits}`,
-              deltaWidth: `${boxWidth}${wUnits}`
-            });
+            if (returnDelta) {
+              update({
+                direction,
+                deltaHeight: delta.height,
+                deltaWidth: delta.width
+              });
+            } else {
+              const { size: hSize, units: hUnits } = extractSizeAndUnits(
+                height
+              );
+              const boxHeight = Math.round(hSize + delta.height);
+              const { size: wSize, units: wUnits } = extractSizeAndUnits(width);
+              const boxWidth = Math.round(wSize + delta.width);
+              update({
+                height: `${boxHeight}${hUnits}`,
+                width: `${boxWidth}${wUnits}`
+              });
+            }
           } else if (height) {
-            const { size, units } = extractSizeAndUnits(height);
-            const boxHeight = Math.round(size + delta.height);
-            update(`${boxHeight}${units}`);
+            if (returnDelta) {
+              update({ direction, delta: delta.height });
+            } else {
+              const { size, units } = extractSizeAndUnits(height);
+              const boxHeight = Math.round(size + delta.height);
+              update(`${boxHeight}${units}`);
+            }
           } else if (width) {
-            const { size, units } = extractSizeAndUnits(width);
-            const boxWidth = Math.round(size + delta.height);
-            update(`${boxWidth}${units}`);
+            if (returnDelta) {
+              update({ direction, delta: delta.width });
+            } else {
+              const { size, units } = extractSizeAndUnits(width);
+              const boxWidth = Math.round(size + delta.height);
+              update(`${boxWidth}${units}`);
+            }
           }
         },
         onResizeStart: () => {
