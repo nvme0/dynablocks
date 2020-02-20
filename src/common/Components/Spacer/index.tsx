@@ -13,6 +13,8 @@ export interface SpacerProps extends Attributes {
   scaleMobile?: number;
   minWidthDesktop?: string;
   minWidthTablet?: string;
+  type?: "top" | "right" | "bottom" | "left";
+  style?: React.CSSProperties;
 }
 
 export default (props: SpacerProps) => {
@@ -21,12 +23,15 @@ export default (props: SpacerProps) => {
     isSelected = false,
     update,
     height,
+    width,
     resizeRatio,
     responsive = false,
     scaleTablet = 1.0,
     scaleMobile = 1.0,
     minWidthDesktop = "1024px",
-    minWidthTablet = "600px"
+    minWidthTablet = "600px",
+    type = "bottom",
+    style
   } = props;
 
   let heightResponsive: Responsive = {};
@@ -47,29 +52,33 @@ export default (props: SpacerProps) => {
       }
     ];
 
-    heightResponsive = generateResponsiveCSS(
-      [{ name: "height", size: height }],
-      responsiveParameters
-    );
+    if (height) {
+      heightResponsive = generateResponsiveCSS(
+        [{ name: "height", size: height }],
+        responsiveParameters
+      );
+    }
   }
 
   return editMode && update ? (
     <ResizableBox
       {...{
         height,
+        width,
         update,
         isSelected,
         resizeRatio,
         enable: {
-          top: false,
-          right: false,
-          bottom: true,
-          left: false,
+          top: type === "top",
+          right: type === "right",
+          bottom: type === "bottom",
+          left: type === "left",
           topRight: false,
           bottomRight: false,
           bottomLeft: false,
           topLeft: false
-        }
+        },
+        style
       }}
     />
   ) : (

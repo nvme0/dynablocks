@@ -1,13 +1,13 @@
 import { BlockAttribute } from "@wordpress/blocks";
 
 export interface Attributes {
-  align: string;
-  height: string;
+  height?: string;
+  width?: string;
   resizeRatio: number;
 }
 
 export interface BlockAttributes {
-  align: BlockAttribute<Attributes["align"]>;
   height: BlockAttribute<Attributes["height"]>;
+  width: BlockAttribute<Attributes["width"]>;
   resizeRatio: BlockAttribute<Attributes["resizeRatio"]>;
 }

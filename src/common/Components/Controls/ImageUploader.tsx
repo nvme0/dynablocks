@@ -1,10 +1,11 @@
 import { css } from "emotion";
 import { MediaUpload } from "@wordpress/block-editor";
 import { IconButton } from "@wordpress/components";
+import { Image } from "./ImagePlaceholder";
 
 export interface Props {
   name: string;
-  value: number | number[] | undefined;
+  value: Image;
   multiple?: boolean;
   gallery?: boolean;
   onSelect: (value: any | any[]) => void;
@@ -19,12 +20,14 @@ export default (props: Props): JSX.Element => {
       </p>
       <MediaUpload
         {...{
-          title: "Select or Upload an Image",
+          title: multiple
+            ? "Select or Upload Images"
+            : "Select or Upload an Image",
           onSelect,
           allowedTypes: ["image"],
           multiple,
           gallery,
-          value
+          value: value as any
         }}
         render={({ open }) => {
           return (

@@ -129,6 +129,11 @@ export const extractSizeAndUnits = (fontSize: string) => {
   };
 };
 
+export const extractSize = (fontSize: string) => {
+  if (!fontSize) return 0;
+  return parseInt(validator.whitelist(fontSize, "0123456789."), 10);
+};
+
 export const scaleFontSize = (size: number, units: string, scalar: number) =>
   `${size * scalar}${units}`;
 

@@ -73,6 +73,8 @@ const Core = (props: Props) => {
     <ResizableBox
       {...{
         style,
+        minWidth: 0,
+        minHeight: 0,
         className: classnames(
           {
             "is-selected": isSelected
@@ -120,7 +122,7 @@ const Core = (props: Props) => {
               update({ direction, delta: delta.width });
             } else {
               const { size, units } = extractSizeAndUnits(width);
-              const boxWidth = Math.round(size + delta.height);
+              const boxWidth = Math.round(size + delta.width);
               update(`${boxWidth}${units}`);
             }
           }

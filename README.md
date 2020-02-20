@@ -8,7 +8,7 @@ A Wordpress Gutenberg Blocks Plugin which adds 9 custom Wordpress Blocks:
 - Responsive Columns
 - Container (depreciate in future, in favor of Responsive Columns)
 - Hero Section
-- Image Block
+- Image Cover Block
 - Post Carousel
 - Spacer
 

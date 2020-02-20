@@ -4,22 +4,52 @@ import { Attributes } from "../editor/attributes";
 
 export interface DividerProps extends Attributes {
   className?: string;
+  editMode?: boolean;
 }
 
 export default (props: DividerProps): JSX.Element => {
-  const { backgroundImage, height, className } = props;
+  const {
+    backgroundImage,
+    backgroundImageSize,
+    filterColor,
+    height,
+    className,
+    margin,
+    editMode
+  } = props;
+
+  const imageSrc = backgroundImage
+    ? backgroundImageSize
+      ? backgroundImage.sizes[backgroundImageSize].url
+      : backgroundImage.url
+    : undefined;
+
   return (
     <div
       className={classnames(
-        css({ height }),
-        `s4tw-dynablocks-image-block ${className}`
+        `${className}`,
+        css({
+          height,
+          margin: editMode
+            ? undefined
+            : `${margin["top"]}px ${margin["right"]}px ${margin["bottom"]}px ${margin["left"]}px`
+        })
       )}
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${imageSrc})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        backgroundColor: filterColor
       }}
-    />
+    >
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          backgroundColor: filterColor
+        }}
+      />
+    </div>
   );
 };
