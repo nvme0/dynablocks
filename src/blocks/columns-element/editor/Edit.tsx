@@ -1,7 +1,6 @@
 import { BlockEditProps } from "@wordpress/blocks";
 import { Attributes } from "./attributes";
 import ContainerElement from "../Components/ContainerElement";
-import { select } from "@wordpress/data";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types
@@ -9,15 +8,7 @@ export interface EditProps extends BlockEditProps<Attributes> {
 }
 
 export const Edit = (props: EditProps): JSX.Element => {
-  const { attributes, className, clientId } = props;
-
-  let innerBlockCount = 0;
-  if (clientId) {
-    const blockInstance = select("core/block-editor").getBlock(clientId);
-    if (blockInstance) {
-      innerBlockCount = blockInstance.innerBlocks.length;
-    }
-  }
+  const { attributes, className } = props;
 
   return (
     <div className={`s4tw-dynablocks-columns-element`} style={{ padding: 0 }}>
@@ -25,7 +16,6 @@ export const Edit = (props: EditProps): JSX.Element => {
         {...{
           className,
           type: "Edit",
-          innerBlockCount,
           ...attributes
         }}
       />
