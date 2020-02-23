@@ -41,6 +41,12 @@
     "type": "string",
     "default": "#000"
   },
+  "titleMargin": {
+    "type": "object",
+    "default": {
+      "bottom": "0px"
+    }
+  },
   "headingFontSize": {
     "type": "string",
     "default": "22px"

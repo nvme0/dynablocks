@@ -10,16 +10,20 @@ import {
   generateBlockTemplate
 } from "../../../common/helpers";
 import { EntryPoint as DynablocksAccordionColumn } from "../../accordion-column/frontend";
+import ResizableBox from "../../../common/Components/ResizableBox";
 
 export interface AccordionProps extends Attributes {
   clientId?: string;
   editMode?: boolean;
+  isSelected?: boolean;
   update?: (property: any) => (value: any) => void;
+  setAttributes: (attrs: Partial<Attributes>) => void;
 }
 
 interface ResponsiveProperties {
   padding: string;
   titleFontSize: string;
+  titleMargin: { bottom: string };
   headingFontSize: string;
   headingPaddingTopBottom: string;
   bodyFontSize: string;
@@ -37,6 +41,7 @@ const generateResponsiveStyles = (
   {
     padding,
     titleFontSize,
+    titleMargin,
     headingFontSize,
     headingPaddingTopBottom,
     bodyFontSize,
@@ -81,7 +86,8 @@ const generateResponsiveStyles = (
   const titleResponsive = generateResponsiveCSS(
     [
       { name: "fontSize", size: titleFontSize },
-      { name: "padding", size: titleFontSize }
+      { name: "padding", size: titleFontSize },
+      { name: "marginBottom", size: titleMargin["bottom"] }
     ],
     responsiveParameters
   );
@@ -120,6 +126,8 @@ export default (props: AccordionProps): JSX.Element => {
     clientId,
     editMode,
     update,
+    setAttributes,
+    isSelected,
     columnBreaks,
     responsive = false,
     scaleTablet = 1.0,
@@ -130,6 +138,7 @@ export default (props: AccordionProps): JSX.Element => {
     titleFontSize,
     titleColor,
     titleTextAlign,
+    titleMargin,
     headingFontSize,
     headingColor,
     headingTextAlign,
@@ -169,6 +178,7 @@ export default (props: AccordionProps): JSX.Element => {
           {
             padding,
             titleFontSize,
+            titleMargin,
             headingFontSize,
             headingPaddingTopBottom,
             bodyFontSize,
@@ -278,6 +288,31 @@ export default (props: AccordionProps): JSX.Element => {
               }
             }}
           />
+          <ResizableBox
+            {...{
+              height: titleMargin["bottom"],
+              update: value => {
+                setAttributes({
+                  titleMargin: {
+                    ...titleMargin,
+                    bottom: value as string
+                  }
+                });
+              },
+              isSelected: isSelected ? true : false,
+              resizeRatio: 1,
+              enable: {
+                top: false,
+                right: false,
+                bottom: true,
+                left: false,
+                topRight: false,
+                bottomRight: false,
+                bottomLeft: false,
+                topLeft: false
+              }
+            }}
+          />
           <InnerBlocks
             {...{
               template,
@@ -293,7 +328,10 @@ export default (props: AccordionProps): JSX.Element => {
               tagName: "h2",
               style: {
                 color: titleColor,
-                margin: 0,
+                marginBottom: !responsive ? titleMargin["bottom"] : undefined,
+                marginTop: 0,
+                marginRight: 0,
+                marginLeft: 0,
                 padding: 0
               },
               className: css({

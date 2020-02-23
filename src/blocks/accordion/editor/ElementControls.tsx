@@ -13,6 +13,7 @@ export interface ControlProps extends Attributes {
   clientId?: string;
   numberOfColumns: number;
   update: (property: any) => (value: any) => void;
+  setAttributes: (attrs: Partial<Attributes>) => void;
 }
 
 const updateColumnBreaks = (
@@ -31,13 +32,25 @@ const updateColumnBreaks = (
 
 const TextStyleControl = (props: {
   update: (property: any) => (value: any) => void;
+  setAttributes?: (attrs: Partial<Attributes>) => void;
   title: string;
   initialOpen: boolean;
   fontSize: { attribute: string; value: string };
   color: { attribute: string; value: string };
   textAlign: { attribute: string; value: string };
+  margin?: { attribute: string; value: { bottom: string } };
 }) => {
-  const { update, title, initialOpen, fontSize, color, textAlign } = props;
+  const {
+    update,
+    setAttributes,
+    title,
+    initialOpen,
+    fontSize,
+    color,
+    textAlign,
+    margin
+  } = props;
+
   return (
     <PanelBody {...{ title, initialOpen }}>
       <TextControl
@@ -56,6 +69,22 @@ const TextStyleControl = (props: {
           update: update(color.attribute)
         }}
       />
+      {margin && setAttributes && (
+        <TextControl
+          {...{
+            name: "Margin Bottom:",
+            value: margin.value.bottom,
+            secondary: true,
+            update: value =>
+              setAttributes({
+                titleMargin: {
+                  ...margin.value,
+                  bottom: value
+                }
+              })
+          }}
+        />
+      )}
       <PanelRow>
         <p>
           <strong>Text Alignment</strong>
@@ -77,11 +106,13 @@ const TextStyleControl = (props: {
 export default (props: ControlProps): JSX.Element => {
   const {
     update,
+    setAttributes,
     numberOfColumns,
     columnBreaks,
     titleFontSize,
     titleColor,
     titleTextAlign,
+    titleMargin,
     headingFontSize,
     headingColor,
     headingTextAlign,
@@ -98,11 +129,13 @@ export default (props: ControlProps): JSX.Element => {
       <TextStyleControl
         {...{
           update,
+          setAttributes,
           title: "Title",
           initialOpen: false,
           fontSize: { attribute: "titleFontSize", value: titleFontSize },
           color: { attribute: "titleColor", value: titleColor },
-          textAlign: { attribute: "titleTextAlign", value: titleTextAlign }
+          textAlign: { attribute: "titleTextAlign", value: titleTextAlign },
+          margin: { attribute: "titleMargin", value: titleMargin }
         }}
       />
       <TextStyleControl

@@ -16,6 +16,7 @@ export interface Attributes extends ResponsiveAttributes {
   titleText: string;
   titleFontSize: string;
   titleColor: string;
+  titleMargin: { bottom: string };
   headingFontSize: string;
   headingColor: string;
   bodyFontSize: string;
@@ -34,6 +35,7 @@ export interface BlockAttributes extends ResponsiveBlockAttributes {
   titleText: BlockAttribute<Attributes["titleText"]>;
   titleFontSize: BlockAttribute<Attributes["titleFontSize"]>;
   titleColor: BlockAttribute<Attributes["titleColor"]>;
+  titleMargin: BlockAttribute<Attributes["titleMargin"]>;
   headingFontSize: BlockAttribute<Attributes["headingFontSize"]>;
   headingColor: BlockAttribute<Attributes["headingColor"]>;
   bodyFontSize: BlockAttribute<Attributes["bodyFontSize"]>;

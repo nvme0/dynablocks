@@ -48,7 +48,9 @@ export const Edit = (props: EditProps): JSX.Element => {
           ...attributes,
           clientId,
           editMode: true,
-          update
+          isSelected,
+          update,
+          setAttributes
         }}
       />
       {(numberOfColumns < 1 || isSelected) && numberOfColumns < 4 && (
