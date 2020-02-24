@@ -55,6 +55,7 @@ export default (props: Props): JSX.Element => {
     keywordsInterval,
     h2Color,
     height,
+    hasButton,
     backgroundImage,
     backgroundImageSize,
     elementsPosition: position,
@@ -92,6 +93,15 @@ export default (props: Props): JSX.Element => {
 
   return (
     <InspectorControls>
+      <PanelBody {...{ title: "Button", initialOpen: false }}>
+        <ToggleControl
+          {...{
+            label: "Enable Button",
+            checked: hasButton,
+            onChange: update("hasButton")
+          }}
+        />
+      </PanelBody>
       <PanelBody {...{ title: "Image Settings", initialOpen: false }}>
         {!isEmpty(imageSizeOptions) && (
           <SelectControl

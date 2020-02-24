@@ -63,6 +63,7 @@ export default (props: ElementsProps): JSX.Element => {
     h2FontSize,
     h2MarginBottom,
     h2Color,
+    hasButton,
     editMode = false,
     responsive = false,
     controlProps,
@@ -149,22 +150,24 @@ export default (props: ElementsProps): JSX.Element => {
               }
             }}
           />
-          <InnerBlocks
-            {...{
-              template: [
-                [
-                  "s4tw/dynablocks-button-group",
-                  {
-                    ...(innerBlocks[blockOrder[0]]
-                      ? innerBlocks[blockOrder[0]].attributes
-                      : undefined)
-                  }
-                ]
-              ],
-              allowedBlocks: ["s4tw/dynablocks-button-group"]
-            }}
-          />
-          {blockOrder.length < 1 && (
+          {hasButton && (
+            <InnerBlocks
+              {...{
+                template: [
+                  [
+                    "s4tw/dynablocks-button-group",
+                    {
+                      ...(innerBlocks[blockOrder[0]]
+                        ? innerBlocks[blockOrder[0]].attributes
+                        : undefined)
+                    }
+                  ]
+                ],
+                allowedBlocks: ["s4tw/dynablocks-button-group"]
+              }}
+            />
+          )}
+          {blockOrder.length < 1 && hasButton && (
             <RenderAppender
               {...{ clientId, numberOfBlocks: blockOrder.length }}
             />
@@ -183,7 +186,9 @@ export default (props: ElementsProps): JSX.Element => {
             />{" "}
             <CycleTextElement />
           </h2>
-          <DynablocksButtonGroup {...innerBlocks[blockOrder[0]].attributes} />
+          {hasButton && (
+            <DynablocksButtonGroup {...innerBlocks[blockOrder[0]].attributes} />
+          )}
         </Fragment>
       )}
     </div>

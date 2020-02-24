@@ -22,6 +22,7 @@ export interface Attributes extends ResponsiveAttributes {
   keywordsColor: string;
   keywordsInterval: number;
   height: string;
+  hasButton: boolean;
   elementsPosition: { left: PositionEntry; top: PositionEntry };
   elementsPositionLimits: Limits;
   elementsTranslate: { left: PositionEntry; top: PositionEntry };

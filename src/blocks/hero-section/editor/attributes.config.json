@@ -52,6 +52,10 @@
     "type": "string",
     "default": "550px"
   },
+  "hasButton": {
+    "type": "boolean",
+    "default": "true"
+  },
   "elementsPosition": {
     "type": "object",
     "default": {
