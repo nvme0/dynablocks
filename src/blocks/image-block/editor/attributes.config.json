@@ -25,5 +25,13 @@
       "bottom": 0,
       "left": 0
     }
+  },
+  "backgroundPosition": {
+    "type": "object",
+    "default": {
+      "type": "center center",
+      "x": { "value": 0, "units": "%" },
+      "y": { "value": 0, "units": "%" }
+    }
   }
 }

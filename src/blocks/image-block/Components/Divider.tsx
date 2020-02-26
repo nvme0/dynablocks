@@ -13,8 +13,9 @@ export default (props: DividerProps): JSX.Element => {
     backgroundImageSize,
     filterColor,
     height,
-    className,
     margin,
+    backgroundPosition,
+    className,
     editMode
   } = props;
 
@@ -37,7 +38,10 @@ export default (props: DividerProps): JSX.Element => {
       )}
       style={{
         backgroundImage: `url(${imageSrc})`,
-        backgroundPosition: "center",
+        backgroundPosition:
+          backgroundPosition["type"] !== "custom"
+            ? backgroundPosition["type"]
+            : `${backgroundPosition["x"].value}${backgroundPosition["x"].units} ${backgroundPosition["y"].value}${backgroundPosition["y"].units}`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundColor: filterColor
