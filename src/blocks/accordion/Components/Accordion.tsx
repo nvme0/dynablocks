@@ -8,16 +8,16 @@ import {
   generateResponsiveCSS,
   extractSizeAndUnits,
   generateBlockTemplate
-} from "../../../common/helpers";
+} from "@solutions4theweb/dynablocks-common/dist/helpers";
 import { EntryPoint as DynablocksAccordionColumn } from "../../accordion-column/frontend";
-import ResizableBox from "../../../common/Components/ResizableBox";
+import ResizableBox from "@solutions4theweb/dynablocks-common/dist/Components/ResizableBox";
 
 export interface AccordionProps extends Attributes {
   clientId?: string;
   editMode?: boolean;
   isSelected?: boolean;
   update?: (property: any) => (value: any) => void;
-  setAttributes: (attrs: Partial<Attributes>) => void;
+  setAttributes?: (attrs: Partial<Attributes>) => void;
 }
 
 interface ResponsiveProperties {
@@ -272,7 +272,7 @@ export default (props: AccordionProps): JSX.Element => {
         })
       }}
     >
-      {editMode && update ? (
+      {editMode && update && setAttributes ? (
         <Fragment>
           <RichText
             {...{

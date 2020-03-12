@@ -2,10 +2,13 @@ import { Fragment, useRef } from "@wordpress/element";
 import { css } from "emotion";
 import Slider from "react-slick";
 import { Attributes } from "../editor/attributes";
-import { Responsive, generateResponsiveCSS } from "../../../common/helpers";
+import {
+  Responsive,
+  generateResponsiveCSS
+} from "@solutions4theweb/dynablocks-common/dist/helpers";
 import withDraggable, {
   updatePositionCallback
-} from "../../../common/HOCs/withDraggable";
+} from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
 import Slide from "./Slide";
 import Elements from "./Elements";
 

@@ -6,9 +6,9 @@ import { dispatch } from "@wordpress/data";
 import { css } from "emotion";
 import { ControlProps } from "../editor/ElementControls";
 import { Attributes } from "../editor/attributes";
-import { Responsive } from "../../../common/helpers";
+import { Responsive } from "@solutions4theweb/dynablocks-common/dist/helpers";
 import { EntryPoint as DynablocksButtonGroup } from "../../button-group/frontend";
-import ResizableBox from "../../../common/Components/ResizableBox";
+import ResizableBox from "@solutions4theweb/dynablocks-common/dist/Components/ResizableBox";
 import * as CycleText from "../Components/CycleText";
 
 export interface ElementsProps extends Attributes {

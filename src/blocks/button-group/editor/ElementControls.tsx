@@ -5,7 +5,7 @@ import { Attributes } from "./attributes";
 import {
   TextControl,
   ResponsiveControls
-} from "../../../common/Components/Controls";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
 import { dispatch } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
 

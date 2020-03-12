@@ -5,9 +5,9 @@ import { createBlock } from "@wordpress/blocks";
 import { dispatch } from "@wordpress/data";
 import { css } from "emotion";
 import { Attributes } from "../editor/attributes";
-import { Responsive } from "../../../common/helpers";
+import { Responsive } from "@solutions4theweb/dynablocks-common/dist/helpers";
 import { EntryPoint as DynablocksButtonGroup } from "../../button-group/frontend";
-import ResizableBox from "../../../common/Components/ResizableBox";
+import ResizableBox from "@solutions4theweb/dynablocks-common/dist/Components/ResizableBox";
 
 export interface ElementsProps extends Attributes {
   clientId?: string;

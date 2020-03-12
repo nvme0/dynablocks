@@ -5,8 +5,7 @@
 */
 
 // local imports
-@import '../../common/sass/reset';
-@import '../../common/sass/global';
+@import "../../common/sass/global";
 
 .s4tw-dynablocks-hero-section {
   overflow: hidden;
@@ -19,19 +18,19 @@
       margin-right: 0;
       padding: 0;
       span {
-        >div {
+        > div {
           display: inline;
         }
         display: inline;
       }
     }
   }
-  .wrapper{
-    .hero-container{
+  .wrapper {
+    .hero-container {
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      .dimmer-filter{
+      .dimmer-filter {
         height: 100%;
       }
     }

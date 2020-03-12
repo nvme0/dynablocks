@@ -4,11 +4,11 @@ import {
   ColorPalette,
   ColorPicker,
   TextControl
-} from "../../../common/Components/Controls";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
 import ButtonControls, {
   createButtonControlProps
-} from "../../../common/Components/Bootstrap/Button/ElementControls";
-import { ResponsiveControls } from "../../../common/Components/Controls";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Bootstrap/Button/ElementControls";
+import { ResponsiveControls } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
 import { Attributes } from "./attributes";
 
 export interface ControlProps {

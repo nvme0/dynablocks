@@ -1,8 +1,11 @@
 import { css } from "emotion";
 import Slider from "react-slick";
-import { StyledButton } from "../../../common/Components/Bootstrap/Button";
+import { StyledButton } from "@solutions4theweb/dynablocks-common/dist/Components/Bootstrap/Button";
 import { Attributes } from "../editor/attributes";
-import { Responsive, generateResponsiveCSS } from "../../../common/helpers";
+import {
+  Responsive,
+  generateResponsiveCSS
+} from "@solutions4theweb/dynablocks-common/dist/helpers";
 
 export interface SliderProps extends Attributes {
   posts: any[];

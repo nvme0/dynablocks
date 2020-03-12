@@ -1,7 +1,7 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import { Attributes } from "./attributes";
-import { SpacerControls } from "../../../common/Components/Spacer/ElementControls";
-import { ResponsiveControls } from "../../../common/Components/Controls";
+import { SpacerControls } from "@solutions4theweb/dynablocks-common/dist/Components/Spacer/ElementControls";
+import { ResponsiveControls } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
 
 export interface ControlProps {
   update: (property: string) => (value: any) => void;

@@ -2,11 +2,11 @@ import { BlockAttribute } from "@wordpress/blocks";
 import {
   Attributes as ResponsiveAttributes,
   BlockAttributes as ResponsiveBlockAttributes
-} from "../../../common/Components/Controls/ResponsiveControls/attributes";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ResponsiveControls/attributes";
 import {
   Attributes as SpacerAttributes,
   BlockAttributes as SpacerBlockAttributes
-} from "../../../common/Components/Spacer/attributes";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Spacer/attributes";
 
 export interface Attributes extends ResponsiveAttributes, SpacerAttributes {
   align: string;

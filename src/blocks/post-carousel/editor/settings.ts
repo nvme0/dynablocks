@@ -1,6 +1,6 @@
 import { BlockConfiguration } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-import { commonDefaults } from "../../../common/blockConfiguration";
+import { commonDefaults } from "@solutions4theweb/dynablocks-common/dist/blockConfiguration";
 
 export const icon = "admin-post";
 

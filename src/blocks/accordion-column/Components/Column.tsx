@@ -11,7 +11,7 @@ export interface ColumnProps extends Attributes {
   editMode?: boolean;
   isSelected?: boolean;
   clientId?: string;
-  numberOfElements: number;
+  numberOfElements?: number;
 }
 
 export default (props: ColumnProps): JSX.Element => {

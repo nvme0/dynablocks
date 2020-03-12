@@ -1,5 +1,5 @@
 import { Attributes } from "./editor/attributes";
-import Spacer from "../../common/Components/Spacer";
+import Spacer from "@solutions4theweb/dynablocks-common/dist/Components/Spacer";
 
 export const className = ".s4tw-dynablocks-spacer";
 

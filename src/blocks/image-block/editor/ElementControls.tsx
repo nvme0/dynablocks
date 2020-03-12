@@ -9,12 +9,12 @@ import {
   TextControl,
   ColorPicker,
   Dropdown
-} from "../../../common/Components/Controls";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
 import {
   Image,
   getImageSizeOptions
-} from "../../../common/Components/Controls/ImagePlaceholder";
-import { sanitizeIntegerInput } from "../../../common/helpers";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+import { sanitizeIntegerInput } from "@solutions4theweb/dynablocks-common/dist/helpers";
 
 export interface ControlProps {
   setAttributes: (attrs: Partial<Attributes>) => void;
