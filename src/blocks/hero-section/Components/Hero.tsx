@@ -1,10 +1,13 @@
 import { Fragment, useRef } from "@wordpress/element";
 import { Attributes } from "../editor/attributes";
 import { ControlProps } from "../editor/ElementControls";
-import { Responsive, generateResponsiveCSS } from "../../../common/helpers";
+import {
+  Responsive,
+  generateResponsiveCSS
+} from "@solutions4theweb/dynablocks-common/dist/helpers";
 import withDraggable, {
   updatePositionCallback
-} from "../../../common/HOCs/withDraggable";
+} from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
 import Elements from "./Elements";
 
 export interface HeroProps extends Attributes {

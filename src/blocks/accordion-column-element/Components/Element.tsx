@@ -5,7 +5,6 @@ import { Attributes } from "../editor/attributes";
 import { Accordion } from "react-bootstrap";
 
 export interface ElementProps extends Attributes {
-  editorId: string;
   editMode?: boolean;
   isSelected?: boolean;
   update?: (property: any) => (value: any) => void;
@@ -13,7 +12,7 @@ export interface ElementProps extends Attributes {
 
 export default (props: ElementProps): JSX.Element => {
   const {
-    editorId,
+    editorId = "0",
     editMode,
     isSelected,
     update,

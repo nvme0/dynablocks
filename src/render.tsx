@@ -1,5 +1,5 @@
 import { render, Fragment } from "@wordpress/element";
-import { getBlocksOfType } from "./common/helpers";
+import { getBlocksOfType } from "@solutions4theweb/dynablocks-common/dist/helpers";
 
 const context = require.context("./blocks", true, /frontend\.tsx$/);
 

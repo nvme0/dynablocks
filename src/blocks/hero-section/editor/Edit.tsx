@@ -7,8 +7,8 @@ import Hero from "../Components/Hero";
 import ElementControls, { ControlProps } from "./ElementControls";
 import { Attributes } from "./attributes";
 import { icon } from "./settings";
-import { ImagePlaceholder } from "../../../common/Components/Controls";
-import { Image } from "../../../common/Components/Controls/ImagePlaceholder";
+import { ImagePlaceholder } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+import { Image } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   clientId?: string;

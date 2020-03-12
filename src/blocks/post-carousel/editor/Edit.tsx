@@ -3,7 +3,7 @@ import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import Slider from "../Components/Slider";
 import { Attributes } from "./attributes";
-import { fetchPosts } from "../common/helpers";
+import { fetchPosts } from "../utils/helpers";
 
 export const Edit = (props: BlockEditProps<Attributes>) => {
   const [posts, setPosts] = useState();

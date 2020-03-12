@@ -6,8 +6,8 @@ import {
   ColorPalette,
   AlignmentButtons,
   ResponsiveControls
-} from "../../../common/Components/Controls";
-import { sanitizeIntegerInput } from "../../../common/helpers";
+} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+import { sanitizeIntegerInput } from "@solutions4theweb/dynablocks-common/dist/helpers";
 
 export interface ControlProps extends Attributes {
   clientId?: string;

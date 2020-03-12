@@ -1,6 +1,6 @@
 import { BlockConfiguration } from "@wordpress/blocks";
 import Edit from "./editor/Edit.dev";
-import Save from "../../common/Save";
+import Save from "@solutions4theweb/dynablocks-common/dist/Save";
 import { settings as baseSettings } from "./editor/settings";
 import { InnerBlocks } from "@wordpress/block-editor";
 import { Fragment } from "@wordpress/element";

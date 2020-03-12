@@ -79,8 +79,13 @@ export const buildStyles = () => bundle(stylesConfig);
 export const buildScripts = () => bundle(scriptsConfig);
 const streamStyles = () => src("dist/css/*.css").pipe(browserSync.stream());
 
+export const copyJSON = () =>
+  src([
+    "./node_modules/@solutions4theweb/dynablocks-common/dist/**/*.json"
+  ]).pipe(dest("dist/common"));
+
 export const build = () =>
-  clean().then(series(bootstrap, buildStyles, buildScripts));
+  clean().then(series(bootstrap, buildStyles, buildScripts, copyJSON));
 
 export const watch = () => {
   build();

@@ -1,4 +1,4 @@
-import { StyledButton } from "../../../common/Components/Bootstrap/Button";
+import { StyledButton } from "@solutions4theweb/dynablocks-common/dist/Components/Bootstrap/Button";
 import { Attributes } from "../editor/attributes";
 
 export interface ButtonProps extends Attributes {

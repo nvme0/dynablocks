@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Block Initializer
  * Enqueue CSS/JS of all the blocks.
@@ -14,7 +15,7 @@ if (!defined('ABSPATH')) {
  * Enqueue assets for frontend and backend
  * @since 1.0.0
  */
-add_action('init', function() {
+add_action('init', function () {
 
 	// Enqueue bootstap.min.css
 	$script_url = plugins_url('dist/css/bootstrap.min.css', __FILE__);
@@ -41,7 +42,7 @@ add_action('init', function() {
  * Enqueue assets for backend
  * @since 1.0.0
  */
-add_action( 'enqueue_block_editor_assets', function() {
+add_action('enqueue_block_editor_assets', function () {
 
 	// Enqueue the editor style
 	$deps = s4tw_getScriptDependencies('dist/css/editor', 'css');
@@ -58,7 +59,7 @@ add_action( 'enqueue_block_editor_assets', function() {
 	$deps = s4tw_getScriptDependencies('dist/editor', 'js');
 	$script_url = $deps['url'];
 	$script_asset = $deps['asset'];
-    wp_enqueue_script(
+	wp_enqueue_script(
 		's4tw-dynablocks-editor-js',
 		$script_url,
 		$script_asset['dependencies'],
@@ -71,7 +72,7 @@ add_action( 'enqueue_block_editor_assets', function() {
  * Enqueue assets for frontend
  * @since 1.0.0
  */
-add_action('wp_enqueue_scripts', function() {
+add_action('wp_enqueue_scripts', function () {
 
 	// Enqueue the frontend script
 	$deps = s4tw_getScriptDependencies('dist/frontend', 'js');
@@ -91,8 +92,8 @@ add_action('wp_enqueue_scripts', function() {
  * @param array $categories Existing block categories.
  * @return array Updated block categories.
  */
-add_filter('block_categories', function($categories) {
-    return array_merge(
+add_filter('block_categories', function ($categories) {
+	return array_merge(
 		$categories,
 		array(
 			array(
@@ -110,7 +111,8 @@ add_filter('block_categories', function($categories) {
  * @param $ext - file extension e.g. src = dist/style.build.css, $ext = css 
  * @since 1.0.0		
  */
-function s4tw_getScriptDependencies($name, $ext) {
+function s4tw_getScriptDependencies($name, $ext)
+{
 	$script_path = $name . '.build.' . $ext;
 	$script_asset_path = $name . '.build.asset.php';
 	$script_asset = require($script_asset_path);

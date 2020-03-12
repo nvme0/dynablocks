@@ -4,8 +4,7 @@
 * CSS for both Frontend+Backend.
 */
 
-@import '../../common/sass/reset';
-@import '../../common/sass/global';
+@import "../../common/sass/global";
 @import "../../../node_modules/slick-carousel/slick/slick.css";
 @import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
@@ -32,7 +31,8 @@
             right: 50%;
             transform: translateX(-50%);
           }
-          h2, h3 {
+          h2,
+          h3 {
             font-family: inherit;
             margin-top: 0;
             margin-left: 0;
@@ -40,7 +40,7 @@
             padding: 0;
           }
           @keyframes show1 {
-            0% { 
+            0% {
               opacity: 0;
               transform: translateX(-50%) translateY(0%);
             }
@@ -56,24 +56,24 @@
 }
 
 .s4tw-dynablocks-post-carousel {
-    &:hover {
-      .slick-arrow {
-        &.slick-prev {
-          opacity: 1;
-          left: 25px;
-        }
-        &.slick-next {
-          opacity: 1;
-          right: 25px;
-        }
+  &:hover {
+    .slick-arrow {
+      &.slick-prev {
+        opacity: 1;
+        left: 25px;
+      }
+      &.slick-next {
+        opacity: 1;
+        right: 25px;
       }
     }
+  }
   .slick-slider {
     .slick-slide {
       .content {
         display: none;
       }
-      &.slick-active{
+      &.slick-active {
         .content {
           z-index: 2;
           display: inline-block;
@@ -93,14 +93,14 @@
       }
       &.slick-prev {
         &::before {
-          content: '‹';
+          content: "‹";
           // TODO -  maybe use an icon font that already exists?
           // content: url("../Post-Carousel/svg/arrow.svg");
         }
       }
       &.slick-next {
         &::before {
-          content: '›';
+          content: "›";
           // TODO
           // content: url("../Post-Carousel/svg/arrow.svg");
         }

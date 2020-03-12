@@ -1,5 +1,5 @@
 import { BlockAttribute } from "@wordpress/blocks";
-import { Image } from "../../../common/Components/Controls/ImagePlaceholder";
+import { Image } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
 
 export type BackgroundPositionOptions =
   | "left top"

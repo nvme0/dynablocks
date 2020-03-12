@@ -1,7 +1,7 @@
 import { useState, useEffect } from "@wordpress/element";
 import Slider from "./Components/Slider";
 import { Attributes } from "./editor/attributes";
-import { fetchPosts } from "./common/helpers";
+import { fetchPosts } from "./utils/helpers";
 
 export const className = ".s4tw-dynablocks-post-carousel";
 
