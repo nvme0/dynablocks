@@ -36,7 +36,7 @@ add_action("init", function () {
     "/editor/attributes.config.json"
   );
   $componentAttributes = s4tw_dynablocks_parse_attributes_config_json(
-    $root . "/src/common/Components/",
+    $root . "/dist/common/Components/",
     $componentNames,
     "/attributes.config.json"
   );
@@ -112,14 +112,14 @@ add_action("init", function () {
     );
 
   foreach ($blocks as $block) {
-// s4tw/dynablocks-container
+    // s4tw/dynablocks-container
     if ($block["name"] == "s4tw/dynablocks-container") {
       register_block_type(
         $block["name"],
         array("attributes" => $block["attributes"])
       );
-    
-// s4tw/dynablocks-columns
+
+      // s4tw/dynablocks-columns
     } else if ($block["name"] == "s4tw/dynablocks-columns") {
       register_block_type(
         $block["name"],
@@ -129,26 +129,26 @@ add_action("init", function () {
             $uuid = "block-" . uniqid();
 
             $responsive = $attributes["responsive"];
-            $scale = Array(
+            $scale = array(
               "desktop" => 1,
               "tablet" => $attributes["scaleTablet"],
               "mobile" => $attributes["scaleMobile"]
             );
-            $minWidth = Array(
+            $minWidth = array(
               "desktop" => $attributes["minWidthDesktop"],
               "tablet" => $attributes["minWidthTablet"],
               "mobile" => "0px"
             );
             $columns = $attributes["columns"];
             $gridGaps = $attributes["gridGaps"];
-            $deviceTypes = Array("desktop", "tablet", "mobile");
+            $deviceTypes = array("desktop", "tablet", "mobile");
 
-            $style = Array();
+            $style = array();
             foreach ($deviceTypes as $device) {
               $scaledColumnGap = $gridGaps["column"] * $scale[$device];
               $scaledRowGap = $gridGaps["row"] * $scale[$device];
 
-              $gridTemplateColumns = array_reduce($columns[$device], function($carry, $entry) use($scaledColumnGap) {
+              $gridTemplateColumns = array_reduce($columns[$device], function ($carry, $entry) use ($scaledColumnGap) {
                 return $carry . "calc({$entry}% - " . (1 - $entry / 100) * $scaledColumnGap . "px) ";
               });
 
@@ -161,24 +161,24 @@ add_action("init", function () {
 }";
             }
 
-            echo 
-"<style>";
+            echo
+              "<style>";
             if ($responsive == true) {
               echo
-$style["mobile"] . "
+                $style["mobile"] . "
 @media all and (min-width:" . $minWidth["tablet"] . ") {" .
-  $style["tablet"] . "
+                  $style["tablet"] . "
 }
 @media all and (min-width:" . $minWidth["desktop"] . ") {" .
-  $style["desktop"] . "
+                  $style["desktop"] . "
 }
               ";
             } else {
-              echo 
-$style["desktop"];
+              echo
+                $style["desktop"];
             }
-            echo 
-"</style>";
+            echo
+              "</style>";
 
 ?>
 <div class="s4tw-dynablocks-columns <?= $uuid ?>">
@@ -191,14 +191,14 @@ $style["desktop"];
         )
       );
 
-// s4tw/dynablocks-columns-element
+      // s4tw/dynablocks-columns-element
     } else if ($block["name"] == "s4tw/dynablocks-columns-element") {
       register_block_type(
         $block["name"],
         array(
           "render_callback" => function ($attributes, $content) {
             ob_start();
-?>
+      ?>
 <div class="s4tw-dynablocks-columns-element">
   <?= $content ?>
 </div>
@@ -209,14 +209,14 @@ $style["desktop"];
         )
       );
 
-// s4tw/dynablocks-
+      // s4tw/dynablocks-
     } else {
       register_block_type(
         $block["name"],
         array(
           "render_callback" => function ($attributes, $content) {
             ob_start();
-?>
+      ?>
 <div class=" <?= $attributes["renderClassName"] ?>">
   <div class="props" style="display: none">
     <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
