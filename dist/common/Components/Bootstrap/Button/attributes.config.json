@@ -1,0 +1,34 @@
+{
+  "buttonUrl": {
+    "type": "string",
+    "default": ""
+  },
+  "buttonStyle": {
+    "type": "string",
+    "default": "primary"
+  },
+  "buttonFontSize": {
+    "type": "string",
+    "default": ""
+  },
+  "buttonColor": {
+    "type": "string"
+  },
+  "buttonHoverColor": {
+    "type": "string"
+  },
+  "buttonPrimaryColor": {
+    "type": "string",
+    "default": "rgb(0, 98, 204)"
+  },
+  "buttonBorderRadius": {
+    "type": "string"
+  },
+  "buttonBorderWidth": {
+    "type": "string"
+  },
+  "buttonBorderStyle": {
+    "type": "string",
+    "default": "solid"
+  }
+}

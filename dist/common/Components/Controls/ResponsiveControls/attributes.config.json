@@ -1,0 +1,22 @@
+{
+  "responsive": {
+    "type": "boolean",
+    "default": false
+  },
+  "scaleTablet": {
+    "type": "number",
+    "default": 1.0
+  },
+  "scaleMobile": {
+    "type": "number",
+    "default": 1.0
+  },
+  "minWidthDesktop": {
+    "type": "string",
+    "default": "1024px"
+  },
+  "minWidthTablet": {
+    "type": "string",
+    "default": "600px"
+  }
+}
