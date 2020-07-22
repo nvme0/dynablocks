@@ -1,5 +1,10 @@
 <?php
 
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/generic.php";
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns.php";
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns-element.php";
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/image-block.php";
+
 /**
  *    Instructions for Adding new Dynamic Block or Component
  *    1. Append Block Name in "$blockNames" or Component Name in "$componentNames"
@@ -29,7 +34,7 @@ add_action("init", function () {
     "Spacer"
   );
 
-  $root = plugin_dir_path(__FILE__);
+  $root = rtrim(plugin_dir_path(__FILE__), '/');
   $blockAttributes = s4tw_dynablocks_parse_attributes_config_json(
     $root . "/src/blocks/",
     $blockNames,
@@ -112,125 +117,71 @@ add_action("init", function () {
     );
 
   foreach ($blocks as $block) {
-    // s4tw/dynablocks-container
-    if ($block["name"] == "s4tw/dynablocks-container") {
-      register_block_type(
-        $block["name"],
-        array("attributes" => $block["attributes"])
-      );
 
-      // s4tw/dynablocks-columns
-    } else if ($block["name"] == "s4tw/dynablocks-columns") {
-      register_block_type(
-        $block["name"],
-        array(
-          "render_callback" => function ($attributes, $content) {
-            ob_start();
-            $uuid = "block-" . uniqid();
+    switch ($block["name"]) {
 
-            $responsive = $attributes["responsive"];
-            $scale = array(
-              "desktop" => 1,
-              "tablet" => $attributes["scaleTablet"],
-              "mobile" => $attributes["scaleMobile"]
-            );
-            $minWidth = array(
-              "desktop" => $attributes["minWidthDesktop"],
-              "tablet" => $attributes["minWidthTablet"],
-              "mobile" => "0px"
-            );
-            $columns = $attributes["columns"];
-            $gridGaps = $attributes["gridGaps"];
-            $deviceTypes = array("desktop", "tablet", "mobile");
+      case "s4tw/dynablocks-container":
+        register_block_type(
+          $block["name"],
+          array("attributes" => $block["attributes"])
+        );
+        break;
 
-            $style = array();
-            foreach ($deviceTypes as $device) {
-              $scaledColumnGap = $gridGaps["column"] * $scale[$device];
-              $scaledRowGap = $gridGaps["row"] * $scale[$device];
+      case "s4tw/dynablocks-columns":
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockColumns\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
 
-              $gridTemplateColumns = array_reduce($columns[$device], function ($carry, $entry) use ($scaledColumnGap) {
-                return $carry . "calc({$entry}% - " . (1 - $entry / 100) * $scaledColumnGap . "px) ";
-              });
+      case "s4tw/dynablocks-columns-element":
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockColumnsElement\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
 
-              $style[$device] = "
-.{$uuid} {
-  display: grid;
-  grid-template-columns: {$gridTemplateColumns};
-  grid-column-gap: {$scaledColumnGap}px;
-  grid-row-gap: {$scaledRowGap}px;
-}";
-            }
+      case "s4tw/dynablocks-image-block":
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockDivider\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
 
-            echo
-              "<style>";
-            if ($responsive == true) {
-              echo
-                $style["mobile"] . "
-@media all and (min-width:" . $minWidth["tablet"] . ") {" .
-                  $style["tablet"] . "
-}
-@media all and (min-width:" . $minWidth["desktop"] . ") {" .
-                  $style["desktop"] . "
-}
-              ";
-            } else {
-              echo
-                $style["desktop"];
-            }
-            echo
-              "</style>";
-
-?>
-<div class="s4tw-dynablocks-columns <?= $uuid ?>">
-  <?= $content ?>
-</div>
-<?php
-            return ob_get_clean();
-          },
-          "attributes" => $block["attributes"]
-        )
-      );
-
-      // s4tw/dynablocks-columns-element
-    } else if ($block["name"] == "s4tw/dynablocks-columns-element") {
-      register_block_type(
-        $block["name"],
-        array(
-          "render_callback" => function ($attributes, $content) {
-            ob_start();
-      ?>
-<div class="s4tw-dynablocks-columns-element">
-  <?= $content ?>
-</div>
-<?php
-            return ob_get_clean();
-          },
-          "attributes" => $block["attributes"]
-        )
-      );
-
-      // s4tw/dynablocks-
-    } else {
-      register_block_type(
-        $block["name"],
-        array(
-          "render_callback" => function ($attributes, $content) {
-            ob_start();
-      ?>
-<div class=" <?= $attributes["renderClassName"] ?>">
-  <div class="props" style="display: none">
-    <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
-  </div>
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-<?php
-            return ob_get_clean();
-          },
-          "attributes" => $block["attributes"]
-        )
-      );
+      default:
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockGeneric\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
     }
   };
 });
