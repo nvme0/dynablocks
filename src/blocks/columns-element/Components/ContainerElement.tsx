@@ -13,6 +13,7 @@ export default (props: ContainerElementProps): JSX.Element => {
       return (
         <InnerBlocks
           {...{
+            // @ts-ignore
             renderAppender: () => <InnerBlocks.ButtonBlockAppender />
           }}
         />
