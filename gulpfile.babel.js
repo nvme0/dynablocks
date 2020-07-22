@@ -81,7 +81,7 @@ const streamStyles = () => src("dist/css/*.css").pipe(browserSync.stream());
 
 export const copyJSON = () =>
   src([
-    "./node_modules/@solutions4theweb/dynablocks-common/dist/**/*.json"
+    "./node_modules/@inspirewebdesigns/dynablocks-common/dist/**/*.json"
   ]).pipe(dest("dist/common"));
 
 export const build = () =>
