@@ -5,6 +5,7 @@ require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns-element.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/image-block.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/hero-section.php";
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/spacer.php";
 
 /**
  *    Instructions for Adding new Dynamic Block or Component
@@ -177,6 +178,20 @@ add_action("init", function () {
             "render_callback" => function ($attributes, $content) {
               ob_start();
               iwdDynablockDivider\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
+
+      case "s4tw/dynablocks-spacer":
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockSpacer\renderCallback($attributes, $content);
               return ob_get_clean();
             },
             "attributes" => $block["attributes"]
