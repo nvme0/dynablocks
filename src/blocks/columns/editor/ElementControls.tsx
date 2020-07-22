@@ -5,9 +5,9 @@ import {
   TextControl,
   ResponsiveControls,
   AlignmentButtons
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import { DeviceTypes } from "../Components/Columns";
-import { sanitizeIntegerInput } from "@solutions4theweb/dynablocks-common/dist/helpers";
+import { sanitizeIntegerInput } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 import { __ } from "@wordpress/i18n";
 
 export interface ControlProps extends Attributes {

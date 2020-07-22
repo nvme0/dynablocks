@@ -1,5 +1,5 @@
 import { ResizeHandle } from "./ResizeHandle";
-import withDraggable from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
+import withDraggable from "@inspirewebdesigns/dynablocks-common/dist/HOCs/withDraggable";
 import { Fragment } from "@wordpress/element";
 
 export interface Props {

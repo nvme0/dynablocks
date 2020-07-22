@@ -5,7 +5,7 @@ import { dispatch } from "@wordpress/data";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import Accordion from "../Components/Accordion";
-import { extractSizeAndUnits } from "@solutions4theweb/dynablocks-common/dist/helpers";
+import { extractSizeAndUnits } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   // extends missing types

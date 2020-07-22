@@ -4,13 +4,13 @@ import {
   ColorPalette,
   ColorPicker,
   TextControl
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import {
   AlignmentButtons,
   ResponsiveControls
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import { Attributes } from "./attributes";
-import { PositionEntry } from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
+import { PositionEntry } from "@inspirewebdesigns/dynablocks-common/dist/HOCs/withDraggable";
 
 export interface ControlProps {
   update: (property: string) => (value: any) => void;

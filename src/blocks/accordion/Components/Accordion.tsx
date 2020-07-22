@@ -8,9 +8,9 @@ import {
   generateResponsiveCSS,
   extractSizeAndUnits,
   generateBlockTemplate
-} from "@solutions4theweb/dynablocks-common/dist/helpers";
+} from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 import { EntryPoint as DynablocksAccordionColumn } from "../../accordion-column/frontend";
-import ResizableBox from "@solutions4theweb/dynablocks-common/dist/Components/ResizableBox";
+import ResizableBox from "@inspirewebdesigns/dynablocks-common/dist/Components/ResizableBox";
 
 export interface AccordionProps extends Attributes {
   clientId?: string;
@@ -162,8 +162,9 @@ export default (props: AccordionProps): JSX.Element => {
   } = extractSizeAndUnits(bodyFontSize);
 
   const padding = `${headingFontSizeValue * 0.5}${headingFontSizeUnits}`;
-  const headingPaddingTopBottom = `${headingFontSizeValue *
-    1.33}${headingFontSizeUnits}`;
+  const headingPaddingTopBottom = `${
+    headingFontSizeValue * 1.33
+  }${headingFontSizeUnits}`;
   const bodyPaddingBottom = `${bodyFontSizeValue * 1.33}${bodyFontSizeUnits}`;
 
   const {

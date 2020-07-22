@@ -3,7 +3,7 @@ import { Attributes as ColumnAttributes } from "../../columns-element/editor/att
 import {
   Attributes as ResponsiveAttributes,
   BlockAttributes as ResponsiveBlockAttributes
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ResponsiveControls/attributes";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ResponsiveControls/attributes";
 
 export interface Attributes extends ResponsiveAttributes {
   editorId?: string;

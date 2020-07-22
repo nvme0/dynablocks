@@ -1,5 +1,5 @@
 import { registerBlockType } from "@wordpress/blocks";
-import { removeAttributes } from "@solutions4theweb/dynablocks-common/dist/helpers";
+import { removeAttributes } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 const context = require.context("./blocks", true, /editor\.dev\.tsx$/);
 

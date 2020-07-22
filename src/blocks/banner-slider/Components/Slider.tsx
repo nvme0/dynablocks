@@ -5,10 +5,10 @@ import { Attributes } from "../editor/attributes";
 import {
   Responsive,
   generateResponsiveCSS
-} from "@solutions4theweb/dynablocks-common/dist/helpers";
+} from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 import withDraggable, {
   updatePositionCallback
-} from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
+} from "@inspirewebdesigns/dynablocks-common/dist/HOCs/withDraggable";
 import Slide from "./Slide";
 import Elements from "./Elements";
 

@@ -7,7 +7,7 @@ import Slider from "../Components/Slider";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
 import { icon } from "./settings";
-import { ImagePlaceholder } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+import { ImagePlaceholder } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 
 export interface EditProps extends BlockEditProps<Attributes> {
   clientId?: string;

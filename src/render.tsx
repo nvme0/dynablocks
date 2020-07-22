@@ -1,5 +1,5 @@
-import { render, Fragment } from "@wordpress/element";
-import { getBlocksOfType } from "@solutions4theweb/dynablocks-common/dist/helpers";
+import { render, Fragment, createElement } from "@wordpress/element";
+import { getBlocksOfType } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 const context = require.context("./blocks", true, /frontend\.tsx$/);
 
@@ -22,7 +22,7 @@ context.keys().forEach(modulePath => {
   const { className, EntryPoint } = context(modulePath);
   if (className && EntryPoint) {
     getBlocksOfType(className).forEach(({ block, props }) => {
-      render(React.createElement(Wrapper, { props, EntryPoint }), block);
+      render(createElement(Wrapper, { props, EntryPoint }), block);
     });
   }
 });

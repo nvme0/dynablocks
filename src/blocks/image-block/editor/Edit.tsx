@@ -7,10 +7,10 @@ import classnames from "classnames";
 import { Attributes } from "./attributes";
 import Divider from "../Components/Divider";
 import { icon } from "./settings";
-import { ImagePlaceholder } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
-import { Image } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
-import Spacer from "@solutions4theweb/dynablocks-common/dist/Components/Spacer";
-import { extractSize } from "@solutions4theweb/dynablocks-common/dist/helpers";
+import { ImagePlaceholder } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
+import { Image } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+import Spacer from "@inspirewebdesigns/dynablocks-common/dist/Components/Spacer";
+import { extractSize } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { className, attributes, setAttributes, isSelected } = props;

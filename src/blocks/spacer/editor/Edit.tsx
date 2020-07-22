@@ -1,7 +1,7 @@
 import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import { Attributes } from "./attributes";
-import Spacer from "@solutions4theweb/dynablocks-common/dist/Components/Spacer";
+import Spacer from "@inspirewebdesigns/dynablocks-common/dist/Components/Spacer";
 
 export const Edit = (props: BlockEditProps<Attributes>): JSX.Element => {
   const { attributes, setAttributes, isSelected } = props;

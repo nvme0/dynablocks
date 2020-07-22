@@ -51,11 +51,9 @@ export interface EditorProps extends BaseProps {
 }
 
 export const Editor = (props: EditorProps) => {
-  const { keyword } = props;
   return (
     <Element
       {...{
-        keyword,
         ...props
       }}
     />

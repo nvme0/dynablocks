@@ -1,6 +1,6 @@
 import { BlockConfiguration } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-import { commonDefaults } from "@solutions4theweb/dynablocks-common/dist/blockConfiguration";
+import { commonDefaults } from "@inspirewebdesigns/dynablocks-common/dist/blockConfiguration";
 
 export const icon = "welcome-view-site";
 

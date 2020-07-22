@@ -1,8 +1,8 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import ButtonControls, {
   createButtonControlProps
-} from "@solutions4theweb/dynablocks-common/dist/Components/Bootstrap/Button/ElementControls";
-import { ResponsiveControls } from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Bootstrap/Button/ElementControls";
+import { ResponsiveControls } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import { Attributes } from "./attributes";
 
 export interface ControlProps {

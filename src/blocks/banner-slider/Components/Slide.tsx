@@ -1,5 +1,5 @@
 import { Attributes } from "../editor/attributes";
-import { Image } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+import { Image } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
 
 export interface SlideProps extends Attributes {
   editMode?: boolean;

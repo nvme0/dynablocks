@@ -17,10 +17,10 @@ import {
   TextareaControl,
   AlignmentButtons,
   ResponsiveControls
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import { Attributes } from "./attributes";
-import { PositionEntry } from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
-import { getImageSizeOptions } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+import { PositionEntry } from "@inspirewebdesigns/dynablocks-common/dist/HOCs/withDraggable";
+import { getImageSizeOptions } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
 
 export interface ControlProps {
   state: {

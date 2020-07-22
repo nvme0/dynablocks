@@ -2,13 +2,13 @@ import { BlockAttribute, BlockInstance } from "@wordpress/blocks";
 import {
   Attributes as ResponsiveAttributes,
   BlockAttributes as ResponsiveBlockAttributes
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ResponsiveControls/attributes";
-import { Image } from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ResponsiveControls/attributes";
+import { Image } from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
 import { Attributes as ButtonGroupAttributes } from "../../button-group/editor/attributes";
 import {
   PositionEntry,
   Limits
-} from "@solutions4theweb/dynablocks-common/dist/HOCs/withDraggable";
+} from "@inspirewebdesigns/dynablocks-common/dist/HOCs/withDraggable";
 
 export interface Attributes extends ResponsiveAttributes {
   editorId?: string;

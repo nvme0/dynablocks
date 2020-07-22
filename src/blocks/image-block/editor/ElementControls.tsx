@@ -9,12 +9,12 @@ import {
   TextControl,
   ColorPicker,
   Dropdown
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls";
 import {
   Image,
   getImageSizeOptions
-} from "@solutions4theweb/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
-import { sanitizeIntegerInput } from "@solutions4theweb/dynablocks-common/dist/helpers";
+} from "@inspirewebdesigns/dynablocks-common/dist/Components/Controls/ImagePlaceholder";
+import { sanitizeIntegerInput } from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 export interface ControlProps {
   setAttributes: (attrs: Partial<Attributes>) => void;

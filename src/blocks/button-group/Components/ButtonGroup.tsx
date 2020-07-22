@@ -10,7 +10,7 @@ import { EntryPoint as DynablocksButton } from "../../button/frontend";
 import {
   generateBlockTemplate,
   generateResponsiveCSS
-} from "@solutions4theweb/dynablocks-common/dist/helpers";
+} from "@inspirewebdesigns/dynablocks-common/dist/helpers";
 
 export interface ButtonGroupProps extends Attributes {
   clientId?: string;

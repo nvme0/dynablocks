@@ -3,10 +3,10 @@ import { BlockEditProps } from "@wordpress/blocks";
 import ElementControls from "./ElementControls";
 import Slider from "../Components/Slider";
 import { Attributes } from "./attributes";
-import { fetchPosts } from "../utils/helpers";
+import { fetchPosts, PostWithSubtitle } from "../utils/helpers";
 
 export const Edit = (props: BlockEditProps<Attributes>) => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState<PostWithSubtitle[]>();
   const [isLoaded, setIsLoadedFlag] = useState(false);
 
   useEffect(() => {
