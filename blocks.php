@@ -4,6 +4,7 @@ require_once plugin_dir_path(__FILE__) . "/inc/blocks/generic.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/columns-element.php";
 require_once plugin_dir_path(__FILE__) . "/inc/blocks/image-block.php";
+require_once plugin_dir_path(__FILE__) . "/inc/blocks/hero-section.php";
 
 /**
  *    Instructions for Adding new Dynamic Block or Component
@@ -120,13 +121,6 @@ add_action("init", function () {
 
     switch ($block["name"]) {
 
-      case "s4tw/dynablocks-container":
-        register_block_type(
-          $block["name"],
-          array("attributes" => $block["attributes"])
-        );
-        break;
-
       case "s4tw/dynablocks-columns":
         register_block_type(
           $block["name"],
@@ -148,6 +142,27 @@ add_action("init", function () {
             "render_callback" => function ($attributes, $content) {
               ob_start();
               iwdDynablockColumnsElement\renderCallback($attributes, $content);
+              return ob_get_clean();
+            },
+            "attributes" => $block["attributes"]
+          )
+        );
+        break;
+
+      case "s4tw/dynablocks-container":
+        register_block_type(
+          $block["name"],
+          array("attributes" => $block["attributes"])
+        );
+        break;
+
+      case "s4tw/dynablocks-hero-section":
+        register_block_type(
+          $block["name"],
+          array(
+            "render_callback" => function ($attributes, $content) {
+              ob_start();
+              iwdDynablockHeroSection\renderCallback($attributes, $content);
               return ob_get_clean();
             },
             "attributes" => $block["attributes"]
