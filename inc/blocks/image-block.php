@@ -37,12 +37,12 @@ function renderCallback($attributes, $content)
       background-position: <?= $backgroundPositionStyle ?>;
       background-repeat: no-repeat;
       background-size: cover;
-      backgound-color: <?= $filterColor ?>;
+      background-color: <?= $filterColor ?>;
     ">
       <div style="
         height: 100%;
         width: 100%;
-        backgound-color: <?= $filterColor ?>;
+        background-color: <?= $filterColor ?>;
       ">
       </div>
     </div>

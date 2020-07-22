@@ -57,7 +57,7 @@ function renderCallback($attributes, $content)
         height: <?= $height ?>; 
       ">
         <div class="dimmer-filter" style="
-          backgound-color: <?= $filterColor ?>;
+          background-color: <?= $filterColor ?>;
         "></div>
       </div>
     </div>
