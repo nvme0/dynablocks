@@ -22,7 +22,8 @@ function renderCallback($attributes, $content)
 
   $imageSrc = "";
   if (isset($attributes["backgroundImageSize"])) {
-    $imageSrc = $backgroundImage["sizes"]["backgroundImageSize"]["url"];
+    $backgroundImageSize = $attributes["backgroundImageSize"];
+    $imageSrc = $backgroundImage["sizes"][$backgroundImageSize]["url"];
   } else {
     $imageSrc = $backgroundImage["url"];
   }
