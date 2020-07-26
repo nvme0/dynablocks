@@ -32,7 +32,7 @@ function renderCallback($attributes, $content)
     </div>
     <div style="
       height: <?= $height ?>;
-      margin: <?= $margin["top"] ?>px <?= $margin["right"] ?>px <?= $margin["bottom"] ?>px <?= $margin[" left"] ?>px;
+      margin: <?= $margin["top"] ?>px <?= $margin["right"] ?>px <?= $margin["bottom"] ?>px <?= $margin["left"] ?>px;
       background-image: url(<?= $imageSrc ?>);
       background-position: <?= $backgroundPositionStyle ?>;
       background-repeat: no-repeat;

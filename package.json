@@ -1,9 +1,9 @@
 {
   "name": "s4tw-dynablocks",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "scripts": {
-    "build:prod": "gulp build --prod",
+    "build": "gulp build --prod",
     "build:dev": "gulp build",
     "watch": "gulp watch",
     "watch:hmr": "gulp watch --hmr",
