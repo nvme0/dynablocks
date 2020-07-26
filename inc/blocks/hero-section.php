@@ -29,15 +29,15 @@ function renderCallback($attributes, $content)
   }
 
 ?>
-  <div class=" <?= $attributes["renderClassName"] ?>">
-    <div class="props" style="display: none">
-      <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
-    </div>
-    <div class="content" style="
+  <div class="<?= $attributes["renderClassName"] ?>-wrapper">
+    <div class="content <?= $attributes["renderClassName"] ?>" style="
       height: <?= $height ?>;
       width: 100%;
       position: absolute;
     ">
+      <div class="props" style="display: none">
+        <?= json_encode($attributes, JSON_HEX_QUOT || JSON_UNESCAPED_SLASHES); ?>
+      </div>
       <div style="
         display: inline-block;
         position: relative;
