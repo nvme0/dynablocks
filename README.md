@@ -16,8 +16,8 @@ A Wordpress Gutenberg Blocks Plugin which adds 9 custom Wordpress Blocks:
 
 Clone the repo, install the dependencies and transpile the source code.
 
-```
-git clone git@github.com:solutions4theweb/dynablocks.git
+```bash
+git clone git@github.com:inspirewebdesigns/dynablocks.git
 cd ./dynablocks
 npm install
 npm run build:prod
