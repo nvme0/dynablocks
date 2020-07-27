@@ -48,6 +48,7 @@ export default (props: Props): JSX.Element => {
     update,
     updateColorPicker,
     filterColor,
+    headingType,
     h2FontSize,
     h2MarginBottom,
     keywords,
@@ -93,6 +94,58 @@ export default (props: Props): JSX.Element => {
 
   return (
     <InspectorControls>
+      <PanelBody {...{ title: "Heading", initialOpen: false }}>
+        <SelectControl
+          {...{
+            label: __("Heading Type"),
+            value: headingType,
+            options: [
+              { label: "H1", value: "h1" },
+              { label: "H2", value: "h2" },
+              { label: "H3", value: "h3" },
+              { label: "H4", value: "h4" },
+              { label: "H5", value: "h5" },
+              { label: "H6", value: "h6" }
+            ],
+            onChange: update("headingType")
+          }}
+        />
+      </PanelBody>
+      <PanelBody {...{ title: "Text Style", initialOpen: false }}>
+        <h6>Font Size</h6>
+        <TextControl
+          {...{
+            name: "",
+            value: h2FontSize,
+            update: update("h2FontSize")
+          }}
+        />
+        <h6>Color</h6>
+        <ColorPalette
+          {...{
+            name: "Static:",
+            value: h2Color,
+            colors: [],
+            update: update("h2Color")
+          }}
+        />
+        <ColorPalette
+          {...{
+            name: "Dynamic:",
+            value: keywordsColor,
+            colors: [],
+            update: update("keywordsColor")
+          }}
+        />
+        <h6>Margin Bottom</h6>
+        <TextControl
+          {...{
+            name: "",
+            value: h2MarginBottom,
+            update: update("h2MarginBottom")
+          }}
+        />
+      </PanelBody>
       <PanelBody {...{ title: "Button", initialOpen: false }}>
         <ToggleControl
           {...{
@@ -166,41 +219,6 @@ export default (props: Props): JSX.Element => {
             name: "",
             value: height,
             update: update("height")
-          }}
-        />
-      </PanelBody>
-      <PanelBody {...{ title: "Text Style", initialOpen: false }}>
-        <h6>Font Size</h6>
-        <TextControl
-          {...{
-            name: "",
-            value: h2FontSize,
-            update: update("h2FontSize")
-          }}
-        />
-        <h6>Color</h6>
-        <ColorPalette
-          {...{
-            name: "Static:",
-            value: h2Color,
-            colors: [],
-            update: update("h2Color")
-          }}
-        />
-        <ColorPalette
-          {...{
-            name: "Dynamic:",
-            value: keywordsColor,
-            colors: [],
-            update: update("keywordsColor")
-          }}
-        />
-        <h6>Margin Bottom</h6>
-        <TextControl
-          {...{
-            name: "",
-            value: h2MarginBottom,
-            update: update("h2MarginBottom")
           }}
         />
       </PanelBody>

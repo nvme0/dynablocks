@@ -16,6 +16,10 @@
     "type": "string",
     "default": "rgba(0, 0, 0, 0)"
   },
+  "headingType": {
+    "type": "string",
+    "default": "h2"
+  },
   "h2Text": {
     "type": "string",
     "default": ""

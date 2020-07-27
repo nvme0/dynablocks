@@ -7,6 +7,7 @@ function renderCallback($attributes, $content)
   $backgroundImage = $attributes["backgroundImage"];
   $height = $attributes["height"];
   $filterColor = $attributes["filterColor"];
+  $headingType = $attributes["headingType"];
   $h2Text = $attributes["h2Text"];
   $h2TextAlignment = $attributes["h2TextAlignment"];
   $h2Color = $attributes["h2Color"];
@@ -45,10 +46,40 @@ function renderCallback($attributes, $content)
         left: <?= $left ?>;
         top: <?= $top ?>;
       ">
-        <h2 style="
-          color: <?= $h2Color ?>;
-          text-align: <?= $h2TextAlignment ?>;
-        "><?= $h2Text ?></h2>
+        <?php
+        switch ($headingType) {
+          case "h1":
+        ?><h1 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h1>
+          <?php
+            break;
+
+          case "h3":
+          ?><h3 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h3>
+          <?php
+            break;
+
+          case "h4":
+          ?><h4 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h4>
+          <?php
+            break;
+
+          case "h5":
+          ?><h5 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h5>
+          <?php
+            break;
+
+          case "h6":
+          ?><h6 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h6>
+          <?php
+            break;
+
+          case "h2":
+          default:
+          ?><h2 style="color: <?= $h2Color ?>; text-align: <?= $h2TextAlignment ?>;"><?= $h2Text ?></h2>
+        <?php
+            break;
+        }
+        ?>
       </div>
     </div>
     <div class="wrapper">

@@ -109,7 +109,7 @@ export const Edit = (props: EditProps) => {
   }, [cycleKeywords, keywordsArray.length, keywordsInterval]);
 
   return (
-    <div className="s4tw-dynablocks-hero-section">
+    <div className="s4tw-dynablocks-hero-section-wrapper">
       <BlockControls>
         <Toolbar>
           <ToolbarButton

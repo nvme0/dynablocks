@@ -1,5 +1,4 @@
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
-import { Fragment } from "@wordpress/element";
 import { IconButton } from "@wordpress/components";
 import { createBlock } from "@wordpress/blocks";
 import { dispatch } from "@wordpress/data";
@@ -47,6 +46,56 @@ const RenderAppender = (props: {
       />
     </div>
   );
+};
+
+const Heading = ({
+  headingType,
+  h2ClassName,
+  h2Style,
+  children
+}: ElementsProps & {
+  h2ClassName: any;
+  h2Style: any;
+  children?: React.ReactNode;
+}) => {
+  switch (headingType) {
+    case "h1":
+      return (
+        <h1 className={h2ClassName} style={h2Style}>
+          {children}
+        </h1>
+      );
+    case "h2":
+      return (
+        <h2 className={h2ClassName} style={h2Style}>
+          {children}
+        </h2>
+      );
+    case "h3":
+      return (
+        <h3 className={h2ClassName} style={h2Style}>
+          {children}
+        </h3>
+      );
+    case "h4":
+      return (
+        <h4 className={h2ClassName} style={h2Style}>
+          {children}
+        </h4>
+      );
+    case "h5":
+      return (
+        <h5 className={h2ClassName} style={h2Style}>
+          {children}
+        </h5>
+      );
+    case "h6":
+      return (
+        <h6 className={h2ClassName} style={h2Style}>
+          {children}
+        </h6>
+      );
+  }
 };
 
 export default (props: ElementsProps): JSX.Element => {
@@ -118,8 +167,8 @@ export default (props: ElementsProps): JSX.Element => {
   return (
     <div style={{ ...style }}>
       {editMode && update ? (
-        <Fragment>
-          <h2 className={h2ClassName} style={h2Style}>
+        <>
+          <Heading {...{ ...props, h2ClassName, h2Style }}>
             <RichText
               {...{
                 value: h2Text,
@@ -131,7 +180,7 @@ export default (props: ElementsProps): JSX.Element => {
               }}
             />{" "}
             <CycleTextElement />
-          </h2>
+          </Heading>
           <ResizableBox
             {...{
               height: h2MarginBottom,
@@ -172,10 +221,10 @@ export default (props: ElementsProps): JSX.Element => {
               {...{ clientId, numberOfBlocks: blockOrder.length }}
             />
           )}
-        </Fragment>
+        </>
       ) : (
-        <Fragment>
-          <h2 className={h2ClassName} style={h2Style}>
+        <>
+          <Heading {...{ ...props, h2ClassName, h2Style }}>
             <RichText.Content
               {...{
                 value: h2Text,
@@ -185,11 +234,11 @@ export default (props: ElementsProps): JSX.Element => {
               }}
             />{" "}
             <CycleTextElement />
-          </h2>
+          </Heading>
           {hasButton && (
             <DynablocksButtonGroup {...innerBlocks[blockOrder[0]].attributes} />
           )}
-        </Fragment>
+        </>
       )}
     </div>
   );
