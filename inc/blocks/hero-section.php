@@ -30,7 +30,7 @@ function renderCallback($attributes, $content)
   }
 
 ?>
-  <div class="<?= $attributes["renderClassName"] ?>-wrapper">
+  <div class="<?= $attributes["renderClassName"] ?>-wrapper <?= $attributes["className"] ?>">
     <div class="content <?= $attributes["renderClassName"] ?>" style="
       height: <?= $height ?>;
       width: 100%;
