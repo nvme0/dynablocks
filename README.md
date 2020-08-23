@@ -6,7 +6,7 @@ A Wordpress Gutenberg Blocks Plugin which adds 9 custom Wordpress Blocks:
 - Banner Slider
 - Buttons
 - Responsive Columns
-- Container (depreciate in future, in favor of Responsive Columns)
+- Container
 - Hero Section
 - Image Cover Block
 - Post Carousel
@@ -23,4 +23,4 @@ npm install
 npm run build:prod
 ```
 
-_Be sure to run "npm run build:prod" as the source code may have recent changes that are not synced with the latest build._
+The latest release is included in the repository, however, you can run "npm run build:prod" to a version with newer commits.
